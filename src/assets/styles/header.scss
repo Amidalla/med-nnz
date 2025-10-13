@@ -1,8 +1,262 @@
-header {
+@use "./colors.scss" as c;
+@use "../styles/mixins.scss" as *;
 
-  &__top {
-    padding-top: 16.5px;
-    padding-bottom: 11.5px;
+.header {
+    &__top {
+      padding-top: 16.5px;
+      padding-bottom: 11.5px;
+    }
+
+    &__inner {
+      margin-left: auto;
+    }
+
+    &__bottom {
+      align-items: center;
+    }
+
+    &__nav {
+      margin-right: auto;
+    }
+}
+
+.location {
+  gap: 5px;
+}
+
+.operating-mode {
+  gap: 5px;
+  margin-right: 32px;
+  font-size: 16px;
+  font-weight: 400;
+
+  b {
+    color: #626262;
+  }
+}
+
+.mail {
+  gap: 5px;
+  margin-right: 32px;
+  font-size: 18px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+
+  a {
+    color: #626262;
+
+    &:hover {
+      color: #E11A1A;
+    }
+  }
+}
+
+.phone {
+  gap: 10px;
+  margin-right: 16px;
+  font-size: 18px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+
+  a {
+    color: #626262;
+
+    &:hover {
+      color: #E11A1A;
+    }
+  }
+}
+
+.call-btn {
+  padding: 11.5px 23.5px;
+  border: 1px solid #FF0000;
+  color: c.$black;
+  font-size: 15px;
+  border-radius: 5px;
+  margin-right: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: c.$white;
+    background: c.$dark-red;
+    border: 1px solid c.$dark-red;
+  }
+}
+
+.logo {
+  max-width: 239px;
+  margin-right: 34px;
+}
+
+.catalog-btn {
+  height: 44px;
+  margin-right: 27px;
+  background: #E11A1A;
+  padding-left: 24px;
+  padding-right: 24px;
+  gap: 10px;
+  font-size: 16px;
+  line-height: 100%;
+  font-weight: 600;
+  color: c.$white;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  &:hover {
+    background: #BB0202;
+  }
+}
+
+.menu {
+
+  gap: 32px;
+
+    &__item {
+      position: relative;
+      padding-right: 25px;
+      cursor: pointer;
+
+      &.dropdown:hover .sub-menu  {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+
+      &.dropdown::before {
+        content: "";
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 6px 4px 0 4px;
+        border-color: #716E6E transparent transparent transparent;
+        margin-right: 8px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 0;
+      }
+    }
+
+    &__link {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 100%;
+      color: c.$black;
+
+      &:hover {
+        color: #E11A1A;
+      }
+    }
+}
+
+.sub-menu {
+  display: none;
+  position: absolute;
+  padding: 20px;
+  border-radius: 5px;
+  background: #F5FAFF;
+  transition: all 0.3s ease;
+  z-index: 5;
+  box-shadow: 0px 2px 27.9px 0px #A8A8A8B8;
+
+
+  &__link {
+      transition: all 0.3s ease;
+      color: #333333;
+
+      &:hover {
+        color: #E11A1A;
+      }
+    }
+}
+
+.search {
+
+    &__inner {
+      align-items: center;
+      position: relative;
+
+      svg {
+        width: 26px;
+        height: 26px;
+        position: absolute;
+        left: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
+    &__form {
+      width: 100%;
+    }
+
+    &__input {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 100%;
+      color: #A0B8CF;
+      width: 482px;
+      height: 41px;
+      border: 1px solid #A0B8CF;
+      border-radius: 10px;
+      padding: 10px 10px 10px 42px;
+
+      &::placeholder {
+        color: #A0B8CF;
+      }
+    }
+}
+
+.basket {
+  background: #2D3B49;
+  border-radius: 5px;
+  position: relative;
+  padding: 7px 8px 6px 5px;
+  margin-left: 24px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  span {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FF0000;
+    color: c.$white;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 150%;
+    right: -5px;
+    top: -5px;
+    transition: all 0.3s ease;
+    padding: 3px;
   }
 
+  &:hover {
+    background: c.$dark-red;
+
+    span {
+      background: #2D3B49;
+    }
+  }
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 10px;
+  width: 10px;
+  background: linear-gradient(45deg, transparent calc(50% - 1px), #FF0000 calc(50% - 1px), #FF0000 calc(50% + 1px), transparent calc(50% + 1px)),
+  linear-gradient(-45deg, transparent calc(50% - 1px), #FF0000 calc(50% - 1px), #FF0000 calc(50% + 1px), transparent calc(50% + 1px));
+  cursor: pointer;
 }

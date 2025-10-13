@@ -22,5 +22,265 @@ h2 {
   font-weight: 500;
   line-height: 34px;
   letter-spacing: 0.02em;
+  margin-bottom: 48px;
+  text-align: center;
 }
+
+
+.equipment {
+  padding-top: 82px;
+  position: relative;
+}
+
+.marking {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+
+    &__wrapper {
+      position: relative;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+
+      &:hover {
+        box-shadow: 0px 2px 27.9px 0px #A8A8A8B8;
+
+        .marking-img {
+          overflow: hidden;
+          img {
+            transform: scale(1.03);
+            transition: all 0.3s ease;
+          }
+        }
+      }
+
+      &:nth-child(1),
+      &:nth-child(2),
+      &:nth-child(3) {
+        flex: 1 1 calc(33.33% - 20px);
+      }
+
+
+      &:nth-child(4) {
+        flex: 1 1 calc(42% - 15px);
+      }
+
+      &:nth-child(5) {
+        flex: 1 1 calc(58% - 15px);
+      }
+
+
+      &:nth-child(6) {
+        flex: 1 1 calc(58% - 15px);
+
+      }
+
+      &:nth-child(7) {
+        flex: 1 1 calc(42% - 15px);
+      }
+
+    }
+
+    &__link {}
+
+    &__list {}
+
+    &__item {
+      padding-left: 12px;
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 6px;
+        width: 4px;
+        height: 13px;
+        background: url("../images/red-arrow.svg") no-repeat;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+
+      .marking__link {
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 100%;
+        letter-spacing: 0.02em;
+        color: c.$black;
+        transition: all 0.3s ease;
+
+        &:hover {
+          color: #E11A1A;
+        }
+      }
+
+    }
+}
+
+.item-top {
+  background: url("../images/marking-top.jpg") no-repeat;
+  background-size: cover;
+
+  .marking__info {
+
+    padding: 26px 48px 53px 48px;
+
+    h3 {
+      margin-bottom: 20px;
+      max-width: 356px;
+
+      .marking__link {
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 130%;
+        letter-spacing: 0.02em;
+        color: c.$black;
+
+        &:hover {
+          color: #E11A1A;
+        }
+      }
+    }
+
+    ul {
+      max-width: 356px;
+    }
+  }
+}
+
+.marking-img {
+  img {
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+
+.marking__info {
+  min-width: 375px;
+}
+
+.interior-new {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 84px;
+  height: 19px;
+  border: 1px solid #E11A1A;
+  font-size: 16px;
+  font-weight: 400;
+  color: c.$red;
+  border-radius: 2px;
+  margin-top: 5px;
+}
+
+.new {
+  width: 84px;
+  height: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #E11A1A;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 100%;
+  color: c.$white;
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  border-radius: 3px;
+}
+
+.item-right {
+   display: flex;
+  flex-direction: row-reverse;
+
+  h3 {
+    margin-bottom: 20px;
+
+    a {
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 130%;
+      letter-spacing: 0.02em;
+      color: #333333;
+
+      &:hover {
+        color: #E11A1A;
+      }
+    }
+  }
+
+  .marking__info {
+    background: url("../images/marking-right.jpg") no-repeat;
+    background-size: cover;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 35px;
+    padding-left: 35px;
+  }
+}
+
+.item-left {
+  display: flex;
+
+  h3 {
+    margin-bottom: 20px;
+
+    a {
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 130%;
+      letter-spacing: 0.02em;
+      color: #333333;
+
+      &:hover {
+        color: #E11A1A;
+      }
+    }
+  }
+
+  .marking__info {
+    background: url("../images/marking-right.jpg") no-repeat;
+    background-size: cover;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 35px;
+    padding-left: 35px;
+  }
+
+}
+
+.all-link {
+  position: absolute;
+  top: 85px;
+  right: 40px;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 100%;
+    letter-spacing: 0.02em;
+    color: #E11A1A;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: c.$black;
+    }
+  }
+}
+
 

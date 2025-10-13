@@ -10,11 +10,13 @@ img {
 }
 
 input,
-button {
+button,
+textarea,
+select {
   border: none;
   background: none;
   outline: none;
-  font-family: "Manrope", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 a {
