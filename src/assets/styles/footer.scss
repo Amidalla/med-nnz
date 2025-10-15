@@ -37,6 +37,11 @@
     &__mid {
         display: flex;
         gap: 73px;
+
+        @media (max-width: 1660px) {
+            gap: 40px;
+        }
+
     }
 
     &__contacts {
@@ -45,9 +50,11 @@
         max-width: 630px;
         border-right: 1px solid #3D536B;
         margin-bottom: 50px;
-    }
 
-    &__inner {}
+        @media (max-width: 1660px) {
+            max-width: 600px;
+        }
+    }
 
     &__head-office {
         flex: 0 0 60%;
@@ -154,6 +161,10 @@
         font-weight: 400;
         line-height: 142%;
         color: #778390;
+        
+        @media (max-width: 1660px) {
+            max-width: 546px;
+        }
 
     }
 

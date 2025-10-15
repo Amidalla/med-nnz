@@ -15,10 +15,91 @@ import IMask from 'imask';
 
 Swiper.use([Pagination, Navigation, Autoplay, Thumbs]);
 
+// Функция для инициализации мобильного поиска
+function initMobileSearch() {
+    // Ищем элементы только в мобильном контейнере
+    const mobileContainer = document.querySelector('.container.mobile');
+    if (!mobileContainer) return;
+
+    const searchToggle = mobileContainer.querySelector('.search__toggle');
+    const searchForm = mobileContainer.querySelector('.search__form');
+    const searchClose = mobileContainer.querySelector('.search__close');
+    const searchInput = mobileContainer.querySelector('.search__input');
+
+    // Если элементы не найдены в мобильном контейнере, выходим
+    if (!searchToggle || !searchForm || !searchClose || !searchInput) {
+        console.log('Mobile search elements not found');
+        return;
+    }
+
+    console.log('Mobile search initialized'); // Для отладки
+
+    // Открытие поиска
+    searchToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        searchForm.classList.add('active');
+        setTimeout(() => searchInput.focus(), 300);
+    });
+
+    // Закрытие поиска
+    searchClose.addEventListener('click', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        searchForm.classList.remove('active');
+        searchInput.blur();
+    });
+
+    // Закрытие при клике вне поиска
+    document.addEventListener('click', function(e) {
+        if (searchForm.classList.contains('active') &&
+            !searchForm.contains(e.target) &&
+            !searchToggle.contains(e.target)) {
+            searchForm.classList.remove('active');
+            searchInput.blur();
+        }
+    });
+
+    // Закрытие по ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && searchForm.classList.contains('active')) {
+            searchForm.classList.remove('active');
+            searchInput.blur();
+        }
+    });
+
+    // Предотвращаем закрытие при клике внутри формы
+    searchForm.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+
+    // Закрытие поиска при отправке формы
+    searchForm.addEventListener('submit', function(e) {
+        if (window.innerWidth <= 1300) {
+            setTimeout(() => {
+                searchForm.classList.remove('active');
+            }, 1000);
+        }
+    });
+
+    // Дополнительно: закрытие при изменении ориентации или resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 1300 && searchForm.classList.contains('active')) {
+            searchForm.classList.remove('active');
+            searchInput.blur();
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     InitSelect();
     SlidersInit();
     InitModals();
+
+    // Инициализируем мобильный поиск после полной загрузки DOM
+    setTimeout(() => {
+        initMobileSearch();
+    }, 100);
 
     const lazyLoadInstance = new LazyLoad();
 
@@ -67,15 +148,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-
     const submitButton = document.querySelector('.submit-btn');
     const checkbox = document.querySelector('input[name="checkbox"]');
-
 
     if (checkbox) {
         checkbox.checked = true;
     }
-
 
     submitButton?.addEventListener('click', function() {
         if (checkbox && !checkbox.checked) {

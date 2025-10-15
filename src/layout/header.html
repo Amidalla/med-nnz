@@ -1,5 +1,5 @@
 <header class="header">
-    <div class="container">
+    <div class="container desktop">
         <div class="header__top flex">
             <div class="location flex flex-center">
                 <include src="assets/svg/geo.html"></include>
@@ -106,6 +106,69 @@
             <div class="basket">
                 <include src="assets/svg/basket.html"></include>
                 <span class="counter">9+</span>
+            </div>
+        </div>
+    </div>
+    <div class="container mobile">
+        <div class="header__top flex">
+            <div class="logo">
+                <include src="assets/svg/logo.html"></include>
+            </div>
+            <!-- Кастомный селект -->
+            <div class="custom-select flex flex-center">
+                <div class="select-selected" data-value="value1">Ru</div>
+                <div class="select-items">
+                    <div class="option" data-value="value1">Ru</div>
+                    <div class="option" data-value="value2">Eng</div>
+                </div>
+            </div>
+
+            <!-- Оригинальный скрытый селект для формы -->
+            <select name="lang-select" style="display: none;">
+                <option value="value1">Ru</option>
+                <option value="value2">Eng</option>
+            </select>
+            <button class="call-btn">Заказать звонок</button>
+            <div class="basket">
+                <include src="assets/svg/basket.html"></include>
+                <span class="counter">9+</span>
+            </div>
+            <div class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="header__bottom flex">
+            <div class="header__inner flex">
+                <div class="mail flex flex-center">
+                    <include src="assets/svg/mail.html"></include>
+                    <a href="mailto:medmeb@nnz.ru">medmeb@nnz.ru</a>
+                </div>
+                <div class="phone flex flex-center">
+                    <a href="tel:+78123265925">+7 (812) 326-59-25,</a>
+                    <a href="tel:+74957828011">+7 (495) 782-80-11</a>
+                </div>
+            </div>
+            <!-- В мобильной версии (container mobile) -->
+            <div class="search">
+                <div class="search__inner flex">
+                    <!-- Только кнопка переключения, без дополнительной иконки -->
+                    <button class="search__toggle" type="button" aria-label="Открыть поиск">
+                        <include src="assets/svg/search.html"></include>
+                    </button>
+
+                    <!-- Форма поиска -->
+                    <form class="search__form">
+                        <input type="search" placeholder="Поиск" name="q" class="search__input">
+                        <!-- Кнопка закрытия для мобильных -->
+                        <button class="search__close" type="button" aria-label="Закрыть поиск">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

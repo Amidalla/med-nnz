@@ -23,7 +23,7 @@ export function SlidersInit() {
                 slidesPerView: 3
             },
             1365: {
-                slidesPerView: 4
+                slidesPerView: 3.5
             },
             1640: {
                 slidesPerView: 5
