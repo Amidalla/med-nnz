@@ -1,0 +1,37 @@
+<li class="cards__item">
+    <div class="cards__img">
+        <img class="lazy" data-src="{{ image }}" alt="{{ title }}">
+    </div>
+    <div class="cards__info">
+        <div class="cards__top">
+            <div class="rus {{ madeInRussia }}">
+                <include src="assets/svg/rus.html"></include>
+                <span>Сделано в России</span>
+            </div>
+            <div class="cards__title">
+                <h4><a class="cards__link" href="{{ link }}">{{ title }}</a></h4>
+                <span>{{ brand }}</span>
+            </div>
+        </div>
+        <div class="cards__bottom">
+            <div class="cards__price">{{ price }} ₽</div>
+            <div class="cards__intelligence">
+                <a href="{{ link }}" class="cards__details">Подробнее</a>
+                <div class="status">
+                    <include src="assets/svg/status.html"></include>
+                    <span>{{ availability }}</span>
+                </div>
+            </div>
+            <div class="cards__buttons">
+                <button class="offer-btn">Получить КП</button>
+                <button class="basket-btn">
+                    <include src="assets/svg/basket.html"></include>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="cards__peculiarities">
+        <div class="action {{ isAction }}">Акция</div>
+        <div class="new {{ isNew }}">Новинка</div>
+    </div>
+</li>

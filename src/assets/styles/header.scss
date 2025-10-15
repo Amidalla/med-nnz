@@ -108,6 +108,10 @@
   &:hover {
     background: #BB0202;
   }
+
+  &.active {
+    background: #CDCDCD;
+  }
 }
 
 .menu {

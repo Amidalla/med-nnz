@@ -1,0 +1,82 @@
+@use "./colors.scss" as c;
+@use "../styles/mixins.scss" as *;
+
+.modal-catalog {
+  position: fixed;
+  top: 139px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+
+    &.active {
+      opacity: 1;
+      visibility: visible;
+
+      .modal-catalog__nav {
+        transform: translateY(0);
+      }
+    }
+
+    &__nav {
+      padding: 60px 43px 93px 43px;
+      background: rgba(245, 250, 255, 1);
+      box-shadow: 0 50px 30px rgba(0, 0, 0, 0.3);
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: translateY(-20px);
+      transition: transform 0.3s ease;
+    }
+
+    &__list {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__item {
+      max-width: 230px;
+    }
+
+    &__link {
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 110%;
+      color: #9E9E9E;
+      text-transform: uppercase;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      display: inline-block;
+      max-width: 100%;
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: #E11A1A;
+      }
+    }
+
+    &__sub-list {
+      margin-top: 14px;
+    }
+
+    &__sub-item {
+      &:not(:last-child) {
+        margin-bottom: 17px;
+      }
+    }
+
+    &__sub-link {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 100%;
+      color: c.$black;
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: #E11A1A;
+      }
+    }
+
+}

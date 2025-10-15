@@ -1,2 +1,84 @@
 @use "../styles/colors.scss" as c;
 
+@mixin red-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+  color: c.$white;
+  padding: 13px 14px;
+  background: #E11A1A;
+  border-radius: 5px;
+  border: none;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background: #BB0202;
+  }
+}
+
+@mixin swiper-button-prev {
+  .swiper-button-prev {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #D8DFE7;
+    border-radius: 5px;
+    left: 0;
+    background: #fff;
+
+    svg {
+      color: #D8DFE7;
+      transition: all 0.3s ease;
+    }
+
+    &:hover {
+      border: 1px solid #2D3B49;
+
+      svg {
+        color: #2D3B49;
+      }
+    }
+
+    &::after {
+      display: none;
+    }
+  }
+}
+
+@mixin swiper-button-next {
+  .swiper-button-next {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #D8DFE7;
+    border-radius: 5px;
+    transform: rotate(180deg);
+    right: 0;
+    background: #fff;
+
+    svg {
+      color: #D8DFE7;
+      transition: all 0.3s ease;
+    }
+
+    &:hover {
+      border: 1px solid #2D3B49;
+
+      svg {
+        color: #2D3B49;
+      }
+    }
+
+    &::after {
+      display: none;
+    }
+  }
+}
