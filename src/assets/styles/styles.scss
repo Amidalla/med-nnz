@@ -915,33 +915,26 @@ h2 {
     padding-left: 20px;
     padding-right: 20px;
 
-    .partners-scrollbar {
+    .custom-progress-container {
       position: relative;
-      height: 6px;
-      background: #f0f0f0;
-      border-radius: 3px;
+      height: 10px;
+      background: #D8DFE7;
+      border-radius: 100px;
       margin-top: 25px;
       cursor: pointer;
+      overflow: hidden;
+      display: none;
     }
 
-    .partners-scrollbar-drag {
-      background: #E11A1A;
-      border-radius: 3px;
+
+    .custom-progress-bar {
+      background: #BECCDB;
+      border-radius: 100px;
       height: 100%;
+      width: 0%;
+      transition: width 0.3s ease;
     }
 
-    @media (max-width: 650px) {
-
-      .partners-scrollbar {
-        display: block;
-      }
-    }
-
-    @media (min-width: 651px) {
-      .partners__controls {
-        display: flex;
-      }
-    }
 
     @media (max-width: 650px) {
       padding-left: 0;
@@ -1025,6 +1018,26 @@ h2 {
   .swiper {
     padding-left: 20px;
     padding-right: 20px;
+
+    .events-progress-container {
+      position: relative;
+      height: 10px;
+      background: c.$white;
+      border-radius: 100px;
+      margin-top: 25px;
+      cursor: pointer;
+      overflow: hidden;
+      display: none;
+    }
+
+    .events-progress-bar {
+      background: #BECCDB;
+      border-radius: 100px;
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
 
     @media (max-width: 1000px) {
       padding-left: 0;
@@ -1179,6 +1192,10 @@ h2 {
       letter-spacing: 0.02em;
       color: #6D6D6D;
       margin-bottom: 38px;
+
+      @media (max-width: 1300px) {
+        font-size: 16px;
+      }
     }
     .container {
       max-width: 1297px;
@@ -1228,6 +1245,14 @@ h2 {
     color: #6D6D6D;
     border: 1px solid #D8DFE7;
     border-radius: 5px;
+
+    @media (max-width: 1300px) {
+      font-size: 16px;
+    }
+
+    @media (max-width: 450px) {
+      width: 100%;
+    }
   }
 
    button {
@@ -1243,6 +1268,10 @@ h2 {
      @media (max-width: 760px) {
        margin-right: 0;
        margin-left: 0;
+     }
+
+     @media (max-width: 450px) {
+       width: 100%;
      }
   }
 }
@@ -1316,5 +1345,317 @@ h2 {
   }
 
 }
+
+
+.breadcrumb {
+ &__inner {
+   margin-top: 30px;
+
+   @media (max-width: 450px) {
+     margin-top: 12px;
+   }
+ }
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+
+    @media (max-width: 450px) {
+      display: none;
+    }
+  }
+
+  &__item {
+    position: relative;
+    padding-right: 20px;
+
+    &.active {
+      a {
+        color: #E11A1A;
+
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    &:not(:last-child)::after {
+      content:"";
+      width: 9px;
+      height: 9px;
+      position: absolute;
+      background: url("../images/breadcrumb-arrow.svg") no-repeat;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  &__link {
+    color: #3C3F41;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.back-link {
+  display: none;
+
+  @media (max-width: 450px) {
+    display: block;
+    color: #3C3F41;
+    font-size: 15px;
+    font-weight: 400;
+    position: relative;
+    padding-left: 15px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &::before {
+      content: " ";
+      width: 9px;
+      height: 9px;
+      position: absolute;
+      background: url("../images/breadcrumb-arrow.svg") no-repeat;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%) rotate(180deg);
+    }
+  }
+}
+
+.page-name {
+  padding-top: 32px;
+  
+  @media (max-width: 1500px) {
+    padding-top: 24px;
+  }
+
+  h1 {
+    font-size: 54px;
+    font-weight: 500;
+    line-height: 100%;
+    color: #272727;
+
+    @media (max-width: 1500px) {
+      font-size: 52px;
+    }
+
+    @media (max-width: 1300px) {
+      font-size: 40px;
+    }
+    @media (max-width: 700px) {
+      font-size: 28px;
+    }
+
+  }
+}
+
+.catalog {
+  padding-top: 48px;
+  padding-bottom: 80px;
+
+  @media (max-width: 1500px) {
+    padding-top: 32px;
+    padding-bottom: 60px;
+  }
+
+  @media (max-width: 1300px) {
+    font-size: 24px;
+    padding-bottom: 56px;
+  }
+  @media (max-width: 700px) {
+    padding-bottom: 48px;
+  }
+
+}
+
+
+.projects {
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background: #EAEFF4;
+
+
+  @media (max-width: 1500px) {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  @media (max-width: 1300px) {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+
+  @media (max-width: 700px) {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  &__item {
+    background: c.$white;
+    min-height: 748px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+
+    @media (max-width: 1300px) {
+      min-height: 478px;
+    }
+  }
+
+  &__info {
+    padding: 37px 20px 30px 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__img {
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__title {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 150%;
+    letter-spacing: 0.02em;
+    color: #333333;
+    margin-bottom: 10px;
+
+    @media (max-width: 1500px) {
+      font-size: 20px;
+    }
+
+    @media (max-width: 1200px) {
+      font-size: 18px;
+    }
+  }
+
+  &__text {
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: 0.02em;
+    color: #333333;
+    margin-bottom: 10px;
+
+    @media (max-width: 1300px) {
+      display: none;
+    }
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 100%;
+    letter-spacing: 0.02em;
+    color: #E11A1A;
+    margin-top: auto;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__controls {
+    .swiper-button-prev svg,
+    .swiper-button-next svg {
+      width: 15px;
+      height: 27px;
+    }
+
+    @include swiper-button-prev;
+
+    @include swiper-button-next;
+  }
+
+  .projects-slider {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    @media (max-width: 1000px) {
+      margin: 0;
+      padding: 0;
+    }
+
+    .projects-progress-container {
+      position: relative;
+      height: 10px;
+      background: c.$white;
+      border-radius: 100px;
+      margin-top: 25px;
+      cursor: pointer;
+      overflow: hidden;
+      display: none;
+    }
+
+    .projects-progress-bar {
+      background: #BECCDB;
+      border-radius: 100px;
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    @media (max-width: 600px) {
+      .projects-progress-container {
+        display: block;
+      }
+
+      .projects__controls {
+        display: none;
+      }
+    }
+  }
+
+  .section-header {
+    position: relative;
+    justify-content: center;
+    align-items: flex-end;
+
+    h2 {
+      @media (max-width: 1300px) {
+        margin-bottom: 16px;
+      }
+    }
+    
+    @media (max-width: 1300px) {
+      align-items: start;
+      flex-direction: column;
+    }
+
+    .all-link {
+      position: absolute;
+      top: 15px;
+      right: 0;
+
+      @media (max-width: 1300px) {
+        position: static;
+      }
+    }
+  }
+}
+
 
 

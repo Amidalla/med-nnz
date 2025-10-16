@@ -115,9 +115,21 @@
   overflow-y: auto;
   transition: right 0.3s ease;
   z-index: 1000;
+  
+  @media (max-width: 550px) {
+    padding: 53px 30px 53px 30px;
+  }
 
   &.active {
     right: 0;
+  }
+
+  .phone {
+    @media (max-width: 450px) {
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+    }
   }
 
   &__close {

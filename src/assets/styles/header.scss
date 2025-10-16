@@ -2,6 +2,8 @@
 @use "../styles/mixins.scss" as *;
 
 .header {
+
+
     &__top {
       padding-top: 16.5px;
       padding-bottom: 11.5px;
@@ -15,6 +17,17 @@
           display: none;
         }
       }
+
+      .search {
+        &.mobile {
+          display: none;
+
+          @media (max-width: 450px) {
+            display: block;
+            margin-left: 19px;
+          }
+        }
+      }
     }
 
     &__inner {
@@ -23,6 +36,11 @@
       @media (max-width: 1300px) {
         margin-left: 0;
         margin-right: auto;
+
+        @media (max-width: 450px) {
+          margin-right: 0;
+          width: 100%;
+        }
       }
     }
 
@@ -39,6 +57,12 @@
 
       @media (max-width: 700px) {
         .mail {
+          display: none;
+        }
+      }
+
+      @media (max-width: 450px) {
+        .search {
           display: none;
         }
       }
@@ -104,6 +128,13 @@
   font-weight: 700;
   transition: all 0.3s ease;
 
+  @media (max-width: 450px) {
+    justify-content: space-between;
+    width: 100%;
+    font-size: 16px;
+    margin-right: 0;
+  }
+
   a {
     color: #626262;
 
@@ -152,6 +183,10 @@
 
     @media (max-width: 1600px) {
       max-width: 197px;
+    }
+
+    @media (max-width: 450px) {
+      max-width: 141px;
     }
   }
 }
@@ -397,6 +432,10 @@
   @media (max-width: 1300px) {
     margin-left: 33px;
   }
+  @media (max-width: 450px) {
+    margin-left: 0;
+  }
+
 
   span {
     position: absolute;
@@ -444,6 +483,12 @@ input[type="search"]::-webkit-search-cancel-button {
   background: transparent;
   border: none;
   margin-left: 65px;
+
+  @media (max-width: 450px) {
+    margin-left: 12px;
+    width: 43px;
+    height: 28px;
+  }
 }
 
 .burger span {
@@ -497,4 +542,14 @@ input[type="search"]::-webkit-search-cancel-button {
 .lang {
   display: flex;
   align-items: center;
+}
+
+.inside-page {
+  header {
+    box-shadow: 0 4px 11.2px 0 rgba(160, 178, 195, 0.54);
+
+    @media (max-width: 1360px) {
+      box-shadow: none;
+    }
+  }
 }

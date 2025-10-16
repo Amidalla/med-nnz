@@ -79,11 +79,11 @@ export function InitModals() {
 
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenu = document.querySelector('.mobile-menu');
-    const burgerBtn = document.querySelector('.burger'); // Исправил на .burger
+    const burgerBtn = document.querySelector('.burger');
     const overlay = document.querySelector('.overlay');
     const closeBtn = document.querySelector('.mobile-menu__close');
 
-    // Проверяем наличие всех необходимых элементов
+
     if (!burgerBtn || !mobileMenu || !overlay) {
         console.log('Не найдены необходимые элементы для мобильного меню');
         return;
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
         isMobileMenuOpen = false;
     }
 
-    // Обработчики для мобильного меню
+
     burgerBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         openMobileMenu();
@@ -147,6 +147,6 @@ document.addEventListener('DOMContentLoaded', function() {
         e.stopPropagation();
     });
 
-    // Изначально скрываем все подменю
+
     closeAllDropdowns();
 });
