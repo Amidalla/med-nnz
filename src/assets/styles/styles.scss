@@ -29,6 +29,16 @@ h2 {
     font-size: 38px;
     margin-bottom: 42px;
   }
+
+  @media (max-width: 1300px) {
+    font-size: 34px;
+    margin-bottom: 32px;
+  }
+
+  @media (max-width: 650px) {
+    font-size: 26px;
+    margin-bottom: 32px;
+  }
 }
 
 
@@ -39,6 +49,14 @@ h2 {
   @media (max-width: 1550px) {
     padding-top: 72px;
   }
+  @media (max-width: 1300px) {
+    padding-top: 70px;
+  }
+
+  @media (max-width: 650px) {
+    padding-top: 48px;
+  }
+
   
   h2 {
     @media (max-width: 1500px) {
@@ -46,6 +64,13 @@ h2 {
       margin: 0 auto;
       margin-bottom: 57px;
     }
+    @media (max-width: 1300px) {
+      max-width: 728px;
+      margin: 0;
+      margin-bottom: 16px;
+      text-align: left;
+    }
+
   }
 }
 
@@ -57,6 +82,20 @@ h2 {
   @media (max-width: 1650px) {
     gap: 21px;
   }
+
+  @media (max-width: 1300px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 21px;
+  }
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 650px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
 
     &__wrapper {
       position: relative;
@@ -71,6 +110,7 @@ h2 {
 
         .marking-img {
           overflow: hidden;
+
           img {
             transform: scale(1.03);
             transition: all 0.3s ease;
@@ -78,46 +118,85 @@ h2 {
         }
       }
 
+
+
       &:nth-child(1),
       &:nth-child(2),
       &:nth-child(3) {
         flex: 1 1 calc(33.33% - 20px);
+
+        @media (max-width: 1300px) {
+          flex: none;
+          grid-column: auto;
+        }
       }
 
 
       &:nth-child(4) {
-        flex: 1 1 calc(42% - 15px);
+        flex: 1 1 calc(45% - 15px);
+
+        @media (max-width: 1300px) {
+          flex: none;
+          grid-column: auto;
+        }
+
       }
 
       &:nth-child(5) {
-        flex: 1 1 calc(58% - 15px);
+        flex: 1 1 calc(55% - 15px);
+
+        @media (max-width: 1300px) {
+          flex: none;
+          grid-column: auto;
+        }
       }
 
 
       &:nth-child(6) {
-        flex: 1 1 calc(58% - 15px);
+        flex: 1 1 calc(55% - 15px);
+
+        @media (max-width: 1300px) {
+          flex: none;
+          grid-column: auto;
+          flex-direction: column;
+        }
 
       }
 
       &:nth-child(7) {
-        flex: 1 1 calc(42% - 15px);
+        flex: 1 1 calc(45% - 15px);
+
+        @media (max-width: 1300px) {
+          flex: none;
+          grid-column: 1 / -1;
+          height: auto;
+          min-height: 333px;
+
+          .marking-img {
+            min-height: 100%;
+          }
+        }
+
+        @media (max-width: 650px) {
+          min-height: auto;
+        }
       }
 
     }
 
-    &__link {}
-
-    &__list {}
 
     &__item {
       padding-left: 12px;
+      display: flex;
+      align-items: start;
+      gap: 15px;
       position: relative;
 
       &::before {
         content: "";
         position: absolute;
         left: 0;
-        top: 6px;
+        top: 3px;
         width: 4px;
         height: 13px;
         background: url("../images/red-arrow.svg") no-repeat;
@@ -130,10 +209,14 @@ h2 {
       .marking__link {
         font-size: 18px;
         font-weight: 400;
-        line-height: 100%;
+        line-height: 120%;
         letter-spacing: 0.02em;
         color: c.$black;
         transition: all 0.3s ease;
+
+        @media (max-width: 1300px) {
+          font-size: 16px;
+        }
 
         &:hover {
           color: #E11A1A;
@@ -146,10 +229,48 @@ h2 {
 .item-top {
   background: url("../images/marking-top.jpg") no-repeat;
   background-size: cover;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 1300px) {
+    background: none;
+  }
+
+  .marking-img {
+    flex-shrink: 0;
+    height: 350px;
+    
+    @media (max-width: 1500px) {
+      height: 259px;
+    }
+
+    @media (max-width: 1300px) {
+      height: 220px;
+    }
+
+    @media (max-width: 650px) {
+      display: none;
+    }
+  }
 
   .marking__info {
-
+    flex: 1;
     padding: 26px 48px 53px 48px;
+
+    @media (max-width: 1550px) {
+      padding: 26px 28px 53px 28px;
+    }
+    @media (max-width: 1300px) {
+      padding: 26px 28px 45px 28px;
+      background: url("../images/marking-right.jpg") no-repeat;
+      background-position: right center;
+      background-size: cover;
+    }
+    @media (max-width: 650px) {
+      padding: 20px;
+    }
+
+
 
     h3 {
       margin-bottom: 20px;
@@ -161,6 +282,7 @@ h2 {
         line-height: 130%;
         letter-spacing: 0.02em;
         color: c.$black;
+
 
         &:hover {
           color: #E11A1A;
@@ -175,6 +297,11 @@ h2 {
 }
 
 .marking-img {
+
+  @media (max-width: 1300px) {
+    height: 220px;
+  }
+
   img {
     height: 100%;
     width: 100%;
@@ -182,26 +309,18 @@ h2 {
   }
 }
 
-
-.marking__info {
-  min-width: 375px;
-}
-
 .interior-new {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 84px;
+  width: auto;
+  min-width: 84px;
   height: 19px;
   border: 1px solid #E11A1A;
   font-size: 16px;
   font-weight: 400;
   color: c.$red;
   border-radius: 2px;
-  margin-top: 5px;
 }
 
 .new {
@@ -219,12 +338,58 @@ h2 {
   top: 16px;
   left: 16px;
   border-radius: 3px;
+
+  @media (max-width: 650px) {
+    display: none;
+  }
 }
 
 .item-right {
-   display: flex;
+  display: flex;
   flex-direction: row-reverse;
-  height: 400px;
+  align-items: stretch;
+  min-height: 400px;
+
+  @media (max-width: 1300px) {
+    min-height: 550px;
+  }
+
+  @media (max-width: 650px) {
+    min-height: auto;
+  }
+
+  .marking-img {
+    width: 50%;
+    display: flex;
+
+    @media (max-width: 1300px) {
+        width: auto;
+    }
+
+    @media (max-width: 650px) {
+      display: none;
+    }
+
+    &.big {
+      width: 64%;
+
+      @media (max-width: 1500px) {
+        width: 50%;
+      }
+      @media (max-width: 1500px) {
+        width: 100%;
+      }
+
+    }
+    .marking__info {
+      flex: 1;
+    }
+
+  }
+
+  @media (max-width: 1300px) {
+    flex-direction: column;
+  }
 
   h3 {
     margin-bottom: 20px;
@@ -245,18 +410,63 @@ h2 {
   .marking__info {
     background: url("../images/marking-right.jpg") no-repeat;
     background-size: cover;
+    background-position: right center;
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding-right: 35px;
     padding-left: 35px;
+    
+    @media (max-height: 1300px) {
+      padding: 26px 28px 45px 28px;
+      justify-content: start;
+    }
+
+    @media (max-width: 650px) {
+      padding: 20px;
+    }
   }
 }
 
 .item-left {
   display: flex;
-  height: 400px;
+  align-items: stretch;
+  min-height: 400px;
+
+  @media (max-width: 1300px) {
+    min-height: 550px;
+  }
+
+  @media (max-width: 650px) {
+    min-height: auto;
+  }
+
+
+  .marking-img {
+    width: 50%;
+    display: flex;
+
+    @media (max-width: 1300px) {
+      width: auto;
+    }
+
+    @media (max-width: 650px) {
+      display: none;
+    }
+
+    &.big {
+      width: 64%;
+
+      @media (max-width: 1500px) {
+        width: 50%;
+      }
+      @media (max-width: 1300px) {
+        width: 100%;
+      }
+
+    }
+  }
 
   h3 {
     margin-bottom: 20px;
@@ -276,6 +486,7 @@ h2 {
 
   .marking__info {
     background: url("../images/marking-right.jpg") no-repeat;
+    background-position: right center;
     background-size: cover;
     flex: 1;
     display: flex;
@@ -283,14 +494,21 @@ h2 {
     justify-content: center;
     padding-right: 35px;
     padding-left: 35px;
+
+
+    @media (max-height: 1300px) {
+      padding: 26px 28px 45px 28px;
+      justify-content: start;
+    }
+
+    @media (max-width: 650px) {
+      padding: 20px;
+    }
   }
 
 }
 
 .all-link {
-  position: absolute;
-  top: 85px;
-  right: 40px;
 
   a {
     display: flex;
@@ -301,6 +519,10 @@ h2 {
     line-height: 100%;
     letter-spacing: 0.02em;
     color: #E11A1A;
+
+    @media (max-width: 1300px) {
+      font-size: 16px;
+    }
 
     &:hover {
       text-decoration: underline;
@@ -317,7 +539,15 @@ h2 {
     padding-bottom: 60px;
   }
 
-    &__inner {}
+  @media (max-width: 1300px) {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+  @media (max-width: 650px) {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
 }
 
 .cards {
@@ -329,6 +559,17 @@ h2 {
       @media (max-width: 1550px) {
         gap: 20px;
       }
+
+      @media (max-width: 1300px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      @media (max-width: 1000px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      @media (max-width: 600px) {
+        grid-template-columns: repeat(1, 1fr);
+      }
+
     }
 
     &__item {
@@ -349,6 +590,10 @@ h2 {
         transition: all 0.3s ease;
         height: 100%;
         object-fit: cover;
+
+        @media (max-width: 600px) {
+          width: 100%;
+        }
       }
 
       &:hover img {
@@ -381,6 +626,10 @@ h2 {
           @media (max-width: 1550px) {
             font-size: 20px;
           }
+          @media (max-width: 1300px) {
+            font-size: 18px;
+          }
+
 
           &:hover {
             color: #E11A1A;
@@ -395,6 +644,10 @@ h2 {
         letter-spacing: 0.02em;
         color: c.$black;
         margin-bottom: 10px;
+
+        @media (max-width: 1300px) {
+          font-size: 15px;
+        }
       }
     }
 
@@ -424,6 +677,10 @@ h2 {
       color: #E11A1A;
       padding-right: 11px;
       position: relative;
+
+      @media (max-width: 1300px) {
+        font-size: 16px;
+      }
 
       &::after {
         content: "";
@@ -506,6 +763,10 @@ h2 {
   cursor: pointer;
   transition: all 0.3s ease;
 
+  @media (max-width: 1300px) {
+    font-size: 16px;
+  }
+
   &:hover {
     background: #BB0202;
   }
@@ -552,6 +813,7 @@ h2 {
 
 .advantages {
   background: url("../images/advantages-bg.jpg") no-repeat;
+  background-position: right center;
   background-size: cover;
   padding-top: 80px;
   padding-bottom: 80px;
@@ -560,12 +822,25 @@ h2 {
     padding-top: 60px;
     padding-bottom: 60px;
   }
+
+  @media (max-width: 1300px) {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
   
     h2 {
       @media (max-width: 1500px) {
         max-width: 1007px;
         margin: 0 auto;
         margin-bottom: 48px;
+        line-height: 130%;
+      }
+
+      @media (max-width: 1300px) {
+        max-width: 723px;
+        margin: 0;
+        margin-bottom: 32px;
+        text-align: left;
         line-height: 130%;
       }
     }
@@ -576,12 +851,35 @@ h2 {
       column-gap: 30px;
       row-gap: 50px;
       margin-bottom: 48px;
+
+      @media (max-width: 1300px) {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 40px;
+        margin-bottom: 32px;
+      }
+      @media (max-width: 1300px) {
+        grid-template-columns: repeat(1, 1fr);
+        row-gap: 30px;
+      }
+
     }
 
     &__item {
       display: flex;
       align-items: center;
       gap: 20px;
+
+      span {
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 120%;
+        letter-spacing: 0.02em;
+        color: #2D3B49;
+
+        @media (max-width: 1300px) {
+          font-size: 18px;
+        }
+      }
 
       svg {
         min-width: 63px;
@@ -591,6 +889,10 @@ h2 {
 
 .consultation-btn {
   @include red-button;
+
+  @media (max-width: 1300px) {
+    font-size: 16px;
+  }
 }
 
 .partners {
@@ -598,9 +900,53 @@ h2 {
   padding-bottom: 60px;
   position: relative;
 
+  @media (max-width: 1300px) {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+
+  h2 {
+    @media (max-width: 1300px) {
+      margin-bottom: 16px;
+    }
+  }
+
   .swiper {
     padding-left: 20px;
     padding-right: 20px;
+
+    .partners-scrollbar {
+      position: relative;
+      height: 6px;
+      background: #f0f0f0;
+      border-radius: 3px;
+      margin-top: 25px;
+      cursor: pointer;
+    }
+
+    .partners-scrollbar-drag {
+      background: #E11A1A;
+      border-radius: 3px;
+      height: 100%;
+    }
+
+    @media (max-width: 650px) {
+
+      .partners-scrollbar {
+        display: block;
+      }
+    }
+
+    @media (min-width: 651px) {
+      .partners__controls {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 650px) {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 
     &__controls {
@@ -608,6 +954,10 @@ h2 {
       @include swiper-button-prev;
 
       @include swiper-button-next;
+
+      @media (max-width: 650px) {
+        display: none;
+      }
 
      .swiper-button-prev svg,
      .swiper-button-next svg {
@@ -627,6 +977,24 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    img {
+      @media (max-width: 1300px) {
+        max-width: 146px;
+      }
+
+      @media (max-width: 650px) {
+        max-width: 86px;
+      }
+    }
+    
+    @media (max-width: 1300px) {
+      height: 123px;
+    }
+
+    @media (max-width: 650px) {
+      height: 83px;
+    }
   }
 }
 
@@ -635,6 +1003,7 @@ h2 {
   padding-bottom: 80px;
   background: url("../images/events-bg.jpg") no-repeat;
   background-size: cover;
+  background-position: right center;
   position: relative;
 
   @media (max-width: 1500px) {
@@ -642,9 +1011,25 @@ h2 {
     padding-bottom: 106px;
   }
 
+  @media (max-width: 1300px) {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+
+  h2 {
+    @media (max-width: 1300px) {
+      margin-bottom: 16px;
+    }
+  }
+
   .swiper {
     padding-left: 20px;
     padding-right: 20px;
+
+    @media (max-width: 1000px) {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 
     &__controls {
@@ -714,6 +1099,10 @@ h2 {
        -webkit-box-orient: vertical;
        overflow: hidden;
        max-height: calc(1.4em * 4);
+
+       @media (max-width: 1300px) {
+         font-size: 18px;
+       }
      }
 
      &__link {
@@ -724,6 +1113,10 @@ h2 {
        letter-spacing: 0.02em;
        gap: 6px;
        color: #E11A1A;
+
+       @media (max-width: 1300px) {
+         font-size: 16px;
+       }
 
        &:hover {
          text-decoration: underline;
@@ -765,6 +1158,18 @@ h2 {
       letter-spacing: 0.02em;
       color: c.$black;
       margin-bottom: 20px;
+
+      @media (max-width: 1500px) {
+        font-size: 30px;
+      }
+
+      @media (max-width: 1300px) {
+        font-size: 28px;
+      }
+      @media (max-width: 650px) {
+        font-size: 24px;
+      }
+
     }
 
     p {
@@ -791,10 +1196,23 @@ h2 {
     display: flex;
     gap: 24px;
 
+  @media (max-width: 1300px) {
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 760px) {
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
+
   fieldset {
     display: flex;
     gap: 24px;
     border: none;
+
+    @media (max-width: 760px) {
+      flex-direction: column;
+    }
   }
 
   input[type="text"],
@@ -817,6 +1235,15 @@ h2 {
      width: 154px;
      height: 47px;
      margin-right: -9px;
+
+     @media (max-width: 1300px) {
+       font-size: 16px;
+     }
+
+     @media (max-width: 760px) {
+       margin-right: 0;
+       margin-left: 0;
+     }
   }
 }
 
@@ -867,3 +1294,27 @@ h2 {
     }
   }
 }
+
+.section-header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+
+  @media (max-width: 1300px) {
+    flex-direction: column;
+    margin-bottom: 24px;
+  }
+}
+
+.marking__wrapper .marking__info h3 .marking__link {
+  @media (max-width: 1300px) {
+    font-size: 22px;
+  }
+
+  @media (max-width: 650px) {
+    font-size: 20px;
+  }
+
+}
+
+

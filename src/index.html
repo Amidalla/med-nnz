@@ -8,11 +8,23 @@
         <section class="main-picture"></section>
         <section class="equipment">
             <div class="container">
-                <h2>Комплекное оснащение медицинских учреждений</h2>
+                <div class="section-header">
+                    <h2>Комплекное оснащение медицинских учреждений</h2>
+                    <div class="all-link">
+                        <a href="#">
+                            <span>Смотреть все</span>
+                            <include src="assets/svg/all-link.html"></include>
+                        </a>
+                    </div>
+                </div>
                 <div class="equipment__inner marking">
                     <div class="marking__wrapper item-top">
                         <div class="marking-img">
-                            <img class="lazy" data-src="assets/images/marking1.jpg" alt="">
+                            <picture>
+                                <source media="(max-width: 1300px)" data-srcset="assets/images/marking10.jpg">
+                                <source media="(max-width: 1366px)" data-srcset="assets/images/marking9.jpg">
+                                <img class="lazy" data-src="assets/images/marking1.jpg" alt="">
+                            </picture>
                         </div>
                         <div class="marking__info">
                             <h3><a href="#" class="marking__link">Рентгенэндоваскулярная хирургия</a></h3>
@@ -30,7 +42,11 @@
                     </div>
                     <div class="marking__wrapper item-top">
                         <div class="marking-img">
-                            <img class="lazy" data-src="assets/images/marking2.jpg" alt="">
+                            <picture>
+                                <source media="(max-width: 1300px)" data-srcset="assets/images/marking12.jpg">
+                                <source media="(max-width: 1366px)" data-srcset="assets/images/marking11.jpg">
+                                <img class="lazy" data-src="assets/images/marking2.jpg" alt="">
+                            </picture>
                         </div>
                         <div class="marking__info">
                             <h3><a href="#" class="marking__link">Интенсивная терапия</a></h3>
@@ -52,7 +68,11 @@
                     </div>
                     <div class="marking__wrapper item-top">
                         <div class="marking-img">
-                            <img class="lazy" data-src="assets/images/marking3.jpg" alt="">
+                            <picture>
+                                <source media="(max-width: 1300px)" data-srcset="assets/images/marking14.jpg">
+                                <source media="(max-width: 1366px)" data-srcset="assets/images/marking13.jpg">
+                                <img class="lazy" data-src="assets/images/marking3.jpg" alt="">
+                            </picture>
                         </div>
                             <div class="marking__info">
                                 <h3><a href="#" class="marking__link">Медицинская мебель</a></h3>
@@ -74,7 +94,11 @@
                     </div>
                     <div class="marking__wrapper item-right">
                         <div class="marking-img">
-                            <img class="lazy" data-src="assets/images/marking4.jpg" alt="">
+                            <picture>
+                                <source media="(max-width: 1300px)" data-srcset="assets/images/marking16.jpg">
+                                <source media="(max-width: 1366px)" data-srcset="assets/images/marking15.jpg">
+                                <img class="lazy" data-src="assets/images/marking4.jpg" alt="">
+                            </picture>
                         </div>
                         <div class="marking__info">
                             <h3><a href="#" class="marking__link">Диагностика</a></h3>
@@ -101,8 +125,9 @@
                         </div>
                     </div>
                     <div class="marking__wrapper item-right">
-                        <div class="marking-img">
+                        <div class="marking-img big">
                             <picture>
+                                <source media="(max-width: 1300px)" data-srcset="assets/images/marking17.jpg">
                                 <source media="(max-width: 1366px)" data-srcset="assets/images/marking8.jpg">
                                 <img class="lazy" data-src="assets/images/marking5.jpg" alt="">
                             </picture>
@@ -126,8 +151,12 @@
                         </div>
                     </div>
                     <div class="marking__wrapper item-left">
-                        <div class="marking-img">
-                            <img class="lazy" data-src="assets/images/marking6.jpg" alt="">
+                        <div class="marking-img big">
+                            <picture>
+                                <source media="(max-width: 1300px)" data-srcset="assets/images/marking19.jpg">
+                                <source media="(max-width: 1366px)" data-srcset="assets/images/marking18.jpg">
+                                <img class="lazy" data-src="assets/images/marking6.jpg" alt="">
+                            </picture>
                         </div>
                         <div class="marking__info">
                             <h3><a href="#" class="marking__link">Реабилитация и физиотерапия</a></h3>
@@ -149,7 +178,11 @@
                     </div>
                     <div class="marking__wrapper item-left">
                         <div class="marking-img">
-                            <img class="lazy" data-src="assets/images/marking7.jpg" alt="">
+                            <picture>
+                                <source media="(max-width: 1300px)" data-srcset="assets/images/marking21.jpg">
+                                <source media="(max-width: 1366px)" data-srcset="assets/images/marking20.jpg">
+                                <img class="lazy" data-src="assets/images/marking7.jpg" alt="">
+                            </picture>
                         </div>
                         <div class="marking__info">
                             <h3><a href="#" class="marking__link">Операционная</a></h3>
@@ -175,12 +208,6 @@
                         <div class="new">Новинка</div>
                     </div>
                 </div>
-            </div>
-            <div class="all-link">
-                <a href="#">
-                    <span>Смотреть все</span>
-                    <include src="assets/svg/all-link.html"></include>
-                </a>
             </div>
         </section>
         <section class="new-items">
@@ -338,7 +365,15 @@
         </section>
         <section class="partners">
             <div class="container">
-                <h2>Наши партнеры</h2>
+                <div class="section-header">
+                    <h2>Наши партнеры</h2>
+                    <div class="all-link">
+                        <a href="#">
+                            <span>Смотреть все</span>
+                            <include src="assets/svg/all-link.html"></include>
+                        </a>
+                    </div>
+                </div>
                 <div class="swiper partners-slider">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
@@ -380,19 +415,20 @@
                             <include src="assets/svg/slider-arrow.html"></include>
                         </div>
                      </div>
+                    <div class="partners-scrollbar swiper-scrollbar"></div>
                 </div>
+            </div>
+        </section>
+        <section class="events">
+            <div class="container">
+            <div class="section-header">
+                <h2>События</h2>
                 <div class="all-link">
                     <a href="#">
                         <span>Смотреть все</span>
                         <include src="assets/svg/all-link.html"></include>
                     </a>
                 </div>
-            </div>
-        </section>
-        <section class="events">
-            <div class="container">
-            <div class="events__header">
-                <h2>События</h2>
             </div>
             <div class="swiper events-slider">
                 <div class="swiper-wrapper">
@@ -485,12 +521,6 @@
                         <include src="assets/svg/slider-arrow.html"></include>
                     </div>
                 </div>
-            </div>
-            <div class="all-link">
-                <a href="#">
-                    <span>Смотреть все</span>
-                    <include src="assets/svg/all-link.html"></include>
-                </a>
             </div>
             </div>
         </section>

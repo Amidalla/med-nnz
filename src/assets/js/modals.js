@@ -20,9 +20,7 @@ export function InitModals() {
     }
 
     function openModal() {
-
         scrollbarWidth = getScrollbarWidth();
-
 
         document.body.style.overflow = 'hidden';
         document.body.style.paddingRight = scrollbarWidth + 'px';
@@ -33,7 +31,6 @@ export function InitModals() {
     }
 
     function closeModal() {
-
         document.body.style.overflow = '';
         document.body.style.paddingRight = '';
 
@@ -41,13 +38,11 @@ export function InitModals() {
         btn.classList.remove('active');
         isOpen = false;
 
-        // Закрываем все открытые подменю
         const activeItems = modal.querySelectorAll('.modal-catalog__item.active');
         activeItems.forEach(item => {
             item.classList.remove('active');
         });
     }
-
 
     btn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -81,3 +76,77 @@ export function InitModals() {
         e.stopPropagation();
     });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const burgerBtn = document.querySelector('.burger'); // Исправил на .burger
+    const overlay = document.querySelector('.overlay');
+    const closeBtn = document.querySelector('.mobile-menu__close');
+
+    // Проверяем наличие всех необходимых элементов
+    if (!burgerBtn || !mobileMenu || !overlay) {
+        console.log('Не найдены необходимые элементы для мобильного меню');
+        return;
+    }
+
+    let isMobileMenuOpen = false;
+
+    function closeAllDropdowns() {
+        const allActiveItems = document.querySelectorAll('.dropdown-box.active, .dropdown-sub-box.active');
+        allActiveItems.forEach(item => {
+            item.classList.remove('active');
+        });
+    }
+
+    function handleDropdownClick(e) {
+        if (e.target.classList.contains('dropdown-arrow')) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const dropdownItem = e.target.closest('.dropdown-box, .dropdown-sub-box');
+
+            if (dropdownItem) {
+                dropdownItem.classList.toggle('active');
+            }
+        }
+    }
+
+    function openMobileMenu() {
+        document.body.style.overflow = 'hidden';
+        mobileMenu.classList.add('active');
+        overlay.classList.add('active');
+        isMobileMenuOpen = true;
+    }
+
+    function closeMobileMenu() {
+        document.body.style.overflow = '';
+        mobileMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        closeAllDropdowns();
+        isMobileMenuOpen = false;
+    }
+
+    // Обработчики для мобильного меню
+    burgerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openMobileMenu();
+    });
+
+    closeBtn.addEventListener('click', closeMobileMenu);
+
+    overlay.addEventListener('click', closeMobileMenu);
+
+    document.addEventListener('keydown', (e) => {
+        if (isMobileMenuOpen && e.key === 'Escape') {
+            closeMobileMenu();
+        }
+    });
+
+    mobileMenu.addEventListener('click', handleDropdownClick);
+    mobileMenu.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+
+    // Изначально скрываем все подменю
+    closeAllDropdowns();
+});
