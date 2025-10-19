@@ -4,6 +4,7 @@ import "../styles/header.scss";
 import "../styles/footer.scss";
 import "../styles/select.scss";
 import "../styles/modals.scss";
+import "../styles/filter.scss";
 import LazyLoad from "vanilla-lazyload";
 import Swiper from 'swiper';
 import 'swiper/swiper-bundle.css';
@@ -11,6 +12,8 @@ import { Pagination, Navigation, Autoplay, Thumbs } from 'swiper/modules';
 import { SlidersInit } from "./sliders";
 import { InitModals } from "./modals";
 import { InitSelect } from "./select";
+import { InitSideMenu } from "./side-menu";
+import { InitFilter } from "./filter";
 import IMask from 'imask';
 
 Swiper.use([Pagination, Navigation, Autoplay, Thumbs]);
@@ -95,8 +98,10 @@ document.addEventListener('DOMContentLoaded', function() {
     InitSelect();
     SlidersInit();
     InitModals();
+    InitSideMenu();
+    InitFilter();
 
-    // Инициализируем мобильный поиск после полной загрузки DOM
+
     setTimeout(() => {
         initMobileSearch();
     }, 100);
