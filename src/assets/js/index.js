@@ -14,13 +14,13 @@ import { InitModals } from "./modals";
 import { InitSelect } from "./select";
 import { InitSideMenu } from "./side-menu";
 import { InitFilter } from "./filter";
+import { InitTabs } from "./tabs";
 import IMask from 'imask';
 
 Swiper.use([Pagination, Navigation, Autoplay, Thumbs]);
 
-// Функция для инициализации мобильного поиска
+
 function initMobileSearch() {
-    // Ищем элементы только в мобильном контейнере
     const mobileContainer = document.querySelector('.container.mobile');
     if (!mobileContainer) return;
 
@@ -29,86 +29,120 @@ function initMobileSearch() {
     const searchClose = mobileContainer.querySelector('.search__close');
     const searchInput = mobileContainer.querySelector('.search__input');
 
-    // Если элементы не найдены в мобильном контейнере, выходим
-    if (!searchToggle || !searchForm || !searchClose || !searchInput) {
-        console.log('Mobile search elements not found');
-        return;
-    }
+    if (!searchToggle || !searchForm || !searchClose || !searchInput) return;
 
-    console.log('Mobile search initialized'); // Для отладки
+    const toggleSearch = (isOpen) => {
+        searchForm.classList.toggle('active', isOpen);
+        if (isOpen) {
+            setTimeout(() => searchInput.focus(), 300);
+        } else {
+            searchInput.blur();
+        }
+    };
 
-    // Открытие поиска
-    searchToggle.addEventListener('click', function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        searchForm.classList.add('active');
-        setTimeout(() => searchInput.focus(), 300);
-    });
-
-    // Закрытие поиска
-    searchClose.addEventListener('click', function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        searchForm.classList.remove('active');
-        searchInput.blur();
-    });
-
-    // Закрытие при клике вне поиска
-    document.addEventListener('click', function(e) {
+    const handleDocumentClick = (e) => {
         if (searchForm.classList.contains('active') &&
             !searchForm.contains(e.target) &&
             !searchToggle.contains(e.target)) {
-            searchForm.classList.remove('active');
-            searchInput.blur();
+            toggleSearch(false);
         }
-    });
+    };
 
-    // Закрытие по ESC
-    document.addEventListener('keydown', function(e) {
+    const handleEscape = (e) => {
         if (e.key === 'Escape' && searchForm.classList.contains('active')) {
-            searchForm.classList.remove('active');
-            searchInput.blur();
+            toggleSearch(false);
         }
-    });
+    };
 
-    // Предотвращаем закрытие при клике внутри формы
-    searchForm.addEventListener('click', function(e) {
-        e.stopPropagation();
-    });
-
-    // Закрытие поиска при отправке формы
-    searchForm.addEventListener('submit', function(e) {
-        if (window.innerWidth <= 1300) {
-            setTimeout(() => {
-                searchForm.classList.remove('active');
-            }, 1000);
-        }
-    });
-
-    // Дополнительно: закрытие при изменении ориентации или resize
-    window.addEventListener('resize', function() {
+    const handleResize = () => {
         if (window.innerWidth > 1300 && searchForm.classList.contains('active')) {
-            searchForm.classList.remove('active');
-            searchInput.blur();
+            toggleSearch(false);
+        }
+    };
+
+
+    searchToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        toggleSearch(true);
+    });
+
+    searchClose.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        toggleSearch(false);
+    });
+
+    searchForm.addEventListener('click', (e) => e.stopPropagation());
+
+    searchForm.addEventListener('submit', () => {
+        if (window.innerWidth <= 1300) {
+            setTimeout(() => toggleSearch(false), 1000);
         }
     });
+
+    document.addEventListener('click', handleDocumentClick);
+    document.addEventListener('keydown', handleEscape);
+    window.addEventListener('resize', handleResize);
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    InitSelect();
-    SlidersInit();
-    InitModals();
-    InitSideMenu();
-    InitFilter();
+
+function initSpecsDots() {
+    function calculateDotsWidth() {
+        const rows = document.querySelectorAll('.specs-row');
+
+        rows.forEach(row => {
+            const label = row.querySelector('.specs-label');
+            const dots = row.querySelector('.specs-dots');
+            const value = row.querySelector('.specs-value');
+
+            if (!label || !dots || !value) return;
+
+            try {
+                const range = document.createRange();
+                const textNode = label.firstChild;
+
+                if (!textNode || !textNode.textContent) return;
+
+                const textLength = textNode.textContent.length;
+                if (textLength === 0) return;
+
+                range.setStart(textNode, textLength - 1);
+                range.setEnd(textNode, textLength);
+
+                const lastCharRect = range.getBoundingClientRect();
+                const valueRect = value.getBoundingClientRect();
+                const rowRect = row.getBoundingClientRect();
+
+                const startX = lastCharRect.right - rowRect.left;
+                const endX = valueRect.left - rowRect.left;
+                const dotsWidth = endX - startX - 8;
+
+                if (dotsWidth > 0) {
+                    dots.style.width = `${dotsWidth}px`;
+                    dots.style.left = `${startX + 4}px`;
+                } else {
+                    dots.style.width = '0px';
+                }
+            } catch (error) {
+                console.warn('Error calculating dots width:', error);
+            }
+        });
+    }
 
 
-    setTimeout(() => {
-        initMobileSearch();
-    }, 100);
+    let resizeTimeout;
+    const handleResize = () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(calculateDotsWidth, 100);
+    };
 
-    const lazyLoadInstance = new LazyLoad();
+    calculateDotsWidth();
+    window.addEventListener('resize', handleResize);
+}
 
-    // Маска для телефона
+
+function initPhoneMasks() {
     const phoneInputs = document.querySelectorAll(`
         input[type="tel"][name="tel"],
         input[type="tel"][data-phone-input]
@@ -117,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
     phoneInputs.forEach(input => {
         let mask = null;
 
-        input.addEventListener('focus', () => {
+        const initMask = () => {
             if (!mask) {
                 input.classList.add('phone-mask-active');
                 mask = IMask(input, {
@@ -129,9 +163,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     input.value = '+7 (';
                 }
             }
-        });
+        };
 
-        input.addEventListener('blur', () => {
+        const destroyMask = () => {
             if (mask) {
                 const phoneNumber = input.value.replace(/\D/g, '');
                 if (phoneNumber.length < 11 || phoneNumber === '7') {
@@ -141,17 +175,40 @@ document.addEventListener('DOMContentLoaded', function() {
                 mask.destroy();
                 mask = null;
             }
-        });
+        };
+
+        input.addEventListener('focus', initMask);
+        input.addEventListener('blur', destroyMask);
 
         input.addEventListener('input', (e) => {
             if (mask && input.value === '+7 (' && e.inputType === 'deleteContentBackward') {
-                input.value = '';
-                input.classList.remove('phone-mask-active');
-                mask.destroy();
-                mask = null;
+                destroyMask();
             }
         });
     });
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    InitSelect();
+    SlidersInit();
+    InitModals();
+    InitSideMenu();
+    InitFilter();
+    InitTabs();
+
+
+    setTimeout(() => {
+        initMobileSearch();
+        initSpecsDots();
+    }, 100);
+
+
+    const lazyLoadInstance = new LazyLoad();
+
+
+    initPhoneMasks();
+
 
     const submitButton = document.querySelector('.submit-btn');
     const checkbox = document.querySelector('input[name="checkbox"]');
