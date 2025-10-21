@@ -2355,9 +2355,15 @@ h2 {
   padding-top: 46px;
   padding-bottom: 36px;
 
+  @media (max-width: 1400px) {
+    padding-top: 32px;
+    padding-bottom: 20px;
+  }
+
     &__inner {
       display: flex;
       gap: 12px;
+      flex-wrap: wrap;
     }
 
     &__item {
@@ -2376,9 +2382,189 @@ h2 {
   display: grid;
   grid-template-columns: 1fr 74px;
 
+  @media (max-width: 1840px) {
+    display: flex;
+
+    &__container {
+      width: 100%;
+      margin-left: 20px;
+      margin-right: 20px;
+
+      .breadcrumb {
+        .container {
+          margin: 0;
+        }
+      }
+
+      .page-name {
+        .container {
+          margin: 0;
+        }
+      }
+
+      .tags {
+        .container {
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  &__mobile {
+    display: none;
+
+    @media (max-width: 1000px) {
+      display: block;
+      margin-top: 20px;
+
+      & > div {
+        display: grid;
+        grid-template-columns: 182px 1fr;
+        gap: 20px;
+        align-items: start;
+
+        .product-card__logo {
+          grid-column: 1;
+          grid-row: 1;
+          padding: 7px 15px;
+
+          svg {
+            width: 150px;
+          }
+        }
+
+        .product-card__table {
+          grid-column: 2;
+          grid-row: 1;
+          margin-bottom: 0;
+        }
+
+        .product-card__contacts {
+          grid-column: 2;
+          grid-row: 2;
+          margin-top: 0;
+        }
+
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      & > div {
+        display: flex;
+        flex-direction: column;
+
+        .product-card__logo,
+        .product-card__table {
+          width: 100%;
+        }
+
+        .product-card__table {
+          padding: 15px;
+        }
+      }
+    }
+  }
+  
+  &__info {
+    @media (max-width: 1000px) {
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+      gap: 20px;
+
+      @media (max-width: 600px) {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .product-card__logo,
+      .product-card__contacts {
+        display: none;
+      }
+    }
+  }
+  
+  h1 {
+    @media (max-width: 1400px) {
+      max-width: 1135px;
+    }
+  }
+
+  &__contacts {
+    margin-top: 18px;
+    background-color: #F5F7FA;
+    border: 1px solid #EAEFF4;
+    border-radius: 20px;
+    padding: 16px 24px;
+    background-image: url("../images/card-contacts-bg.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 80% center;
+
+    @media (max-width: 1400px) {
+      padding: 16px 24px;
+    }
+
+    @media (max-width: 600px) {
+      padding: 15px;
+    }
+
+    p {
+      &:first-child {
+        margin-bottom: 8px;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 150%;
+        letter-spacing: 0.02em;
+        color: c.$black;
+
+        @media (max-width: 1400px) {
+          font-size: 16px;
+        }
+
+        a {
+          color: #E11A1A;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      &:last-child {
+
+        @media (max-width: 1400px) {
+          font-size: 16px;
+        }
+
+        a {
+          color: #000000;
+          @media (max-width: 450px) {
+            display: block;
+          }
+
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+
   &__container {
+
+    &:last-child {
+      @media (max-width: 1840px) {
+        display: none;
+      }
+    }
     &:first-child {
       margin-left: 41px;
+
+      @media (max-width: 1840px) {
+        margin-left: 20px;
+      }
     }
 
     .social {
@@ -2419,12 +2605,33 @@ h2 {
 
   &__tabs {
     margin-top: 80px;
+    margin-bottom: 96px;
+
+    @media (max-width: 1400px) {
+      margin-top: 60px;
+      margin-bottom: 60px;
+    }
+    @media (max-width: 1000px) {
+      margin-top: 48px;
+      margin-bottom: 48px;
+    }
+
   }
 
   &__inner {
     display: grid;
     grid-template-columns: 437px 1fr;
     gap: 30px;
+    
+    @media (max-width: 1700px) {
+      grid-template-columns: 337px 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 1359px) {
+      display: flex;
+      gap: 0;
+    }
+
   }
 
   &__table {
@@ -2454,6 +2661,11 @@ h2 {
       background: #F5F7FA;
       border: 1px solid #EAEFF4;
       padding: 24px;
+      border-radius: 10px;
+
+      @media (max-width: 1440px) {
+        padding: 12px 24px 21px 24px;
+      }
 
       p {
         font-size: 20px;
@@ -2473,6 +2685,11 @@ h2 {
           height: 40px;
           flex: none;
           border-radius: 5px;
+
+          @media (max-width: 1400px) {
+            font-size: 16px;
+            width: 116px;
+          }
         }
 
         .add-btn {
@@ -2491,10 +2708,33 @@ h2 {
           cursor: pointer;
           transition: all 0.3s ease;
 
+          @media (max-width: 1400px) {
+            font-size: 16px;
+            width: 163px;
+            padding-left: 15px;
+          }
+
+          @media (max-width: 600px) {
+            width: 40px;
+            padding: 0;
+            border: none;
+            border-radius: 5px;
+            overflow: hidden;
+          }
+
           span:first-child {
             display: inline-block;
             flex: 1;
             text-align: center;
+
+            @media (max-width: 1400px) {
+              text-align: left;
+            }
+
+            @media (max-width: 600px) {
+              display: none;
+            }
+
           }
 
           span:last-child {
@@ -2505,6 +2745,10 @@ h2 {
             background: #2D3B49;
             height: 100%;
             transition: all 0.3s ease;
+
+            @media (max-width: 1400px) {
+              font-size: 16px;
+            }
           }
 
           &:hover {
@@ -2523,11 +2767,48 @@ h2 {
     &__content {
       display: flex;
       gap: 30px;
+
+      @media (max-width: 1400px) {
+        display: grid;
+        grid-template-columns: 1fr 364px;
+      }
+      @media (max-width: 1000px) {
+        display: flex;
+        flex-direction: column-reverse;
+      }
+
     }
 
     &__slider {
       flex: 0 0 calc(56% - 15px);
       position: relative;
+
+      @media (max-width: 1600px) {
+        flex: 0 0 calc(52% - 15px);
+      }
+
+      @media (max-width: 1460px) {
+        flex: 0 0 calc(50% - 15px);
+      }
+
+      .swiper-pagination {
+        display: none;
+
+        @media (max-width: 1000px) {
+          display: block;
+
+          .swiper-pagination-bullet {
+            width: 14px;
+            height: 14px;
+            background: rgba(218, 218, 218, 1);
+            transform: none;
+          }
+
+          .swiper-pagination-bullet-active {
+            background: #E11A1A;
+          }
+        }
+      }
 
       .swiper-slide {
         width: 100% !important;
@@ -2541,6 +2822,11 @@ h2 {
         height: 604px;
         display: flex;
         align-items: center;
+        justify-content: center;
+        
+        @media (max-width: 1400px) {
+          height: 507px;
+        }
 
         &__content {
           position: relative;
@@ -2549,11 +2835,23 @@ h2 {
           align-items: center;
 
 
+          @media (max-width: 1400px) {
+            height: 507px;
+          }
+
+          @media (max-width: 1000px) {
+            height: 507px;
+            width: 100%;
+            justify-content: center;
+          }
+
+
           .label {
             position: absolute;
             top: 16px;
             left: 14px;
             display: flex;
+           flex-wrap: wrap;
             gap: 15px;
 
             .rus {
@@ -2562,6 +2860,10 @@ h2 {
 
             .new {
               position: static;
+
+              @media (max-width: 650px) {
+                display: flex;
+              }
             }
 
             .availability {
@@ -2584,6 +2886,10 @@ h2 {
       .thumbnail-swiper {
          margin-top: 24px;
 
+        @media (max-width: 1000px) {
+          display: none;
+        }
+
         .swiper-slide {
           max-width: 148px;
           border-radius: 4px;
@@ -2595,6 +2901,11 @@ h2 {
       @include swiper-button-prev;
 
       .swiper-button-next {
+
+        @media (max-width: 1000px) {
+          display: none;
+        }
+
         svg {
           width: 15px;
           height: 27px;
@@ -2602,6 +2913,11 @@ h2 {
       }
 
       .swiper-button-prev {
+
+        @media (max-width: 1000px) {
+          display: none;
+        }
+
         svg {
           width: 15px;
           height: 27px;
@@ -2612,6 +2928,14 @@ h2 {
 
     &__info {
       flex: 0 0 calc(44% - 15px);
+
+      @media (max-width: 1600px) {
+        flex: 0 0 calc(48% - 15px);
+      }
+      @media (max-width: 1460px) {
+        flex: 0 0 calc(50% - 15px);
+      }
+
     }
 
     &__logo {
@@ -2625,6 +2949,11 @@ h2 {
         width: 190px;
         height: 48px;
         margin-bottom: 8px;
+
+        @media (max-width: 1400px) {
+          margin-bottom: 3px;
+        }
+
       }
     }
 
@@ -2637,6 +2966,10 @@ h2 {
         & > span {
           font-size: 22px;
           color: #6D6D6D;
+
+          @media (max-width: 1400px) {
+            font-size: 16px;
+          }
         }
       }
 
@@ -2646,6 +2979,10 @@ h2 {
         line-height: 100%;
         letter-spacing: 0.02em;
         color: c.$black;
+
+        @media (max-width: 1400px) {
+          font-size: 16px;
+        }
       }
     }
 
@@ -2657,6 +2994,10 @@ h2 {
       margin-bottom: 10px;
       border: 1px solid #EAEFF4;
       border-radius: 10px;
+
+      @media (max-width: 1000px) {
+        margin-bottom: 0;
+      }
 
       & > div {
 
@@ -2719,6 +3060,10 @@ h2 {
     padding-left: 12px;
     position: relative;
 
+    @media (max-width: 1400px) {
+      font-size: 16px;
+    }
+
     &:before {
       content: "";
       position: absolute;
@@ -2745,6 +3090,11 @@ h2 {
     line-height: 150%;
     letter-spacing: 0.02em;
     color: #0F1019;
+    white-space: nowrap;
+
+    @media (max-width: 1400px) {
+      font-size: 16px;
+    }
   }
 }
 .product {
@@ -2755,6 +3105,10 @@ h2 {
       letter-spacing: 0.02em;
       color: c.$black;
       margin-bottom: 15px;
+
+      @media (max-width: 1400px) {
+        font-size: 20px;
+      }
     }
 }
 
@@ -2767,6 +3121,14 @@ h2 {
     line-height: 34px;
     color: #272727;
     margin-bottom: 30px;
+
+    @media (max-width: 1400px) {
+      font-size: 32px;
+    }
+    @media (max-width: 1000px) {
+      font-size: 28px;
+    }
+
   }
 
   &__subtitle {
@@ -2776,6 +3138,10 @@ h2 {
     letter-spacing: 0.02em;
     color: c.$black;
     margin-bottom: 20px;
+
+    @media (max-width: 1000px) {
+      font-size: 20px;
+    }
   }
 
   p {
@@ -2796,6 +3162,10 @@ h2 {
     margin-bottom: 20px;
     padding-left: 15px;
     position: relative;
+
+    @media (max-width: 1000px) {
+      font-size: 18px;
+    }
 
     &::before {
       content: "";
@@ -2822,6 +3192,10 @@ h2 {
     padding-left: 15px;
     position: relative;
 
+    @media (max-width: 1000px) {
+      font-size: 18px;
+    }
+
     &::before {
       content: "";
       position: absolute;
@@ -2838,6 +3212,10 @@ h2 {
 .tabs__header {
   display: flex;
   gap: 13px;
+
+  @media (max-width: 1400px) {
+    flex-wrap: wrap;
+  }
 }
 
 .tab__btn {
@@ -2854,6 +3232,10 @@ h2 {
   position: relative;
   border-radius: 4px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  @media (max-width: 450px) {
+    padding: 8px 15px;
+  }
 }
 
 .tab__btn:hover {
@@ -2908,6 +3290,20 @@ h2 {
     letter-spacing: 0.02em;
     color: #272727;
 
+    @media (max-width: 600px) {
+      font-size: 16px;
+    }
+
+    .tabs-table__column {
+      &:first-child {
+        padding-right: 10px;
+      }
+
+      &:last-child {
+        padding-left: 10px;
+      }
+    }
+
     &.grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -2917,6 +3313,81 @@ h2 {
       line-height: 20px;
       letter-spacing: 0.02em;
       color: c.$black;
+
+      @media (max-width: 600px) {
+        font-size: 16px;
+      }
     }
   }
+}
+
+.recommended {
+  background: #EAEFF4;
+  padding-top: 80px;
+  padding-bottom: 80px;
+
+  @media (max-width: 1400px) {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  @media (max-width: 1000px) {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .cards__peculiarities {
+    .new {
+      position: static;
+    }
+  }
+
+  &__slider {
+    .swiper-slide {
+
+      .cards__item {
+        min-height: 743px;
+        background: c.$white;
+      }
+    }
+  }
+
+  &__controls {
+    @include swiper-button-prev;
+
+    .swiper-button-prev {
+        svg {
+          width: 15px;
+          height: 27px;
+        }
+    }
+
+    @include swiper-button-next;
+
+    .swiper-button-next {
+      svg {
+        width: 15px;
+        height: 27px;
+      }
+    }
+  }
+}
+
+.recommended-progress-container {
+  position: relative;
+  height: 10px;
+  background: #FFFFFF;
+  border-radius: 100px;
+  margin-top: 25px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.recommended-progress-bar {
+  background: #BECCDB;
+  border-radius: 100px;
+  height: 100%;
+  width: 0%;
+  transition: width 0.3s
+  ease;
 }
