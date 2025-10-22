@@ -2375,6 +2375,12 @@ h2 {
       line-height: 130%;
       letter-spacing: 0.02em;
       color: c.$black;
+
+
+      &.active {
+        background: #8996A3;
+        color: c.$white;
+      }
     }
 }
 
@@ -4454,8 +4460,60 @@ div.page-bg {
     }
 }
 
-.discount {}
+.news {
+  padding-bottom: 80px;
+  border-bottom: 1px solid #EAEFF4;
+  
+  @media (max-width: 1700px) {
+    padding-bottom: 0;
+    border: none;
+  }
 
-.sale {}
+  &__inner {
 
-.number {}
+    .events {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      padding: 0;
+      background: none;
+
+      @media (max-width: 1359px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      @media (max-width: 1000px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media (max-width: 550px) {
+        grid-template-columns: repeat(1, 1fr);
+      }
+
+
+      .events__item {
+        border: 1px solid #D8DFE7;
+        border-radius: 20px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+
+        .events__image {
+          img {
+            transition: all 0.3s ease;
+          }
+        }
+
+        &:hover {
+          box-shadow: 0px 2px 27.9px 0px rgba(168, 168, 168, 0.7215686275);
+
+          .events__image {
+            overflow: hidden;
+
+            img {
+              transform: scale(1.03);
+            }
+          }
+        }
+      }
+    }
+  }
+}

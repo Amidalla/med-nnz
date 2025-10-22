@@ -8,6 +8,7 @@ export function SlidersInit() {
     let productCardSlider;
     let recommendedSlider;
     let excellenceSlider;
+    let newsDetailSlider;
 
     function initCustomProgressBar(swiper, sliderType = 'partners') {
 
@@ -378,6 +379,127 @@ export function SlidersInit() {
         }
     }
 
+    function initNewsDetailSlider() {
+        const thumbnailSwiper = new Swiper(".video__slider .thumbnail-swiper", {
+            spaceBetween: 10,
+            slidesPerView: 4,
+            freeMode: true,
+            watchSlidesProgress: true,
+            breakpoints: {
+                0: { slidesPerView: 3, spaceBetween: 8 },
+                768: { slidesPerView: 4, spaceBetween: 10 },
+                1024: { slidesPerView: 5, spaceBetween: 25 }
+            }
+        });
+
+        newsDetailSlider = new Swiper(".video__slider .main-swiper", {
+            speed: 300,
+            spaceBetween: 10,
+            slidesPerView: 1,
+            navigation: {
+                nextEl: '.video__slider .swiper-button-next',
+                prevEl: '.video__slider .swiper-button-prev',
+            },
+            pagination: {
+                el: '.video__slider .swiper-pagination',
+                clickable: true,
+                dynamicBullets: true
+            },
+            thumbs: {
+                swiper: thumbnailSwiper
+            },
+            breakpoints: {
+                0: {
+                    navigation: false,
+                    thumbs: { swiper: false }
+                },
+                1001: {
+                    navigation: {
+                        nextEl: '.video__slider .swiper-button-next',
+                        prevEl: '.video__slider .swiper-button-prev',
+                    },
+                    thumbs: { swiper: thumbnailSwiper }
+                }
+            },
+            on: {
+                init: function () {
+                    const lazyImages = this.el.querySelectorAll('.lazy');
+                    lazyImages.forEach(img => {
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.classList.remove('lazy');
+                        }
+                    });
+
+                    toggleNewsDetailElements();
+
+                    // Инициализация обработчиков для видео
+                    initVideoHandlers();
+                },
+                resize: function () {
+                    toggleNewsDetailElements();
+                }
+            }
+        });
+
+        function toggleNewsDetailElements() {
+            const thumbnails = document.querySelector('.video__slider .thumbnail-swiper');
+            const navigation = document.querySelector('.video__slider .swiper-navigation');
+            const pagination = document.querySelector('.video__slider .swiper-pagination');
+
+            if (window.innerWidth <= 1000) {
+                if (thumbnails) thumbnails.style.display = 'none';
+                if (navigation) navigation.style.display = 'none';
+                if (pagination) pagination.style.display = 'block';
+            } else {
+                if (thumbnails) thumbnails.style.display = 'block';
+                if (navigation) navigation.style.display = 'flex';
+                if (pagination) pagination.style.display = 'none';
+            }
+        }
+
+        function initVideoHandlers() {
+            // Обработка клика по кнопке воспроизведения видео
+            document.querySelectorAll('.video__slider .video-play-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const videoContainer = this.closest('.media-container');
+                    const video = videoContainer.querySelector('video');
+
+                    if (video) {
+                        if (video.paused) {
+                            video.play();
+                            this.style.display = 'none';
+                        } else {
+                            video.pause();
+                            this.style.display = 'flex';
+                        }
+                    }
+                });
+            });
+
+            // Показ кнопки воспроизведения при паузе видео
+            document.querySelectorAll('.video__slider .news-video').forEach(video => {
+                video.addEventListener('pause', function() {
+                    const playButton = this.closest('.media-container').querySelector('.video-play-button');
+                    if (playButton) {
+                        playButton.style.display = 'flex';
+                    }
+                });
+
+                video.addEventListener('click', function() {
+                    const playButton = this.closest('.media-container').querySelector('.video-play-button');
+                    if (this.paused) {
+                        this.play();
+                        if (playButton) playButton.style.display = 'none';
+                    } else {
+                        this.pause();
+                        if (playButton) playButton.style.display = 'flex';
+                    }
+                });
+            });
+        }
+    }
+
     function initAllSliders() {
         if (document.querySelector(".partners-slider")) {
             initPartnersSlider();
@@ -401,6 +523,10 @@ export function SlidersInit() {
 
         if (document.querySelector('.product-card__slider')) {
             initProductCardSlider();
+        }
+
+        if (document.querySelector('.video__slider')) {
+            initNewsDetailSlider();
         }
     }
 
