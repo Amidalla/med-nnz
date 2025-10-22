@@ -7,9 +7,12 @@ export function SlidersInit() {
     let projectsSlider;
     let productCardSlider;
     let recommendedSlider;
-
+    let excellenceSlider;
 
     function initCustomProgressBar(swiper, sliderType = 'partners') {
+
+        if (sliderType === 'excellence') return;
+
         const sliderElement = swiper.el;
         const containerClass = getProgressContainerClass(sliderType);
         const barClass = getProgressBarClass(sliderType);
@@ -26,8 +29,10 @@ export function SlidersInit() {
         toggleProgressBar();
     }
 
-
     function updateCustomProgressBar(swiper, sliderType = 'partners') {
+
+        if (sliderType === 'excellence') return;
+
         const barClass = getProgressBarClass(sliderType);
         const progressBar = swiper.el.querySelector(`.${barClass}`);
         if (progressBar) {
@@ -36,13 +41,13 @@ export function SlidersInit() {
         }
     }
 
-
     function getProgressContainerClass(sliderType) {
         const classes = {
             partners: 'custom-progress-container',
             events: 'events-progress-container',
             projects: 'projects-progress-container',
-            recommended: 'recommended-progress-container'
+            recommended: 'recommended-progress-container',
+            excellence: 'excellence-progress-container'
         };
         return classes[sliderType] || 'custom-progress-container';
     }
@@ -52,11 +57,11 @@ export function SlidersInit() {
             partners: 'custom-progress-bar',
             events: 'events-progress-bar',
             projects: 'projects-progress-bar',
-            recommended: 'recommended-progress-bar'
+            recommended: 'recommended-progress-bar',
+            excellence: 'excellence-progress-bar'
         };
         return classes[sliderType] || 'custom-progress-bar';
     }
-
 
     function toggleProgressBar() {
         const breakpoints = [
@@ -87,7 +92,8 @@ export function SlidersInit() {
                 slider: null,
                 maxWidth: 600,
                 autoplay: false
-            }
+            },
+
         ];
 
         breakpoints.forEach(({ container, controls, slider, maxWidth, autoplay }) => {
@@ -111,7 +117,6 @@ export function SlidersInit() {
             }
         });
     }
-
 
     function initPartnersSlider() {
         partnersSlider = new Swiper(".partners-slider", {
@@ -162,7 +167,6 @@ export function SlidersInit() {
         });
     }
 
-
     function initNewsSlider() {
         newsSlider = new Swiper(".events-slider", {
             autoplay: false,
@@ -194,7 +198,6 @@ export function SlidersInit() {
             }
         });
     }
-
 
     function initProjectsSlider() {
         projectsSlider = new Swiper(".projects-slider", {
@@ -228,7 +231,6 @@ export function SlidersInit() {
         });
     }
 
-
     function initRecommendedSlider() {
         recommendedSlider = new Swiper(".recommended__slider", {
             autoplay: false,
@@ -261,6 +263,43 @@ export function SlidersInit() {
         });
     }
 
+    function initExcellenceSlider() {
+        excellenceSlider = new Swiper(".excellence-slider", {
+            autoplay: false,
+            speed: 1000,
+            slidesPerView: 1,
+            spaceBetween: 0,
+            navigation: {
+                nextEl: '.excellence-slider__controls .swiper-button-next',
+                prevEl: '.excellence-slider__controls .swiper-button-prev'
+            },
+            pagination: {
+                el: '.excellence-slider .swiper-pagination',
+                clickable: true
+            },
+
+            breakpoints: {
+                0: { slidesPerView: 1 },
+                601: { slidesPerView: 1 },
+                1000: { slidesPerView: 1 },
+                1300: { slidesPerView: 1 }
+            },
+            on: {
+                init: function () {
+
+                },
+                slideChange: function () {
+
+                },
+                scroll: function () {
+
+                },
+                resize: function () {
+
+                }
+            }
+        });
+    }
 
     function initProductCardSlider() {
         const thumbnailSwiper = new Swiper(".product-card__slider .thumbnail-swiper", {
@@ -306,7 +345,6 @@ export function SlidersInit() {
             },
             on: {
                 init: function () {
-                    // Ленивая загрузка изображений
                     const lazyImages = this.el.querySelectorAll('.lazy');
                     lazyImages.forEach(img => {
                         if (img.dataset.src) {
@@ -329,19 +367,16 @@ export function SlidersInit() {
             const pagination = document.querySelector('.product-card__slider .swiper-pagination');
 
             if (window.innerWidth <= 1000) {
-
                 if (thumbnails) thumbnails.style.display = 'none';
                 if (navigation) navigation.style.display = 'none';
                 if (pagination) pagination.style.display = 'block';
             } else {
-
                 if (thumbnails) thumbnails.style.display = 'block';
                 if (navigation) navigation.style.display = 'flex';
                 if (pagination) pagination.style.display = 'none';
             }
         }
     }
-
 
     function initAllSliders() {
         if (document.querySelector(".partners-slider")) {
@@ -360,14 +395,16 @@ export function SlidersInit() {
             initRecommendedSlider();
         }
 
+        if (document.querySelector(".excellence-slider")) {
+            initExcellenceSlider();
+        }
+
         if (document.querySelector('.product-card__slider')) {
             initProductCardSlider();
         }
     }
 
-
     window.addEventListener('resize', toggleProgressBar);
-
 
     initAllSliders();
     toggleProgressBar();
