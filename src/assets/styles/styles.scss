@@ -1548,6 +1548,9 @@ h2 {
     display: grid;
     grid-template-rows: auto 1fr;
     transition: all 0.3s ease;
+    border: 1px solid #EAEFF4;
+    border-radius: 10px;
+    overflow: hidden;
 
     @media (max-width: 1300px) {
       min-height: 478px;
@@ -5142,3 +5145,34 @@ div.page-bg {
     }
   }
 }
+
+.projection {
+
+  .projects {
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    padding: 0;
+    background: none;
+    padding-top: 46px;
+
+    @media (max-width: 1700px) {
+      padding-top: 24px;
+    }
+
+    @media (max-width: 1359px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 1000px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 550px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+}
+
+
+
