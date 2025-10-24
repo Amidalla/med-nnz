@@ -5756,3 +5756,116 @@ div.page-bg {
     }
 }
 
+
+.special {
+  padding-top: 46px;
+  padding-bottom: 80px;
+  border-bottom: 1px solid #EAEFF4;
+
+  @media (max-width: 1700px) {
+    padding-top: 29px;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  @media (max-width: 1300px) {
+    padding-top: 22px;
+  }
+
+  @media (max-width: 700px) {
+    padding-top: 24px;
+  }
+
+    .promotions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+
+      @media (max-width: 1700px) {
+        gap: 20px;
+      }
+
+      @media (max-width: 1300px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media (max-width: 760px) {
+        grid-template-columns: repeat(1, 1fr);
+      }
+
+        &__item {
+          border: 1px solid #EAEFF4;
+
+          &:last-child {
+            @media (max-width: 1300px) {
+              grid-column: auto;
+
+              .promotions__text {
+                flex-direction: column;
+                justify-content: flex-end;
+                align-items: start;
+              }
+              .promotions__availability {
+                text-align: left;
+              }
+            }
+
+            @media (max-width: 760px) {
+              .promotions__text {
+                flex-direction: row;
+                justify-content: start;
+                align-items: center;
+                gap: 8px;
+              }
+            }
+          }
+
+          @media (max-width: 760px) {
+
+            padding: 15px 12px;
+
+            .promotions__text {
+              flex-direction: row;
+              justify-content: start;
+              align-items: center;
+              gap: 8px;
+            }
+          }
+        }
+    
+        &__title {}
+    
+        &__info {}
+    
+        &__text {}
+    
+        &__label {
+          &.sale {
+            @media (max-width: 760px) {
+              padding: 6px 13.5px;
+            }
+          }
+        }
+    
+        &__price {
+          @media (max-width: 760px) {
+            margin-top: 0;
+          }
+        }
+    
+        &__media {
+          @media (max-width: 780px) {
+            min-width: 130px;
+          }
+        }
+    
+        &__availability {}
+    }
+}
+
+
+
+
+
+
+
