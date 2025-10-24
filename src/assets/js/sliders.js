@@ -9,6 +9,7 @@ export function SlidersInit() {
     let recommendedSlider;
     let excellenceSlider;
     let newsDetailSlider;
+    let scheduleSlider;
 
     function initCustomProgressBar(swiper, sliderType = 'partners') {
         if (sliderType === 'excellence') return;
@@ -46,7 +47,8 @@ export function SlidersInit() {
             events: 'events-progress-container',
             projects: 'projects-progress-container',
             recommended: 'recommended-progress-container',
-            excellence: 'excellence-progress-container'
+            excellence: 'excellence-progress-container',
+            schedule: 'schedule-progress-container'
         };
         return classes[sliderType] || 'custom-progress-container';
     }
@@ -57,7 +59,8 @@ export function SlidersInit() {
             events: 'events-progress-bar',
             projects: 'projects-progress-bar',
             recommended: 'recommended-progress-bar',
-            excellence: 'excellence-progress-bar'
+            excellence: 'excellence-progress-bar',
+            schedule: 'schedule-progress-bar'
         };
         return classes[sliderType] || 'custom-progress-bar';
     }
@@ -88,6 +91,13 @@ export function SlidersInit() {
             {
                 container: '.recommended-progress-container',
                 controls: '.recommended__controls',
+                slider: null,
+                maxWidth: 600,
+                autoplay: false
+            },
+            {
+                container: '.schedule-progress-container',
+                controls: '.schedule__controls',
                 slider: null,
                 maxWidth: 600,
                 autoplay: false
@@ -253,6 +263,39 @@ export function SlidersInit() {
                 },
                 scroll: function () {
                     updateCustomProgressBar(this, 'recommended');
+                },
+                resize: function () {
+                    toggleProgressBar();
+                }
+            }
+        });
+    }
+
+    function initScheduleSlider() {
+        scheduleSlider = new Swiper(".schedule__slider", {
+            autoplay: false,
+            speed: 1000,
+            slidesPerView: 1,
+            spaceBetween: 10,
+            navigation: {
+                nextEl: '.schedule__controls .swiper-button-next',
+                prevEl: '.schedule__controls .swiper-button-prev'
+            },
+            breakpoints: {
+                0: { slidesPerView: 1, spaceBetween: 10 },
+                601: { slidesPerView: 2, spaceBetween: 15 },
+                1000: { slidesPerView: 3, spaceBetween: 20 },
+                1500: { slidesPerView: 4, spaceBetween: 30 }
+            },
+            on: {
+                init: function () {
+                    initCustomProgressBar(this, 'schedule');
+                },
+                slideChange: function () {
+                    updateCustomProgressBar(this, 'schedule');
+                },
+                scroll: function () {
+                    updateCustomProgressBar(this, 'schedule');
                 },
                 resize: function () {
                     toggleProgressBar();
@@ -637,6 +680,10 @@ export function SlidersInit() {
 
         if (document.querySelector(".recommended__slider")) {
             initRecommendedSlider();
+        }
+
+        if (document.querySelector(".schedule__slider")) {
+            initScheduleSlider();
         }
 
         if (document.querySelector(".excellence-slider")) {
