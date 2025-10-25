@@ -15,6 +15,7 @@ import { InitSelect } from "./select";
 import { InitSideMenu } from "./side-menu";
 import { InitFilter } from "./filter";
 import { InitTabs } from "./tabs";
+import { InitVideo } from "./video";
 import IMask from 'imask';
 
 Swiper.use([Pagination, Navigation, Autoplay, Thumbs]);
@@ -196,6 +197,7 @@ document.addEventListener('DOMContentLoaded', function() {
     InitSideMenu();
     InitFilter();
     InitTabs();
+    InitVideo();
 
 
     setTimeout(() => {

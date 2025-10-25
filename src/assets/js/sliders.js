@@ -10,6 +10,7 @@ export function SlidersInit() {
     let excellenceSlider;
     let newsDetailSlider;
     let scheduleSlider;
+    let productsSaleSlider;
 
     function initCustomProgressBar(swiper, sliderType = 'partners') {
         if (sliderType === 'excellence') return;
@@ -48,7 +49,8 @@ export function SlidersInit() {
             projects: 'projects-progress-container',
             recommended: 'recommended-progress-container',
             excellence: 'excellence-progress-container',
-            schedule: 'schedule-progress-container'
+            schedule: 'schedule-progress-container',
+            productsSale: 'products-sale-progress-container'
         };
         return classes[sliderType] || 'custom-progress-container';
     }
@@ -60,7 +62,8 @@ export function SlidersInit() {
             projects: 'projects-progress-bar',
             recommended: 'recommended-progress-bar',
             excellence: 'excellence-progress-bar',
-            schedule: 'schedule-progress-bar'
+            schedule: 'schedule-progress-bar',
+            productsSale: 'products-sale-progress-bar'
         };
         return classes[sliderType] || 'custom-progress-bar';
     }
@@ -98,6 +101,13 @@ export function SlidersInit() {
             {
                 container: '.schedule-progress-container',
                 controls: '.schedule__controls',
+                slider: null,
+                maxWidth: 600,
+                autoplay: false
+            },
+            {
+                container: '.products-sale-progress-container',
+                controls: '.products-sale__controls',
                 slider: null,
                 maxWidth: 600,
                 autoplay: false
@@ -263,6 +273,38 @@ export function SlidersInit() {
                 },
                 scroll: function () {
                     updateCustomProgressBar(this, 'recommended');
+                },
+                resize: function () {
+                    toggleProgressBar();
+                }
+            }
+        });
+    }
+
+    function initProductsSaleSlider() {
+        productsSaleSlider = new Swiper(".products-sale__slider", {
+            autoplay: false,
+            speed: 1000,
+            slidesPerView: 1,
+            spaceBetween: 10,
+            navigation: {
+                nextEl: '.products-sale__controls .swiper-button-next',
+                prevEl: '.products-sale__controls .swiper-button-prev'
+            },
+            breakpoints: {
+                601: { slidesPerView: 2, spaceBetween: 15 },
+                1000: { slidesPerView: 3, spaceBetween: 20 },
+                1300: { slidesPerView: 4, spaceBetween: 30 }
+            },
+            on: {
+                init: function () {
+                    initCustomProgressBar(this, 'productsSale');
+                },
+                slideChange: function () {
+                    updateCustomProgressBar(this, 'productsSale');
+                },
+                scroll: function () {
+                    updateCustomProgressBar(this, 'productsSale');
                 },
                 resize: function () {
                     toggleProgressBar();
@@ -680,6 +722,10 @@ export function SlidersInit() {
 
         if (document.querySelector(".recommended__slider")) {
             initRecommendedSlider();
+        }
+
+        if (document.querySelector(".products-sale__slider")) {
+            initProductsSaleSlider();
         }
 
         if (document.querySelector(".schedule__slider")) {
