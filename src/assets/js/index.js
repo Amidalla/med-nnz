@@ -16,6 +16,7 @@ import { InitSideMenu } from "./side-menu";
 import { InitFilter } from "./filter";
 import { InitTabs } from "./tabs";
 import { InitVideo } from "./video";
+import { InitAccordion } from "./accordion";
 import IMask from 'imask';
 
 Swiper.use([Pagination, Navigation, Autoplay, Thumbs]);
@@ -198,6 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
     InitFilter();
     InitTabs();
     InitVideo();
+    InitAccordion();
 
 
     setTimeout(() => {

@@ -6426,6 +6426,338 @@ div.page-bg {
   }
 }
 
+.vacancy {
+  padding-bottom: 60px;
+  border-bottom: 1px solid #EAEFF4;
+  
+  @media (max-width: 1700px) {
+    padding-bottom: 36px;
+    border-bottom: none;
+  }
+  @media (max-width: 1300px) {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+
+    &__inner {
+      display: grid;
+      grid-template-columns: 1fr 704px;
+      gap: 75px;
+
+      @media (max-width: 1700px) {
+        grid-template-columns: 1fr 516px;
+        gap: 19px;
+      }
+
+      @media (max-width: 1300px) {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 56px;
+      }
+    }
+
+    &__wrapper {
+
+      &:last-child {
+        position: sticky;
+        align-self: flex-start;
+        top: 0;
+
+        @media (max-width: 1300px) {
+          position: static;
+        }
+      }
+      p {
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 150%;
+        letter-spacing: 0.02em;
+        color: c.$black;
+        margin-top: 14px;
+
+        @media (max-width: 1300px) {
+          font-size: 16px;
+        }
+
+        &.vacancy__title {
+          font-size: 34px;
+          font-weight: 500;
+          line-height: 34px;
+          letter-spacing: 0.02em;
+          color: #272727;
+          margin-bottom: 32px;
+
+          @media(max-width: 1700px) {
+            font-size: 26px;
+            margin-bottom: 14px;
+          }
+          @media(max-width: 1300px) {
+            font-size: 24px;
+            margin-bottom: 16px;
+          }
+          @media(max-width: 700px) {
+            font-size: 22px;
+            margin-bottom: 20px;
+            white-space: break-spaces;
+          }
+
+          &:not(:first-child) {
+            margin-bottom: 16px;
+
+            @media(max-width: 1300px) {
+              margin-bottom: 4px;
+            }
+            @media(max-width: 700px) {
+              margin-bottom: 12px;
+            }
+          }
+        }
+
+
+        a {
+          color: #FF0000;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    &__list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 46px;
+
+      @media (max-width: 1700px) {
+        gap: 20px;
+      }
+
+      @media (max-width: 1300px) {
+        margin-bottom: 32px;
+      }
+      @media (max-width: 700px) {
+        margin-bottom: 48px;
+      }
+
+      @media (max-width: 600px) {
+         display: flex;
+         flex-direction: column;
+         gap: 15px;
+      }
+    }
+
+    &__item {
+      background: #F5F5F5;
+      border-radius: 20px;
+      padding: 24px 17px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 150%;
+      letter-spacing: 0.02em;
+      color: c.$black;
+
+      @media (max-width: 1700px) {
+        font-size: 18px;
+      }
+      @media (max-width: 1300px) {
+        font-size: 16px;
+      }
+    }
+
+  .tags {
+    padding-bottom: 32px;
+    
+    @media (max-width: 1700px) {
+      padding-top: 24px;
+      padding-bottom: 23px;
+    }
+    @media (max-width: 1300px) {
+      padding-top: 26px;
+      padding-bottom: 25px;
+    }
+    @media (max-width: 700px) {
+      padding-top: 19px;
+      padding-bottom: 20px;
+    }
+  }
+}
+
+.accordion {
+  overflow: hidden;
+}
+
+.accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  padding: 15px 20px;
+  border: 1px solid #E11A1A;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 24px;
+  background: c.$white;
+
+  &:hover {
+    background: #BB0202;
+    h3 {
+      color: c.$white;
+    }
+
+    .accordion-icon {
+      border: 1px solid c.$white;
+      transition: transform 0.3s ease;
+
+      svg {
+        filter: brightness(0) invert(1);
+      }
+    }
+  }
+
+  h3 {
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 34px;
+    letter-spacing: 0.02em;
+    color: #272727;
+    transition: color 0.3s ease;
+    
+    @media (max-width: 1700px) {
+      font-size: 22px;
+    }
+    @media (max-width: 1300px) {
+      font-size: 20px;
+    }
+    @media (max-width: 700px) {
+      font-size: 16px;
+      line-height: 110%;
+    }
+
+    @media (max-width: 450px) {
+      max-width: 258px;
+    }
+
+  }
+}
+
+.accordion-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #FF0000;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+
+  svg {
+    transition: all 0.3s ease;
+  }
+}
+
+.accordion-item.active {
+  margin-bottom: 24px;
+  height: auto;
+
+  .accordion-header {
+
+    .accordion-icon {
+
+      transform: rotate(45deg);
+    }
+  }
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  background: white;
+}
+
+.accordion-body {
+  margin-bottom: 24px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0.02em;
+  color: #333333;
+  background: c.$white;
+
+  p {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 130%;
+    letter-spacing: 0.02em;
+    color: c.$black;
+    margin-bottom: 30px;
+
+    @media (max-width: 1700px) {
+      font-size: 20px;
+    }
+    @media (max-width: 1300px) {
+      font-size: 18px;
+    }
+  }
+
+  ul {
+    margin-bottom: 30px;
+
+    li {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 150%;
+      letter-spacing: 0.02em;
+      color: #333333;
+      margin-bottom: 24px;
+      padding-left: 20px;
+      position: relative;
+
+      @media (max-width: 1300px) {
+        font-size: 16px;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 6px;
+        width: 4px;
+        height: 13px;
+        background: url("../images/red-arrow.svg") no-repeat;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.vacancy-btn {
+  @include red-button;
+  display: inline-flex;
+  margin-left: 15px;
+
+  @media (max-width: 1300px) {
+    font-size: 16px;
+    margin-left: 33px;
+  }
+
+  @media (max-width: 450px) {
+    display: flex;
+    width: 100%;
+    margin-left: 0;
+    margin-top: 7px;
+  }
+}
 
 
 
