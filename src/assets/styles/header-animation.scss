@@ -1,0 +1,29 @@
+
+.header_hidden_left {
+    overflow: hidden;
+    opacity: 1;
+    transition: all 1.2s ease-out;
+}
+
+.header_hidden_left .tn-atom {
+    overflow: hidden;
+    opacity: 0;
+}
+
+.header_hidden_leftVisible .tn-atom {
+    animation: an_7 1s 1 both;
+    animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+    animation-delay: 0.2s;
+}
+
+@keyframes an_7 {
+    from {
+        opacity: 0;
+        transform: perspective(1000px) translate3d(0px, 300px, 0px) rotate3d(-100, 0, 50, 45deg);
+    }
+    to {
+        opacity: 1;
+        transform: perspective(500px) translate3d(0, 0, 0);
+    }
+}
+

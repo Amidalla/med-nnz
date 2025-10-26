@@ -3,45 +3,276 @@
 <include src="layout/head.html"></include>
 <body class="home-page">
 <include src="layout/header.html"></include>
-    <main>
-        <section class="main-picture"></section>
-        <section class="equipment">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Комплекное оснащение медицинских учреждений</h2>
-                    <div class="all-link">
-                        <a href="#">
-                            <span>Смотреть все</span>
-                            <include src="assets/svg/all-link.html"></include>
-                        </a>
+<main>
+    <section class="main-picture">
+        <picture>
+            <source media="(max-width: 450px)" data-srcset="assets/images/main-picture4.jpg">
+            <source media="(max-width: 768px)" data-srcset="assets/images/main-picture3.jpg">
+            <source media="(max-width: 1360px)" data-srcset="assets/images/main-picture2.jpg">
+            <img class="lazy" data-src="assets/images/main-picture.jpg" alt="">
+        </picture>
+        <div class="header_hidden_left absolute">
+            <div class="tn-atom">
+                <h1>
+                    <span>Альфа Мобили</span>
+                    <span>ПРОЕКТНЫЕ МЕДИЦИНСКИЕ</span>
+                    <span>РЕШЕНИЯ</span>
+                </h1>
+            </div>
+        </div>
+        <ul class="social">
+            <li class="social__item">
+                <a href="#" class="social__link">
+                    <include src="assets/svg/whatsapp.html"></include>
+                </a>
+            </li>
+            <li class="social__item">
+                <a href="#" class="social__link">
+                    <include src="assets/svg/telegram.html"></include>
+                </a>
+            </li>
+            <li class="social__item">
+                <a href="#" class="social__link">
+                    <include src="assets/svg/email.html"></include>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <section class="equipment">
+        <div class="container">
+            <div class="section-header">
+                <div class="header_hidden_left">
+                    <div class="tn-atom">
+                        <h2>Комплекное оснащение медицинских учреждений</h2>
                     </div>
                 </div>
-                <div class="equipment__inner">
-                    <include src="layout/marking.html"></include>
+                <div class="all-link">
+                    <a href="#">
+                        <span>Смотреть все</span>
+                        <include src="assets/svg/all-link.html"></include>
+                    </a>
                 </div>
             </div>
-        </section>
-        <section class="new-items">
-            <div class="container">
-                <h2>Новинки</h2>
-                <div class="new-items__inner cards">
-                    <ul class="cards__list">
-                        <li class="cards__item">
-                            <include src="layout/template/card/cards-item.html">
-                                {
-                                "image": "assets/images/cards1.jpg",
-                                "title": "Кровать BLC 2414 K-5 функциональная медицинская электрическая, 5 функций",
-                                "link": "#",
-                                "brand": "Альфа Мобили",
-                                "price": "15 000",
-                                "availability": "В наличии",
-                                "madeInRussia": true,
-                                "isAction": true,
-                                "isNew": true
-                                }
-                            </include>
-                        </li>
-                        <li class="cards__item">
+            <div class="equipment__inner">
+                <div class="marking">
+                    <div class="marking__wrapper item-top marking-animate">
+                        <div class="marking-img">
+                            <picture>
+                                <source media="(max-width: 1300px)" data-srcset="assets/images/marking10.jpg">
+                                <source media="(max-width: 1366px)" data-srcset="assets/images/marking9.jpg">
+                                <img class="lazy" data-src="assets/images/marking1.jpg" alt="">
+                            </picture>
+                        </div>
+                        <div class="marking__info">
+                            <h3><a href="#" class="marking__link">Рентгенэндоваскулярная хирургия</a></h3>
+                            <ul class="marking__list">
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Расходные материалы для рентгенхирургии</a>
+                                    <span class="interior-new">Новинка</span>
+                                </li>
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Оборудование для рентгеноперационной</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="new">Новинка</div>
+                    </div>
+                    <div class="marking__wrapper item-top marking-animate">
+                        <div class="marking-img">
+                            <picture>
+                                <source media="(max-width: 1300px)" data-srcset="assets/images/marking12.jpg">
+                                <source media="(max-width: 1366px)" data-srcset="assets/images/marking11.jpg">
+                                <img class="lazy" data-src="assets/images/marking2.jpg" alt="">
+                            </picture>
+                        </div>
+                        <div class="marking__info">
+                            <h3><a href="#" class="marking__link">Интенсивная терапия</a></h3>
+                            <ul class="marking__list">
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Противоожоговые кровати</a>
+                                </li>
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Мониторы пациента</a>
+                                </li>
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Дефибриляторы</a>
+                                </li>
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">НДА ИВЛ</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="marking__wrapper item-top marking-animate">
+                        <div class="marking-img">
+                            <picture>
+                                <source media="(max-width: 1300px)" data-srcset="assets/images/marking14.jpg">
+                                <source media="(max-width: 1366px)" data-srcset="assets/images/marking13.jpg">
+                                <img class="lazy" data-src="assets/images/marking3.jpg" alt="">
+                            </picture>
+                        </div>
+                        <div class="marking__info">
+                            <h3><a href="#" class="marking__link">Медицинская мебель</a></h3>
+                            <ul class="marking__list">
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Кровати электрические</a>
+                                </li>
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Кровати механические</a>
+                                </li>
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Тележки медицинские</a>
+                                </li>
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Каталки для перевозки пациентов</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="marking__wrapper item-right marking-animate">
+                        <div class="marking-img">
+                            <picture>
+                                <source media="(max-width: 1300px)" data-srcset="assets/images/marking16.jpg">
+                                <source media="(max-width: 1366px)" data-srcset="assets/images/marking15.jpg">
+                                <img class="lazy" data-src="assets/images/marking4.jpg" alt="">
+                            </picture>
+                        </div>
+                        <div class="marking__info">
+                            <h3><a href="#" class="marking__link">Диагностика</a></h3>
+                            <ul class="marking__list">
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">УЗИ универсальные</a>
+                                </li>
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Рентгены для хирургии</a>
+                                </li>
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Мобильные</a>
+                                </li>
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Стационарные</a>
+                                </li>
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Электрокардиографы</a>
+                                </li>
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Маммографы</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="marking__wrapper item-right marking-animate">
+                        <div class="marking-img big">
+                            <picture>
+                                <source media="(max-width: 1300px)" data-srcset="assets/images/marking17.jpg">
+                                <source media="(max-width: 1366px)" data-srcset="assets/images/marking8.jpg">
+                                <img class="lazy" data-src="assets/images/marking5.jpg" alt="">
+                            </picture>
+                        </div>
+                        <div class="marking__info">
+                            <h3><a href="#" class="marking__link">Хирургия РАНБ</a></h3>
+                            <ul class="marking__list">
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Ультразвуковой дебридмент ран</a>
+                                </li>
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Электроагуляторы</a>
+                                </li>
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Дерматопластика</a>
+                                </li>
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Хирургический инструмент</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="marking__wrapper item-left marking-animate">
+                        <div class="marking-img big">
+                            <picture>
+                                <source media="(max-width: 1300px)" data-srcset="assets/images/marking19.jpg">
+                                <source media="(max-width: 1366px)" data-srcset="assets/images/marking18.jpg">
+                                <img class="lazy" data-src="assets/images/marking6.jpg" alt="">
+                            </picture>
+                        </div>
+                        <div class="marking__info">
+                            <h3><a href="#" class="marking__link">Реабилитация и физиотерапия</a></h3>
+                            <ul class="marking__list">
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Ультразвуковой дебридмент ран</a>
+                                </li>
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Электроагуляторы</a>
+                                </li>
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Дерматопластика</a>
+                                </li>
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Хирургический инструмент</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="marking__wrapper item-left marking-animate">
+                        <div class="marking-img">
+                            <picture>
+                                <source media="(max-width: 1300px)" data-srcset="assets/images/marking21.jpg">
+                                <source media="(max-width: 1366px)" data-srcset="assets/images/marking20.jpg">
+                                <img class="lazy" data-src="assets/images/marking7.jpg" alt="">
+                            </picture>
+                        </div>
+                        <div class="marking__info">
+                            <h3><a href="#" class="marking__link">Операционная</a></h3>
+                            <ul class="marking__list">
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Коронарная ангиопластика</a>
+                                </li>
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Операционные столы</a>
+                                    <span class="interior-new">Новинка</span>
+                                </li>
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Светильники</a>
+                                </li>
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Стерилизаторы</a>
+                                </li>
+                                <li class="marking__item">
+                                    <a href="#" class="marking__link">Хирургический инструмент</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="new">Новинка</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="new-items">
+        <div class="container">
+            <div class="header_hidden_left">
+                <div class="tn-atom">
+                    <h2>Новинки</h2>
+                </div>
+            </div>
+            <div class="new-items__inner cards">
+                <ul class="cards__list">
+                    <li class="cards__item cards-animate">
+                        <include src="layout/template/card/cards-item.html">
+                            {
+                            "image": "assets/images/cards1.jpg",
+                            "title": "Кровать BLC 2414 K-5 функциональная медицинская электрическая, 5 функций",
+                            "link": "#",
+                            "brand": "Альфа Мобили",
+                            "price": "15 000",
+                            "availability": "В наличии",
+                            "madeInRussia": true,
+                            "isAction": true,
+                            "isNew": true
+                            }
+                        </include>
+                    </li>
+                    <li class="cards__item cards-animate">
                         <include src="layout/template/card/cards-item.html">
                             {
                             "image": "assets/images/cards2.jpg",
@@ -55,8 +286,8 @@
                             "isNew": true
                             }
                         </include>
-                        </li>
-                        <li class="cards__item">
+                    </li>
+                    <li class="cards__item cards-animate">
                         <include src="layout/template/card/cards-item.html">
                             {
                             "image": "assets/images/cards3.jpg",
@@ -70,8 +301,8 @@
                             "isNew": false
                             }
                         </include>
-                        </li>
-                        <li class="cards__item">
+                    </li>
+                    <li class="cards__item cards-animate">
                         <include src="layout/template/card/cards-item.html">
                             {
                             "image": "assets/images/cards4.jpg",
@@ -85,8 +316,8 @@
                             "isNew": false
                             }
                         </include>
-                        </li>
-                        <li class="cards__item">
+                    </li>
+                    <li class="cards__item cards-animate">
                         <include src="layout/template/card/cards-item.html">
                             {
                             "image": "assets/images/cards5.jpg",
@@ -100,8 +331,8 @@
                             "isNew": true
                             }
                         </include>
-                        </li>
-                        <li class="cards__item">
+                    </li>
+                    <li class="cards__item cards-animate">
                         <include src="layout/template/card/cards-item.html">
                             {
                             "image": "assets/images/cards6.jpg",
@@ -115,23 +346,23 @@
                             "isNew": true
                             }
                         </include>
-                        </li>
-                        <li class="cards__item">
-                            <include src="layout/template/card/cards-item.html">
-                                {
-                                "image": "assets/images/cards7.jpg",
-                                "title": "Семейство коронарных баллонов БЛЕЙД, БЛЕЙД NC",
-                                "link": "#",
-                                "brand": "Альфа Мобили",
-                                "price": "15 000",
-                                "availability": "В наличии",
-                                "madeInRussia": true,
-                                "isAction": false,
-                                "isNew": false
-                                }
-                            </include>
-                        </li>
-                        <li class="cards__item">
+                    </li>
+                    <li class="cards__item cards-animate">
+                        <include src="layout/template/card/cards-item.html">
+                            {
+                            "image": "assets/images/cards7.jpg",
+                            "title": "Семейство коронарных баллонов БЛЕЙД, БЛЕЙД NC",
+                            "link": "#",
+                            "brand": "Альфа Мобили",
+                            "price": "15 000",
+                            "availability": "В наличии",
+                            "madeInRussia": true,
+                            "isAction": false,
+                            "isNew": false
+                            }
+                        </include>
+                    </li>
+                    <li class="cards__item cards-animate">
                         <include src="layout/template/card/cards-item.html">
                             {
                             "image": "assets/images/cards8.jpg",
@@ -145,69 +376,258 @@
                             "isNew": false
                             }
                         </include>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        <section class="advantages">
-            <div class="container">
-                <h2>Преимущества покупки оборудования в компании Альфа Мобили</h2>
-                <ul class="advantages__list">
-                    <li class="advantages__item">
-                        <include src="assets/svg/advantages1.html"></include>
-                        <span>Комплексное оснащение клиник</span>
-                    </li>
-                    <li class="advantages__item">
-                        <include src="assets/svg/advantages2.html"></include>
-                        <span>Подбор по приказу Минздрав</span>
-                    </li>
-                    <li class="advantages__item">
-                        <include src="assets/svg/advantages3.html"></include>
-                        <span>Госконтракты (участие в госзакупках)</span>
-                    </li>
-                    <li class="advantages__item">
-                        <include src="assets/svg/advantages4.html"></include>
-                        <span>Работа с торгующими компаниями</span>
-                    </li>
-                    <li class="advantages__item">
-                        <include src="assets/svg/advantages5.html"></include>
-                        <span>Сертификаты и лицензии на оборуд. и сервис</span>
-                    </li>
-                    <li class="advantages__item">
-                        <include src="assets/svg/advantages6.html"></include>
-                        <span>Доставка, монтаж/сборка</span>
-                    </li>
-                    <li class="advantages__item">
-                        <include src="assets/svg/advantages7.html"></include>
-                        <span>Сервис, ТО, гарантийное обслуживание</span>
-                    </li>
-                    <li class="advantages__item">
-                        <include src="assets/svg/advantages8.html"></include>
-                        <span>Своевременная поставка запасных частей и расходных материалов</span>
                     </li>
                 </ul>
-                <button class="consultation-btn">Получить консультацию</button>
             </div>
-        </section>
-        <section class="partners">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Наши партнеры</h2>
-                    <div class="all-link">
-                        <a href="#">
-                            <span>Смотреть все</span>
-                            <include src="assets/svg/all-link.html"></include>
-                        </a>
+        </div>
+    </section>
+    <section class="advantages">
+        <div class="container">
+            <div class="header_hidden_left">
+                <div class="tn-atom">
+                    <h2>Преимущества покупки оборудования в компании Альфа Мобили</h2>
+                </div>
+            </div>
+            <ul class="advantages__list">
+                <li class="advantages__item advantages-animate">
+                    <include src="assets/svg/advantages1.html"></include>
+                    <span>Комплексное оснащение клиник</span>
+                </li>
+                <li class="advantages__item advantages-animate">
+                    <include src="assets/svg/advantages2.html"></include>
+                    <span>Подбор по приказу Минздрав</span>
+                </li>
+                <li class="advantages__item advantages-animate">
+                    <include src="assets/svg/advantages3.html"></include>
+                    <span>Госконтракты (участие в госзакупках)</span>
+                </li>
+                <li class="advantages__item advantages-animate">
+                    <include src="assets/svg/advantages4.html"></include>
+                    <span>Работа с торгующими компаниями</span>
+                </li>
+                <li class="advantages__item advantages-animate">
+                    <include src="assets/svg/advantages5.html"></include>
+                    <span>Сертификаты и лицензии на оборуд. и сервис</span>
+                </li>
+                <li class="advantages__item advantages-animate">
+                    <include src="assets/svg/advantages6.html"></include>
+                    <span>Доставка, монтаж/сборка</span>
+                </li>
+                <li class="advantages__item advantages-animate">
+                    <include src="assets/svg/advantages7.html"></include>
+                    <span>Сервис, ТО, гарантийное обслуживание</span>
+                </li>
+                <li class="advantages__item advantages-animate">
+                    <include src="assets/svg/advantages8.html"></include>
+                    <span>Своевременная поставка запасных частей и расходных материалов</span>
+                </li>
+            </ul>
+            <button class="consultation-btn">Получить консультацию</button>
+        </div>
+    </section>
+    <section class="partners">
+        <div class="container">
+            <div class="section-header">
+                <div class="header_hidden_left">
+                    <div class="tn-atom">
+                        <h2>Наши партнеры</h2>
                     </div>
                 </div>
-                <include src="layout/partners.html"></include>
+                <div class="all-link">
+                    <a href="#">
+                        <span>Смотреть все</span>
+                    </a>
+                </div>
             </div>
-        </section>
-        <include src="layout/events.html"></include>
-        <include src="layout/main-form.html"></include>
-    </main>
-    <include src="layout/footer.html"></include>
-    <include src="layout/modals.html"></include>
+            <div class="swiper partners-slider slider-animate">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img class="lazy" data-src="assets/images/partner1.png" alt="">
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="lazy" data-src="assets/images/partner2.png" alt="">
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="lazy" data-src="assets/images/partner3.png" alt="">
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="lazy" data-src="assets/images/partner4.png" alt="">
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="lazy" data-src="assets/images/partner5.png" alt="">
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="lazy" data-src="assets/images/partner1.png" alt="">
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="lazy" data-src="assets/images/partner2.png" alt="">
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="lazy" data-src="assets/images/partner3.png" alt="">
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="lazy" data-src="assets/images/partner4.png" alt="">
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="lazy" data-src="assets/images/partner5.png" alt="">
+                    </div>
+                </div>
+                <div class="partners__controls">
+                    <div class="swiper-button-prev">
+                        <include src="assets/svg/slider-arrow.html"></include>
+                    </div>
+                    <div class="swiper-button-next">
+                        <include src="assets/svg/slider-arrow.html"></include>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section class="events">
+        <div class="container">
+            <div class="section-header">
+                <div class="header_hidden_left">
+                    <div class="tn-atom">
+                        <h2>События</h2>
+                    </div>
+                </div>
+                <div class="all-link">
+                    <a href="#">
+                        <span>Смотреть все</span>
+                        <include src="assets/svg/all-link.html"></include>
+                    </a>
+                </div>
+            </div>
+            <div class="swiper events-slider slider-animate">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <include src="layout/template/card/events-card.html">
+                            {
+                            "image": "assets/images/events1.jpg",
+                            "title": "Научно-практическая конференция «Современные аспекты лечения ран различной этиологии»",
+                            "link": "#",
+                            "date": "24.04.2024"
+                            }
+                        </include>
+                    </div>
+                    <div class="swiper-slide">
+                        <include src="layout/template/card/events-card.html">
+                            {
+                            "image": "assets/images/events2.jpg",
+                            "title": "Компания «Альфа Мобили» участник выставки «Здравоохранение 2023»",
+                            "link": "#",
+                            "date": "24.04.2024"
+                            }
+                        </include>
+                    </div>
+                    <div class="swiper-slide">
+                        <include src="layout/template/card/events-card.html">
+                            {
+                            "image": "assets/images/events3.jpg",
+                            "title": "Компания «Альфа Мобили» участник выставки «Здравоохранение 2023»",
+                            "link": "#",
+                            "date": "24.04.2024"
+                            }
+                        </include>
+                    </div>
+                    <div class="swiper-slide">
+                        <include src="layout/template/card/events-card.html">
+                            {
+                            "image": "assets/images/events4.jpg",
+                            "title": "Научно-практическая конференция \"Актуальные вопросы хирургических инфекций\" 10 ноября 2023г.",
+                            "link": "#",
+                            "date": "24.04.2024"
+                            }
+                        </include>
+                    </div>
+                    <div class="swiper-slide">
+                        <include src="layout/template/card/events-card.html">
+                            {
+                            "image": "assets/images/events1.jpg",
+                            "title": "Научно-практическая конференция «Современные аспекты лечения ран различной этиологии»",
+                            "link": "#",
+                            "date": "24.04.2024"
+                            }
+                        </include>
+                    </div>
+                    <div class="swiper-slide">
+                        <include src="layout/template/card/events-card.html">
+                            {
+                            "image": "assets/images/events2.jpg",
+                            "title": "Компания «Альфа Мобили» участник выставки «Здравоохранение 2023»",
+                            "link": "#",
+                            "date": "24.04.2024"
+                            }
+                        </include>
+                    </div>
+                    <div class="swiper-slide">
+                        <include src="layout/template/card/events-card.html">
+                            {
+                            "image": "assets/images/events3.jpg",
+                            "title": "Компания «Альфа Мобили» участник выставки «Здравоохранение 2023»",
+                            "link": "#",
+                            "date": "24.04.2024"
+                            }
+                        </include>
+                    </div>
+                    <div class="swiper-slide">
+                        <include src="layout/template/card/events-card.html">
+                            {
+                            "image": "assets/images/events4.jpg",
+                            "title": "Научно-практическая конференция \"Актуальные вопросы хирургических инфекций\" 10 ноября 2023г.",
+                            "link": "#",
+                            "date": "24.04.2024"
+                            }
+                        </include>
+                    </div>
+                </div>
+                <div class="events__controls">
+                    <div class="swiper-button-prev">
+                        <include src="assets/svg/slider-arrow.html"></include>
+                    </div>
+                    <div class="swiper-button-next">
+                        <include src="assets/svg/slider-arrow.html"></include>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="main-form form-animate">
+        <div class="container">
+            <div class="header_hidden_left">
+                <div class="tn-atom">
+                    <div class="main-form__title">Остались вопросы? Или нужна консультация?</div>
+                </div>
+            </div>
+            <p>Оставьте ваш телефон, и мы вам перезвоним</p>
+            <form class="form-main">
+                <fieldset>
+                    <label>
+                        <input type="text" name="name" placeholder="Имя"  required>
+                    </label>
+                    <label>
+                        <input type="tel" name="tel" placeholder="Телефон" data-phone-input required>
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <button class="submit-btn">
+                        Отправить
+                    </button>
+                </fieldset>
+                <fieldset>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="checkbox" required>
+                        <span>
+                        <span>Нажимая на кнопку «Отправить», вы соглашаетесь на обработку персональных данных</span>
+                    </span>
+                    </label>
+                </fieldset>
+            </form>
+        </div>
+    </section>
+</main>
+<include src="layout/footer.html"></include>
+<include src="layout/modals.html"></include>
 </body>
 </html>

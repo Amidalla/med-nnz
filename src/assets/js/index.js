@@ -5,6 +5,8 @@ import "../styles/footer.scss";
 import "../styles/select.scss";
 import "../styles/modals.scss";
 import "../styles/filter.scss";
+import "../styles/header-animation.scss";
+import "../styles/animations.scss";
 import LazyLoad from "vanilla-lazyload";
 import Swiper from 'swiper';
 import 'swiper/swiper-bundle.css';
@@ -17,6 +19,8 @@ import { InitFilter } from "./filter";
 import { InitTabs } from "./tabs";
 import { InitVideo } from "./video";
 import { InitAccordion } from "./accordion";
+import { InitHeaderAnimation } from "./header-animation";
+import { InitScrollAnimations } from "./scrollAnimations";
 import IMask from 'imask';
 
 Swiper.use([Pagination, Navigation, Autoplay, Thumbs]);
@@ -200,7 +204,8 @@ document.addEventListener('DOMContentLoaded', function() {
     InitTabs();
     InitVideo();
     InitAccordion();
-
+    InitHeaderAnimation();
+    InitScrollAnimations();
 
     setTimeout(() => {
         initMobileSearch();

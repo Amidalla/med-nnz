@@ -80,35 +80,35 @@ export function SlidersInit() {
             {
                 container: '.events-progress-container',
                 controls: '.events__controls',
-                slider: null,
+                slider: newsSlider,
                 maxWidth: 600,
                 autoplay: false
             },
             {
                 container: '.projects-progress-container',
                 controls: '.projects__controls',
-                slider: null,
+                slider: projectsSlider,
                 maxWidth: 600,
                 autoplay: false
             },
             {
                 container: '.recommended-progress-container',
                 controls: '.recommended__controls',
-                slider: null,
+                slider: recommendedSlider,
                 maxWidth: 600,
                 autoplay: false
             },
             {
                 container: '.schedule-progress-container',
                 controls: '.schedule__controls',
-                slider: null,
+                slider: scheduleSlider,
                 maxWidth: 600,
                 autoplay: false
             },
             {
                 container: '.products-sale-progress-container',
                 controls: '.products-sale__controls',
-                slider: null,
+                slider: productsSaleSlider,
                 maxWidth: 600,
                 autoplay: false
             },
@@ -122,13 +122,15 @@ export function SlidersInit() {
                 if (window.innerWidth <= maxWidth) {
                     progressContainer.style.display = 'block';
                     controlsElement.style.display = 'none';
-                    if (slider && autoplay) {
+
+                    if (slider && slider.autoplay && autoplay) {
                         slider.autoplay.stop();
                     }
                 } else {
                     progressContainer.style.display = 'none';
                     controlsElement.style.display = 'flex';
-                    if (slider && autoplay) {
+
+                    if (slider && slider.autoplay && autoplay) {
                         slider.autoplay.start();
                     }
                 }

@@ -2,7 +2,11 @@
 @use "../styles/mixins.scss" as *;
 
 .header {
+    height: 150px;
 
+  @media (max-height: 1300px) {
+    height: auto;
+  }
 
     &__top {
       padding-top: 16.5px;
