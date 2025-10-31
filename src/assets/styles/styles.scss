@@ -771,6 +771,7 @@ h2 {
   letter-spacing: 0.02em;
   cursor: pointer;
   transition: all 0.3s ease;
+  border-radius: 5px;
 
   @media (max-width: 1300px) {
     font-size: 16px;
@@ -840,6 +841,13 @@ h2 {
   @media (max-width: 700px) {
     background: #EAEFF4;
   }
+
+  .consultation-btn {
+    @media (max-width: 1300px) {
+      font-size: 16px;
+      padding: 11px 14px;
+    }
+  }
   
     h2 {
       @media (max-width: 1500px) {
@@ -902,10 +910,6 @@ h2 {
 
 .consultation-btn {
   @include red-button;
-
-  @media (max-width: 1300px) {
-    font-size: 16px;
-  }
 }
 
 .partners {
@@ -1300,6 +1304,7 @@ h2 {
      @media (max-width: 760px) {
        margin-right: 0;
        margin-left: 0;
+       height: 40px;
      }
 
      @media (max-width: 450px) {
@@ -1477,6 +1482,21 @@ h2 {
 
 .page-name {
   padding-top: 32px;
+
+  &.caption {
+    h1 {
+      @media (max-width: 1700px) {
+        font-size: 48px;
+      }
+      @media (max-width: 1300px) {
+        font-size: 40px;
+      }
+      @media (max-width: 700px) {
+        font-size: 28px;
+      }
+
+    }
+  }
   
   @media (max-width: 1500px) {
     padding-top: 24px;
@@ -3192,6 +3212,10 @@ h2 {
     @media (max-width: 1000px) {
       font-size: 20px;
     }
+
+    @media (max-width: 700px) {
+      font-size: 18px;
+    }
   }
 
   p {
@@ -3201,6 +3225,10 @@ h2 {
     letter-spacing: 0.02em;
     color: c.$black;
     margin-bottom: 30px;
+
+    @media (max-width: 1300px) {
+      font-size: 16px;
+    }
   }
 
   &__item {
@@ -3215,6 +3243,10 @@ h2 {
 
     @media (max-width: 1000px) {
       font-size: 18px;
+    }
+
+    @media (max-width: 700px) {
+      font-size: 16px;
     }
 
     &::before {
@@ -3244,6 +3276,10 @@ h2 {
 
     @media (max-width: 1000px) {
       font-size: 18px;
+    }
+
+    @media (max-width:700px) {
+      font-size: 16px;
     }
 
     &::before {
@@ -3282,6 +3318,14 @@ h2 {
   position: relative;
   border-radius: 4px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  @media (max-width: 1300px) {
+    padding: 1.5px 20px;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 16px;
+  }
 
   @media (max-width: 450px) {
     padding: 8px 15px;
@@ -3534,7 +3578,7 @@ div.page-bg {
     color: c.$black;
 
     @media (max-width: 1300px) {
-      font-size: 15px;
+      font-size: 16px;
     }
   }
 }
@@ -3950,6 +3994,7 @@ div.page-bg {
   @media (max-width: 1300px) {
     margin-top: 100px;
     font-size: 16px;
+    height: 40px;
   }
 
   @media (max-width: 920px) {
@@ -4243,6 +4288,8 @@ div.page-bg {
   }
   @media (max-width: 1300px) {
     margin-top: 32px;
+    font-size: 16px;
+    height: 40px;
   }
   @media (max-width: 450px) {
     width: 100%;
@@ -4726,6 +4773,12 @@ div.page-bg {
   .new {
     position: static;
   }
+  
+  h2 {
+    @media (max-width: 1300px) {
+      text-align: left;
+    }
+  }
 
 }
 
@@ -4932,6 +4985,11 @@ div.page-bg {
   width: 172px;
   margin-left: 0;
   margin-bottom: 32px;
+
+  @media (max-width: 1300px) {
+    font-size: 16px;
+    height: 40px;
+  }
 }
 
 .back {
@@ -5458,6 +5516,7 @@ div.page-bg {
 
     @media (max-width: 1300px) {
       font-size: 16px;
+      height: 40px;
     }
   }
 }
@@ -5589,7 +5648,7 @@ div.page-bg {
 
       @media (max-width: 1300px) {
         border: none;
-        padding: 10px 20px;
+        padding: 10px 15px;
         background: #F5F7FA;
         border-radius: 10px;
       }
@@ -5598,7 +5657,7 @@ div.page-bg {
         padding-top: 0;
 
         @media (max-width: 1300px) {
-          padding: 10px 20px;
+          padding: 10px 15px;
         }
       }
 
@@ -5607,7 +5666,7 @@ div.page-bg {
         border: none;
 
         @media (max-width: 1300px) {
-          padding: 10px 20px;
+          padding: 10px 15px;
         }
 
       }
@@ -6756,6 +6815,7 @@ div.page-bg {
   @media (max-width: 1300px) {
     font-size: 16px;
     margin-left: 33px;
+    height: 40px;
   }
 
   @media (max-width: 450px) {
@@ -6889,6 +6949,15 @@ div.page-bg {
 .reviews-btn {
   @include red-button;
   margin-left: 0;
+
+  @media (max-width: 1300px) {
+    font-size: 16px;
+    height: 40px;
+  }
+  @media (max-width: 450px) {
+    width: 100%;
+  }
+
 }
 
 .reviews-detail {
@@ -6987,6 +7056,11 @@ div.page-bg {
   @include red-button;
   margin-left: 0;
   margin-top: 32px;
+
+  @media (max-width: 1300px) {
+    font-size: 16px;
+    height: 40px;
+  }
 
   @media (max-width: 450px) {
     width: 100%;
@@ -7307,6 +7381,14 @@ div.page-bg {
 .consultation-btn {
   @include red-button;
   margin-top: 32px;
+
+  @media (max-width: 1300px) {
+    font-size: 16px;
+    height: 40px;
+  }
+  @media (max-width: 450px) {
+    width: 100%;
+  }
 }
 
 
