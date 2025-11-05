@@ -1,0 +1,44 @@
+
+<div class="basket-item">
+    <div class="basket-item__main">
+        <div class="basket-item__img">
+            <img class="lazy" data-src="{{ image }}" alt="{{ title }}">
+    
+            <div class="cards__peculiarities">
+                <div class="action {{ isAction }}">Акция</div>
+                <div class="new {{ isNew }}">Новинка</div>
+            </div>
+    
+             <div class="rus {{ madeInRussia }}">
+                <include src="assets/svg/rus.html"></include>
+                <span>Сделано в России</span>
+            </div>
+        </div>
+    
+        <div class="basket-item__info">
+             <div class="basket-item__title">
+                <h4><a class="basket-item__link" href="{{ link }}">{{ title }}</a></h4>
+                <span>{{ brand }}</span>
+            </div>
+    
+            <div class="status">
+                <include src="assets/svg/status.html"></include>
+                <span>{{ availability }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="basket-item__footer">
+
+        <div class="basket-item-quantity">
+            <button type="button" class="basket-item-quantity__btn basket-item-quantity__btn--minus"><include src="assets/svg/minus.html"></include></button>
+            <div class="basket-item-quantity__value">1</div>
+            <button type="button" class="basket-item-quantity__btn basket-item-quantity__btn--plus"><include src="assets/svg/plus.html"></include></button>
+        </div>
+    
+        <div class="basket-item__price">{{ price }} ₽</div>
+        
+        <button class="basket-item__del" type="button"><include src="assets/svg/trash.html"></include></button>
+    </div>
+
+</div>

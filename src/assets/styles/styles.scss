@@ -2,6 +2,7 @@
 @use "../styles/mixins.scss" as *;
 @use "./blocks/404" as *;
 @use "./blocks/search-result" as *;
+@use "./blocks/basket-page" as *;
 
 html {
   scroll-behavior: smooth;

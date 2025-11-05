@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ru">
+<include src="layout/head.html"></include>
+<body class="inside-page">
+<include src="layout/header.html"></include>
+<main>
+    <div class="breadcrumb">
+        <div class="container">
+            <nav class="breadcrumb__inner">
+                <ul class="breadcrumb__list">
+                    <li class="breadcrumb__item">
+                        <a href="#" class="breadcrumb__link">Медицинское оборудование</a>
+                    </li>
+                    <li class="breadcrumb__item active">
+                        <a href="#" class="breadcrumb__link">Корзина</a>
+                    </li>
+                </ul>
+                <a class="back-link">Назад</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="page-name">
+        <div class="container">
+            <h1>Корзина</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="basket-clear">
+            <label for="clear-all-basket">
+                <input type="checkbox" id="clear-all-basket" name="clear-all" value="Y">
+                <span>Выбрать все</span>
+            </label>
+            <button type="button"><include src="assets/svg/trash.html"></include></button>
+        </div>
+
+        <div class="basket-page">
+            <div class="basket-items">
+                <include src="layout/template/card/cards-basket-item.html">
+                    {
+                    "image": "assets/images/cards1.jpg",
+                    "title": "Кровать BLC 2414 K-5 функциональная медицинская электрическая, 5 функций",
+                    "link": "#",
+                    "brand": "Альфа Мобили",
+                    "price": "15 000",
+                    "availability": "В наличии",
+                    "madeInRussia": true,
+                    "isAction": true,
+                    "isNew": true
+                    }
+                </include>
+                <include src="layout/template/card/cards-basket-item.html">
+                    {
+                    "image": "assets/images/cards1.jpg",
+                    "title": "Кровать BLC 2414 K-5 функциональная медицинская электрическая, 5 функций",
+                    "link": "#",
+                    "brand": "Альфа Мобили",
+                    "price": "15 000",
+                    "availability": "В наличии",
+                    "madeInRussia": true,
+                    "isAction": true,
+                    "isNew": true
+                    }
+                </include>
+                
+            </div>
+
+            <div class="basket-total">
+                <a href="#" class="basket-total__btn">Перейти к оформлению</a>
+                <div class="basket-total__title">Ваша корзина</div>
+                <div class="basket-total__info">
+                    <span>Товаров</span><span>3 позиции</span>
+                </div>
+                <div class="basket-total__footer">
+                    <p>Условия <a href="#">оплаты</a> и <a href="#">доставки</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+<include src="layout/footer.html"></include>
+<include src="layout/modals.html"></include>
+</body>
+</html>
