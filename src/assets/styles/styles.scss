@@ -1,5 +1,6 @@
 @use "./colors.scss" as c;
 @use "../styles/mixins.scss" as *;
+@use "./blocks/404" as *;
 
 html {
   scroll-behavior: smooth;
