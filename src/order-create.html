@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+<include src="layout/head.html"></include>
+<body class="home-page">
+<include src="layout/header.html"></include>
+<main>
+    <div class="breadcrumb">
+        <div class="container">
+            <nav class="breadcrumb__inner">
+                <ul class="breadcrumb__list">
+                    <li class="breadcrumb__item">
+                        <a href="#" class="breadcrumb__link">Медицинское оборудование</a>
+                    </li>
+                    <li class="breadcrumb__item active">
+                        <a href="#" class="breadcrumb__link">Оформление заказа</a>
+                    </li>
+                </ul>
+                <a class="back-link">Назад</a>
+            </nav>
+        </div>
+    </div>
+    <section class="page-name">
+        <div class="container">
+            <h1>Оформление заказа</h1>
+        </div>
+    </section>
+
+    <div class="order-create">
+        <div class="container">
+            <a href="#" class="order-create__back-link">Вернуться в корзину</a>
+
+            <form action="" class="order-create-form">
+                <div class="order-create-form__input">
+                    <input type="text" placeholder="Название компании*" required name="name-company">
+                </div>
+                <div class="order-create-form__input">
+                    <input type="text" placeholder="Имя представителя*" required name="name">
+                </div>
+                <div class="order-create-form__input">
+                    <input type="email" placeholder="E-mail представителя*" required name="email">
+                </div>
+                <div class="order-create-form__input">
+                    <input type="tel" data-phone-input placeholder="Телефон*" required name="phone">
+                </div>
+                <div class="order-create-form__input">
+                    <input type="text" placeholder="Ваш комментарий" name="comment">
+                </div>
+
+                <div class="order-create-form__footer">
+                    <button class="order-create-form__btn">Оформить заказ</button>
+
+                    <div class="agreement-checkbox">
+                        <input type="checkbox" id="agreement-form-order" required name="agreement" value="Y">
+                        <label for="agreement-form-order">Я принимаю условия Соглашения на обработку персональных данных</label>
+                    </div>
+                </div>
+            </form>
+
+            <div class="order-create-fon">
+                <include src="assets/svg/alpha.svg"></include>
+            </div>
+        </div>
+    </div>
+
+</main>
+<include src="layout/footer.html"></include>
+<include src="layout/modals.html"></include>
+</body>
+</html>

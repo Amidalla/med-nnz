@@ -1,0 +1,89 @@
+@use "../mixins.scss" as *;
+@use "../colors.scss" as *;
+
+$max-width: 836px;
+
+.order-create {
+    margin-top: 45px;
+    margin-bottom: 45px;
+
+    .container {
+        position: relative;
+    }
+
+    &__back-link {
+        background-color: #F9F9F9;
+        color: #0F1019;
+        padding: 10px 20px;
+        border-radius: 10px;
+        display: block;
+        font-size: 16px;
+        line-height: 120%;
+        max-width: $max-width;
+        margin-bottom: 30px;
+    }
+}
+
+.order-create-form {
+    max-width: $max-width;
+
+    &__input {
+        input {
+            border: 1px solid #D8DFE7;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 18px 15px;
+            color: #6D6D6D;
+            font-size: 18px;
+            font-family: Roboto;
+            line-height: 150%;
+            letter-spacing: 0.02em;
+            width: 100%;
+
+            &::placeholder {
+                color: #6D6D6D;
+            }
+        }
+
+        margin-bottom: 24px;
+    }
+
+    &__footer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 15px;
+
+        .agreement-checkbox {
+            max-width: 400px;
+        }
+
+        @media (max-width: 768px) {
+            flex-direction: column-reverse;
+
+            .agreement-checkbox,
+            .order-create-form__btn {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+    }
+
+    &__btn {
+        @include red-button;
+        margin: 0;
+        padding: 13px 40px;
+        white-space: nowrap;
+    }
+}
+
+.order-create-fon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+
+    @media (max-width: 768px) {
+        display: none;
+    }
+}

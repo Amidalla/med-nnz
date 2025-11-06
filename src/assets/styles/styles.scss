@@ -3,6 +3,8 @@
 @use "./blocks/404" as *;
 @use "./blocks/search-result" as *;
 @use "./blocks/basket-page" as *;
+@use "./blocks/order-create" as *;
+@use "./blocks/agreement-checkbox" as *;
 
 html {
   scroll-behavior: smooth;

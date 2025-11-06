@@ -1,0 +1,56 @@
+@use "../colors.scss" as *;
+
+.agreement-checkbox {
+
+    input[type="checkbox"] {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+
+        &:checked {
+            & + label::before {}
+
+            & + label::after {
+                opacity: 1;
+            }
+        }
+    }
+
+    label {
+        color: #6D6D6D;
+        position: relative;
+        padding-left: 30px;
+        cursor: pointer;
+        display: inline-flex;
+        letter-spacing: 0.02em;
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 3px;
+            width: 21px;
+            height: 21px;
+            border: 1px solid #D8DFE7;
+            border-radius: 3px;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+
+        &:hover::before {
+           border-color: $dark-red;
+        }
+
+        &::after {
+            content: '✓';
+            position: absolute;
+            left: 5px;
+            top: 2px;
+            color: $red;
+            font-size: 18px;
+            font-weight: bold;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+    }
+}
