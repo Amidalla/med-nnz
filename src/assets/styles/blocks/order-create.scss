@@ -21,6 +21,14 @@ $max-width: 836px;
         line-height: 120%;
         max-width: $max-width;
         margin-bottom: 30px;
+
+        &-red {
+            @include red-button;
+            margin: 0;
+            padding: 13px 40px;
+            white-space: nowrap;
+            display: inline-flex;
+        }
     }
 }
 
@@ -32,7 +40,7 @@ $max-width: 836px;
             border: 1px solid #D8DFE7;
             background-color: #fff;
             border-radius: 5px;
-            padding: 18px 15px;
+            padding: 9px 15px;
             color: #6D6D6D;
             font-size: 18px;
             font-family: Roboto;
@@ -85,5 +93,18 @@ $max-width: 836px;
 
     @media (max-width: 768px) {
         display: none;
+    }
+}
+
+.order-create-succ {
+    max-width: $max-width;
+    
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    .order-create__back-link-red {
+        margin-top: 16px;
     }
 }
