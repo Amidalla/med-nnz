@@ -223,16 +223,13 @@
 
 .menu {
 
-  gap: 32px;
+  gap: 22px;
 
-  @media (max-width: 1500px) {
-    gap: 10px;
-  }
 
     &__item {
       position: relative;
-      padding-right: 25px;
       cursor: pointer;
+      padding-right: 25px;
 
       &.dropdown:hover .sub-menu  {
         display: flex;

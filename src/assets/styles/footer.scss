@@ -306,6 +306,10 @@
                 column-gap: 24px;
                 row-gap: 16px;
             }
+
+            @media (max-width: 450px) {
+                row-gap: 5px;
+            }
         }
 
     }
@@ -416,6 +420,7 @@
     }
     @media (max-width: 450px) {
         text-align: left;
+        margin-top: 24px;
     }
 
 }

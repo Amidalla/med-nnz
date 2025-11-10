@@ -280,6 +280,12 @@ a {
     }
     @media (max-width: 650px) {
       padding: 20px;
+      background-color: #EAEFF4;
+      background-image: url("../images/marking-right-mobile.png");
+      background-repeat: no-repeat;
+      background-position: right center;
+      background-size: 80%;
+
     }
 
 
@@ -437,6 +443,12 @@ a {
 
     @media (max-width: 650px) {
       padding: 20px;
+      background-color: #EAEFF4;
+      background-image: url("../images/marking-right-mobile.png");
+      background-repeat: no-repeat;
+      background-position: right center;
+      background-size: 80%;
+
     }
   }
 }
@@ -515,6 +527,12 @@ a {
 
     @media (max-width: 650px) {
       padding: 20px;
+      background-color: #EAEFF4;
+      background-image: url("../images/marking-right-mobile.png");
+      background-repeat: no-repeat;
+      background-position: right center;
+      background-size: 80%;
+
     }
   }
 
@@ -558,6 +576,12 @@ a {
   @media (max-width: 650px) {
     padding-top: 48px;
     padding-bottom: 48px;
+  }
+
+  h2 {
+    @media (max-width: 1300px) {
+      text-align: left;
+    }
   }
 
 }
@@ -912,6 +936,12 @@ a {
 
       svg {
         min-width: 63px;
+        
+        @media (max-width: 450px) {
+          width: 38px;
+          height: 45px;
+          min-width: 38px;
+        }
       }
     }
 }
@@ -1247,8 +1277,8 @@ a {
 
       @media (max-width: 1350px) {
         max-width: 100%;
-        padding-left: 32px;
-        padding-right: 32px;
+        padding-left: 20px;
+        padding-right: 20px;
       }
   }
 }
@@ -1273,6 +1303,12 @@ a {
 
     @media (max-width: 760px) {
       flex-direction: column;
+    }
+
+    &:first-child {
+      @media (max-width: 700px) {
+        gap: 10px;
+      }
     }
   }
 
@@ -1356,12 +1392,13 @@ a {
         transition: all 0.2s ease;
         flex-shrink: 0;
         margin-top: 2px;
+        border: 1px solid #D8DFE7;
+        border-radius: 3px;
       }
     }
 
     &:checked + span::before {
       background: white;
-      border-color: #E11A1A;
       background-image: url("data:image/svg+xml,%3Csvg width='21' height='21' viewBox='0 0 21 21' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='21' height='21' rx='3' fill='white'/%3E%3Cpath d='M17 7L8.75 15L5 11.3636' stroke='%23E11A1A' stroke-width='2' stroke-linecap='square' stroke-linejoin='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: center;
@@ -1573,7 +1610,7 @@ a {
 
   &__item {
     background: c.$white;
-    min-height: 748px;
+    min-height: 720px;
     display: grid;
     grid-template-rows: auto 1fr;
     transition: all 0.3s ease;
@@ -1581,9 +1618,21 @@ a {
     border-radius: 10px;
     overflow: hidden;
 
-    @media (max-width: 1300px) {
-      min-height: 478px;
+    @media (max-width: 1500px) {
+      min-height: 725px;
+      height: 725px;
     }
+
+    @media (max-width: 1300px) {
+      min-height: 550px;
+      height: 550px;
+    }
+
+    @media (max-width: 600px) {
+      min-height: 500px;
+      height: 500px;
+    }
+
 
     &:hover {
       box-shadow: 0px 2px 27.9px 0px #A8A8A8B8;
@@ -1603,6 +1652,11 @@ a {
   &__img {
 
     overflow: hidden;
+    height: 306px;
+
+    @media (max-width: 700px) {
+         height: 268px;
+    }
     img {
       width: 100%;
       height: 100%;
@@ -1618,6 +1672,11 @@ a {
     letter-spacing: 0.02em;
     color: #333333;
     margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     @media (max-width: 1500px) {
       font-size: 20px;
@@ -1768,6 +1827,12 @@ a {
     padding-bottom: 0;
   }
 
+  &.name-left {
+    h2 {
+      text-align: left;
+    }
+  }
+
 
     &__inner {
       max-width: 1297px;
@@ -1809,7 +1874,7 @@ a {
         line-height: 150%;
         letter-spacing: 0.02em;
         color: c.$black;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
 
         @media (max-width: 1500px) {
           font-size: 32px;
@@ -1840,8 +1905,12 @@ a {
       ul {
         display: flex;
         flex-direction: column;
-        gap: 24px;
+        gap: 20px;
         margin-bottom: 26px;
+
+        @media (max-width: 450px) {
+          margin-bottom: 24px;
+        }
 
         li {
           padding-left: 12px;
@@ -1850,7 +1919,6 @@ a {
           line-height: 150%;
           letter-spacing: 0.02em;
           color: c.$black;
-          margin-left: 12px;
           position: relative;
 
           @media (max-width: 1300px) {
@@ -2039,7 +2107,7 @@ a {
 
   &__item {
     &:not(:last-child) {
-      margin-bottom: 24px;
+      margin-bottom: 10px;
     }
 
     span {
@@ -2410,13 +2478,13 @@ a {
   padding-bottom: 36px;
 
   @media (max-width: 1400px) {
-    padding-top: 32px;
+    padding-top: 24px;
     padding-bottom: 20px;
   }
 
     &__inner {
       display: flex;
-      gap: 12px;
+      gap: 15px;
       flex-wrap: wrap;
     }
 
@@ -2876,8 +2944,8 @@ a {
           display: block;
 
           .swiper-pagination-bullet {
-            width: 14px;
-            height: 14px;
+            width: 12px;
+            height: 12px;
             background: rgba(218, 218, 218, 1);
             transform: none;
           }
@@ -3198,7 +3266,7 @@ a {
     font-weight: 500;
     line-height: 34px;
     color: #272727;
-    margin-bottom: 30px;
+    margin-bottom: 24px;
 
     @media (max-width: 1400px) {
       font-size: 32px;
@@ -3215,7 +3283,7 @@ a {
     line-height: 180%;
     letter-spacing: 0.02em;
     color: c.$black;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 
     @media (max-width: 1000px) {
       font-size: 20px;
@@ -3232,7 +3300,7 @@ a {
     line-height: 180%;
     letter-spacing: 0.02em;
     color: c.$black;
-    margin-bottom: 30px;
+    margin-bottom: 24px;
 
     @media (max-width: 1300px) {
       font-size: 16px;
@@ -3333,10 +3401,9 @@ a {
 
   @media (max-width: 700px) {
     font-size: 16px;
-  }
-
-  @media (max-width: 450px) {
-    padding: 8px 15px;
+    height: 36px;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 }
 
@@ -3394,6 +3461,7 @@ a {
 
     @media (max-width: 600px) {
       font-size: 16px;
+      padding: 10px 16px;
     }
 
     .tabs-table__column {
@@ -3445,10 +3513,21 @@ a {
   }
 
   &__slider {
+
+    &.swiper {
+      padding-left: 15px;
+      padding-right: 15px;
+
+      @media (max-width: 1000px) {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+
     .swiper-slide {
 
       .cards__item {
-        min-height: 743px;
+        height: 731px;
         background: c.$white;
       }
     }
@@ -3574,6 +3653,10 @@ div.page-bg {
       }
       @media (max-width: 1300px) {
         font-size: 28px;
+      }
+
+      @media (max-width: 700px) {
+        font-size: 20px;
       }
 
     }
@@ -3972,6 +4055,14 @@ div.page-bg {
       bottom: 223px;
       display: flex;
       gap: 32px;
+
+      @media (max-width: 1618px) {
+        bottom: 255px;
+      }
+
+      @media (max-width: 1408px) {
+        bottom: 295px;
+      }
       
       @media (max-width: 1300px) {
         bottom: 145px;
@@ -4054,6 +4145,10 @@ div.page-bg {
 
     @media (max-width: 1300px) {
       width: 100%;
+    }
+
+    @media (max-width: 700px) {
+      max-height: 90vh;
     }
   }
 }
@@ -4740,6 +4835,16 @@ div.page-bg {
     .download-icon {
       width: 60px;
       height: 60px;
+
+      @media (max-width: 700px) {
+        width: 30px;
+        height: 41px;
+
+        svg {
+          width: 30px;
+          height: 41px;
+      }
+      }
     }
     .download-button {
       font-weight: 700;
@@ -4921,6 +5026,8 @@ div.page-bg {
   .main-swiper {
     .swiper-slide {
       position: relative;
+      line-height: 0;
+      font-size: 0;
 
 
 
@@ -4935,7 +5042,7 @@ div.page-bg {
 
   }
   .thumbnail-swiper {
-    margin-top: 15px;
+    margin-top: 24px;
 
     .swiper-slide {
       width: 169px !important;
@@ -5012,10 +5119,6 @@ div.page-bg {
 
   &:hover {
     text-decoration: underline;
-  }
-
-  svg {
-    transform: rotate(180deg);
   }
 }
 
@@ -5266,9 +5369,9 @@ div.page-bg {
       gap: 30px;
       align-items: stretch;
 
-      @media (max-width: 1300px) {
+      @media (max-width: 1365px) {
         display: flex;
-        flex-direction: column;
+        flex-direction: column-reverse;
       }
 
       p {
@@ -5383,6 +5486,9 @@ div.page-bg {
 
       img {
         transition: all 0.3s ease;
+        @media (max-width: 450px) {
+          max-height: 58px;
+        }
       }
     }
 
@@ -5427,9 +5533,20 @@ div.page-bg {
 
       h2 {
         text-align: left;
+        margin-bottom: 30px;
+
+        @media (max-width: 1350px) {
+          margin-bottom: 32px;
+        }
+
+        @media (max-width: 1300px) {
+          margin-bottom: 24px;
+        }
       }
 
       p {
+        margin-bottom: 24px;
+
         @media (max-width: 1300px) {
           font-size: 16px;
           font-weight: 700;
@@ -5487,6 +5604,12 @@ div.page-bg {
 
         @media (max-width: 1300px) {
           display: block;
+
+          .content__inner {
+            ul {
+              gap: 24px;
+            }
+          }
         }
       }
     }
@@ -5538,7 +5661,9 @@ div.page-bg {
     padding-bottom: 0;
 
     .content__inner {
-
+       p.margin {
+         margin-bottom: 24px;
+       }
     }
 
     .content__title {
@@ -5556,7 +5681,7 @@ div.page-bg {
   display: grid;
   grid-template-columns: 435px minmax(0, 1fr);
   gap: 26px;
-  padding-bottom: 56px;
+  padding-bottom: 80px;
 
   @media (max-width: 1700px) {
     padding-bottom: 43px;
@@ -5577,8 +5702,12 @@ div.page-bg {
     .swiper-slide {
 
       .cards__item {
-        min-height: 743px;
+        min-height: 720px;
         background: c.$white;
+
+        @media (max-width: 450px) {
+          min-height: 685px;
+        }
       }
     }
   }
@@ -5799,6 +5928,10 @@ div.page-bg {
       @media (max-width: 1300px) {
         font-size: 22px;
       }
+
+      @media (max-width: 700px) {
+        margin-bottom: 20px;
+      }
     }
 
     &__address {
@@ -5976,6 +6109,12 @@ div.page-bg {
         margin-bottom: 20px;
       }
 
+    }
+
+    h2 {
+      @media (max-width: 700px) {
+        text-align: left;
+      }
     }
 
     &__container {
@@ -6444,6 +6583,12 @@ div.page-bg {
   }
   @media (max-width: 700px) {
     background: #EAEFF4;
+  }
+
+  h2 {
+    @media (max-width: 700px) {
+      text-align: left;
+    }
   }
 
     &__slider {
@@ -7415,21 +7560,21 @@ div.page-bg {
       position: absolute;
       top: 188px;
       left: 40px;
-    }
 
-    @media (max-width: 1700px) {
-      top: 210px;
-      left: 22px;
-    }
-    @media (max-width: 1300px) {
-      top: 133px;
-      left: 50px;
-    }
-    @media (max-width: 700px) {
-      top: 24.5px;
-      left: 18px;
-    }
+      @media (max-width: 1700px) {
+        top: 210px;
+        left: 22px;
+      }
+      @media (max-width: 1300px) {
+        top: 133px;
+        left: 50px;
+      }
+      @media (max-width: 700px) {
+        top: 51.5px;
+        left: 18px;
+      }
 
+    }
   }
 
   h1 {
