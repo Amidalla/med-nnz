@@ -83,9 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const overlay = document.querySelector('.overlay');
     const closeBtn = document.querySelector('.mobile-menu__close');
 
-
     if (!burgerBtn || !mobileMenu || !overlay) {
-        console.log('Не найдены необходимые элементы для мобильного меню');
         return;
     }
 
@@ -116,6 +114,9 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileMenu.classList.add('active');
         overlay.classList.add('active');
         isMobileMenuOpen = true;
+
+        if (mobileMenu) mobileMenu.style.zIndex = '';
+        if (overlay) overlay.style.zIndex = '';
     }
 
     function closeMobileMenu() {
@@ -124,8 +125,10 @@ document.addEventListener('DOMContentLoaded', function() {
         overlay.classList.remove('active');
         closeAllDropdowns();
         isMobileMenuOpen = false;
-    }
 
+        if (mobileMenu) mobileMenu.style.zIndex = '';
+        if (overlay) overlay.style.zIndex = '';
+    }
 
     burgerBtn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -147,6 +150,235 @@ document.addEventListener('DOMContentLoaded', function() {
         e.stopPropagation();
     });
 
-
     closeAllDropdowns();
+
+    const callModal = document.querySelector('.call-modal');
+    const callBtns = document.querySelectorAll('.call-btn');
+
+    if (callModal && callBtns.length > 0 && overlay) {
+        let isCallModalOpen = false;
+
+        function openCallModal() {
+            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+            document.body.style.overflow = 'hidden';
+            document.body.style.paddingRight = scrollbarWidth + 'px';
+
+            callModal.classList.add('opened');
+            overlay.classList.add('active');
+            isCallModalOpen = true;
+
+            if (isMobileMenuOpen && mobileMenu && callModal) {
+                mobileMenu.style.zIndex = '999';
+                overlay.style.zIndex = '1000';
+                callModal.style.zIndex = '1001';
+            }
+        }
+
+        function closeCallModal() {
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
+
+            callModal.classList.remove('opened');
+            overlay.classList.remove('active');
+            isCallModalOpen = false;
+
+            if (callModal) callModal.style.zIndex = '';
+            if (overlay) overlay.style.zIndex = '';
+            if (mobileMenu) mobileMenu.style.zIndex = '';
+        }
+
+        callBtns.forEach(callBtn => {
+            callBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openCallModal();
+            });
+        });
+
+        const callModalClose = callModal.querySelector('.call-modal__close');
+        if (callModalClose) {
+            callModalClose.addEventListener('click', closeCallModal);
+        }
+
+        overlay.addEventListener('click', (e) => {
+            if (isCallModalOpen) {
+                closeCallModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (isCallModalOpen && e.key === 'Escape') {
+                closeCallModal();
+            }
+        });
+
+        callModal.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
+
+    const offerModal = document.querySelector('.offer-modal');
+    const offerBtns = document.querySelectorAll('.offer-btn');
+
+    if (offerModal && offerBtns.length > 0 && overlay) {
+        let isOfferModalOpen = false;
+
+        function openOfferModal() {
+            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+            document.body.style.overflow = 'hidden';
+            document.body.style.paddingRight = scrollbarWidth + 'px';
+
+            offerModal.classList.add('opened');
+            overlay.classList.add('active');
+            isOfferModalOpen = true;
+        }
+
+        function closeOfferModal() {
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
+
+            offerModal.classList.remove('opened');
+            overlay.classList.remove('active');
+            isOfferModalOpen = false;
+        }
+
+        offerBtns.forEach(offerBtn => {
+            offerBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openOfferModal();
+            });
+        });
+
+        const offerModalClose = offerModal.querySelector('.offer-modal__close');
+        if (offerModalClose) {
+            offerModalClose.addEventListener('click', closeOfferModal);
+        }
+
+        overlay.addEventListener('click', (e) => {
+            if (isOfferModalOpen) {
+                closeOfferModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (isOfferModalOpen && e.key === 'Escape') {
+                closeOfferModal();
+            }
+        });
+
+        offerModal.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
+
+    const reviewModal = document.querySelector('.review-modal');
+    const reviewBtns = document.querySelectorAll('.reviews-btn, .reviews-detail-button');
+
+    if (reviewModal && reviewBtns.length > 0 && overlay) {
+        let isReviewModalOpen = false;
+
+        function openReviewModal() {
+            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+            document.body.style.overflow = 'hidden';
+            document.body.style.paddingRight = scrollbarWidth + 'px';
+
+            reviewModal.classList.add('opened');
+            overlay.classList.add('active');
+            isReviewModalOpen = true;
+        }
+
+        function closeReviewModal() {
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
+
+            reviewModal.classList.remove('opened');
+            overlay.classList.remove('active');
+            isReviewModalOpen = false;
+        }
+
+        reviewBtns.forEach(reviewBtn => {
+            reviewBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openReviewModal();
+            });
+        });
+
+        const reviewModalClose = reviewModal.querySelector('.review-modal__close');
+        if (reviewModalClose) {
+            reviewModalClose.addEventListener('click', closeReviewModal);
+        }
+
+        overlay.addEventListener('click', (e) => {
+            if (isReviewModalOpen) {
+                closeReviewModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (isReviewModalOpen && e.key === 'Escape') {
+                closeReviewModal();
+            }
+        });
+
+        reviewModal.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
+
+    const vacancyModal = document.querySelector('.vacancy-modal');
+    const vacancyBtns = document.querySelectorAll('.vacancy-btn');
+
+    if (vacancyModal && vacancyBtns.length > 0 && overlay) {
+        let isVacancyModalOpen = false;
+
+        function openVacancyModal() {
+            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+            document.body.style.overflow = 'hidden';
+            document.body.style.paddingRight = scrollbarWidth + 'px';
+
+            vacancyModal.classList.add('opened');
+            overlay.classList.add('active');
+            isVacancyModalOpen = true;
+        }
+
+        function closeVacancyModal() {
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
+
+            vacancyModal.classList.remove('opened');
+            overlay.classList.remove('active');
+            isVacancyModalOpen = false;
+        }
+
+        vacancyBtns.forEach(vacancyBtn => {
+            vacancyBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openVacancyModal();
+            });
+        });
+
+        const vacancyModalClose = vacancyModal.querySelector('.vacancy-modal__close');
+        if (vacancyModalClose) {
+            vacancyModalClose.addEventListener('click', closeVacancyModal);
+        }
+
+        overlay.addEventListener('click', (e) => {
+            if (isVacancyModalOpen) {
+                closeVacancyModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (isVacancyModalOpen && e.key === 'Escape') {
+                closeVacancyModal();
+            }
+        });
+
+        vacancyModal.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
 });
