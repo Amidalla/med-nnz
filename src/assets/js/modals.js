@@ -5,11 +5,6 @@ export function InitModals() {
     if (!modal || !btn) return;
 
     let isOpen = false;
-    let scrollbarWidth = 0;
-
-    function getScrollbarWidth() {
-        return window.innerWidth - document.documentElement.clientWidth;
-    }
 
     function toggleModal() {
         if (isOpen) {
@@ -20,11 +15,7 @@ export function InitModals() {
     }
 
     function openModal() {
-        scrollbarWidth = getScrollbarWidth();
-
         document.body.style.overflow = 'hidden';
-        document.body.style.paddingRight = scrollbarWidth + 'px';
-
         modal.classList.add('active');
         btn.classList.add('active');
         isOpen = true;
@@ -32,32 +23,14 @@ export function InitModals() {
 
     function closeModal() {
         document.body.style.overflow = '';
-        document.body.style.paddingRight = '';
-
         modal.classList.remove('active');
         btn.classList.remove('active');
         isOpen = false;
-
-        const activeItems = modal.querySelectorAll('.modal-catalog__item.active');
-        activeItems.forEach(item => {
-            item.classList.remove('active');
-        });
     }
 
     btn.addEventListener('click', (e) => {
         e.stopPropagation();
         toggleModal();
-    });
-
-    modal.addEventListener('click', (e) => {
-        const link = e.target.closest('.modal-catalog__link');
-        const subLink = e.target.closest('.modal-catalog__sub-link');
-
-        if (link && !subLink) {
-            e.preventDefault();
-            const item = link.parentElement;
-            item.classList.toggle('active');
-        }
     });
 
     document.addEventListener('click', (e) => {
@@ -159,11 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let isCallModalOpen = false;
 
         function openCallModal() {
-            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-
             document.body.style.overflow = 'hidden';
-            document.body.style.paddingRight = scrollbarWidth + 'px';
-
             callModal.classList.add('opened');
             overlay.classList.add('active');
             isCallModalOpen = true;
@@ -177,8 +146,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function closeCallModal() {
             document.body.style.overflow = '';
-            document.body.style.paddingRight = '';
-
             callModal.classList.remove('opened');
             overlay.classList.remove('active');
             isCallModalOpen = false;
@@ -224,11 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let isOfferModalOpen = false;
 
         function openOfferModal() {
-            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-
             document.body.style.overflow = 'hidden';
-            document.body.style.paddingRight = scrollbarWidth + 'px';
-
             offerModal.classList.add('opened');
             overlay.classList.add('active');
             isOfferModalOpen = true;
@@ -236,8 +199,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function closeOfferModal() {
             document.body.style.overflow = '';
-            document.body.style.paddingRight = '';
-
             offerModal.classList.remove('opened');
             overlay.classList.remove('active');
             isOfferModalOpen = false;
@@ -279,11 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let isReviewModalOpen = false;
 
         function openReviewModal() {
-            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-
             document.body.style.overflow = 'hidden';
-            document.body.style.paddingRight = scrollbarWidth + 'px';
-
             reviewModal.classList.add('opened');
             overlay.classList.add('active');
             isReviewModalOpen = true;
@@ -291,8 +248,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function closeReviewModal() {
             document.body.style.overflow = '';
-            document.body.style.paddingRight = '';
-
             reviewModal.classList.remove('opened');
             overlay.classList.remove('active');
             isReviewModalOpen = false;
@@ -334,11 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let isVacancyModalOpen = false;
 
         function openVacancyModal() {
-            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-
             document.body.style.overflow = 'hidden';
-            document.body.style.paddingRight = scrollbarWidth + 'px';
-
             vacancyModal.classList.add('opened');
             overlay.classList.add('active');
             isVacancyModalOpen = true;
@@ -346,8 +297,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function closeVacancyModal() {
             document.body.style.overflow = '';
-            document.body.style.paddingRight = '';
-
             vacancyModal.classList.remove('opened');
             overlay.classList.remove('active');
             isVacancyModalOpen = false;
@@ -378,6 +327,55 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         vacancyModal.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
+
+    const consultationModal = document.querySelector('.consultation-modal');
+    const consultationBtns = document.querySelectorAll('.consultation-btn');
+
+    if (consultationModal && consultationBtns.length > 0 && overlay) {
+        let isConsultationModalOpen = false;
+
+        function openConsultationModal() {
+            document.body.style.overflow = 'hidden';
+            consultationModal.classList.add('opened');
+            overlay.classList.add('active');
+            isConsultationModalOpen = true;
+        }
+
+        function closeConsultationModal() {
+            document.body.style.overflow = '';
+            consultationModal.classList.remove('opened');
+            overlay.classList.remove('active');
+            isConsultationModalOpen = false;
+        }
+
+        consultationBtns.forEach(consultationBtn => {
+            consultationBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openConsultationModal();
+            });
+        });
+
+        const consultationModalClose = consultationModal.querySelector('.consultation-modal__close');
+        if (consultationModalClose) {
+            consultationModalClose.addEventListener('click', closeConsultationModal);
+        }
+
+        overlay.addEventListener('click', (e) => {
+            if (isConsultationModalOpen) {
+                closeConsultationModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (isConsultationModalOpen && e.key === 'Escape') {
+                closeConsultationModal();
+            }
+        });
+
+        consultationModal.addEventListener('click', (e) => {
             e.stopPropagation();
         });
     }

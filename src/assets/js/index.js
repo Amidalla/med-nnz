@@ -10,7 +10,7 @@ import "../styles/animations.scss";
 import LazyLoad from "vanilla-lazyload";
 import Swiper from 'swiper';
 import 'swiper/swiper-bundle.css';
-import { Pagination, Navigation, Autoplay, Thumbs } from 'swiper/modules';
+import { Pagination, Navigation, Autoplay, Thumbs, EffectFade } from 'swiper/modules';
 import { SlidersInit } from "./sliders";
 import { InitModals } from "./modals";
 import { InitSelect } from "./select";
@@ -23,7 +23,7 @@ import { InitHeaderAnimation } from "./header-animation";
 import { InitScrollAnimations } from "./scrollAnimations";
 import IMask from 'imask';
 
-Swiper.use([Pagination, Navigation, Autoplay, Thumbs]);
+Swiper.use([Pagination, Navigation, Autoplay, Thumbs, EffectFade]);
 
 
 function initMobileSearch() {
@@ -231,4 +231,33 @@ document.addEventListener('DOMContentLoaded', function() {
             checkbox.checked = true;
         }
     });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const socialBlock = document.querySelector('.social');
+    const footerElement = document.querySelector('footer');
+
+    if (!socialBlock || !footerElement) return;
+
+    function handleScroll() {
+        const footerTop = footerElement.offsetTop;
+        const scrollPosition = window.pageYOffset + window.innerHeight;
+
+
+        const shouldHide = scrollPosition >= footerTop - 50;
+
+        if (shouldHide) {
+            socialBlock.style.opacity = '0';
+            socialBlock.style.visibility = 'hidden';
+            socialBlock.style.pointerEvents = 'none';
+        } else {
+            socialBlock.style.opacity = '1';
+            socialBlock.style.visibility = 'visible';
+            socialBlock.style.pointerEvents = 'auto';
+        }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+    handleScroll();
 });

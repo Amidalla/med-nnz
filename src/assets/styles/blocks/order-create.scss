@@ -21,6 +21,11 @@ $max-width: 836px;
         line-height: 120%;
         max-width: $max-width;
         margin-bottom: 30px;
+        transition: all 0.3s ease;
+
+        &:hover {
+            color: #e11a1a;
+        }
 
         &-red {
             @include red-button;
@@ -42,7 +47,7 @@ $max-width: 836px;
             border-radius: 5px;
             padding: 9px 15px;
             color: #6D6D6D;
-            font-size: 18px;
+            font-size: 16px;
             font-family: Roboto;
             line-height: 150%;
             letter-spacing: 0.02em;
@@ -82,6 +87,7 @@ $max-width: 836px;
         margin: 0;
         padding: 13px 40px;
         white-space: nowrap;
+        font-size: 16px;
     }
 }
 
@@ -99,12 +105,17 @@ $max-width: 836px;
 .order-create-succ {
     max-width: $max-width;
     
-    font-size: 24px;
+    font-size: 20px;
     display: flex;
     flex-direction: column;
     gap: 14px;
 
+    p:not(:first-child) {
+        font-size: 16px;
+    }
+
     .order-create__back-link-red {
         margin-top: 16px;
+        font-size: 16px;
     }
 }

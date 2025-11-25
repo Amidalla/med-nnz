@@ -34,7 +34,9 @@
                     <aside class="side-menu">
                         <ul class="side-menu__list">
                             <li class="side-menu__item">
-                                <a href="#" class="side-menu__link">Рентгенэндоваскулярная хирургия<span class="side-menu__arrow"></span></a>
+                                <div class="side-menu__link-wrapper">
+                                    <a href="#" class="side-menu__link">Рентгенэндоваскулярная хирургия</a><span class="side-menu__arrow"></span>
+                                </div>
                                 <ul class="side-menu__sublist">
                                     <li class="side-menu__subitem">
                                         <a href="#" class="side-menu__sublink">1</a>
@@ -48,7 +50,9 @@
                                 </ul>
                             </li>
                             <li class="side-menu__item">
-                                <a href="#" class="side-menu__link">Интенсивная терапия<span class="side-menu__arrow"></span></a>
+                                <div class="side-menu__link-wrapper">
+                                    <a href="#" class="side-menu__link">Интенсивная терапия</a><span class="side-menu__arrow"></span>
+                                </div>
                                 <ul class="side-menu__sublist">
                                     <li class="side-menu__subitem">
                                         <a href="#" class="side-menu__sublink">1</a>
@@ -62,7 +66,9 @@
                                 </ul>
                             </li>
                             <li class="side-menu__item">
-                                <a href="#" class="side-menu__link">Медицинская мебель<span class="side-menu__arrow"></span></a>
+                                <div class="side-menu__link-wrapper">
+                                    <a href="#" class="side-menu__link">Медицинская мебель</a><span class="side-menu__arrow"></span>
+                                </div>
                                 <ul class="side-menu__sublist">
                                     <li class="side-menu__subitem">
                                         <a href="#" class="side-menu__sublink">Каталка медицинская реанимационная для перевозки пациентов</a>
@@ -91,7 +97,25 @@
                                 </ul>
                             </li>
                             <li class="side-menu__item">
-                                <a href="#" class="side-menu__link">Диагностика<span class="side-menu__arrow"></span></a>
+                                <div class="side-menu__link-wrapper">
+                                    <a href="#" class="side-menu__link">Диагностика</a><span class="side-menu__arrow"></span>
+                                </div>
+                                <ul class="side-menu__sublist">
+                                    <li class="side-menu__subitem">
+                                        <a href="#" class="side-menu__sublink">1</a>
+                                    </li>
+                                    <li class="side-menu__subitem">
+                                        <a href="#" class="side-menu__sublink">2</a>
+                                    </li>
+                                    <li class="side-menu__subitem">
+                                        <a href="#" class="side-menu__sublink">3</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="side-menu__item active">
+                                <div class="side-menu__link-wrapper">
+                                    <a href="#" class="side-menu__link">Хирургия РАН</a><span class="side-menu__arrow"></span>
+                                </div>
                                 <ul class="side-menu__sublist">
                                     <li class="side-menu__subitem">
                                         <a href="#" class="side-menu__sublink">1</a>
@@ -105,7 +129,9 @@
                                 </ul>
                             </li>
                             <li class="side-menu__item">
-                                <a href="#" class="side-menu__link">Хирургия РАН<span class="side-menu__arrow"></span></a>
+                                <div class="side-menu__link-wrapper">
+                                    <a href="#" class="side-menu__link">Реабилитация и физиотерапия</a><span class="side-menu__arrow"></span>
+                                </div>
                                 <ul class="side-menu__sublist">
                                     <li class="side-menu__subitem">
                                         <a href="#" class="side-menu__sublink">1</a>
@@ -119,21 +145,9 @@
                                 </ul>
                             </li>
                             <li class="side-menu__item">
-                                <a href="#" class="side-menu__link">Реабилитация и физиотерапия<span class="side-menu__arrow"></span></a>
-                                <ul class="side-menu__sublist">
-                                    <li class="side-menu__subitem">
-                                        <a href="#" class="side-menu__sublink">1</a>
-                                    </li>
-                                    <li class="side-menu__subitem">
-                                        <a href="#" class="side-menu__sublink">2</a>
-                                    </li>
-                                    <li class="side-menu__subitem">
-                                        <a href="#" class="side-menu__sublink">3</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="side-menu__item">
-                                <a href="#" class="side-menu__link">Операционная<span class="side-menu__arrow"></span></a>
+                                <div class="side-menu__link-wrapper">
+                                    <a href="#" class="side-menu__link">Операционная</a><span class="side-menu__arrow"></span>
+                                </div>
                                 <ul class="side-menu__sublist">
                                     <li class="side-menu__subitem">
                                         <a href="#" class="side-menu__sublink">1</a>
@@ -310,6 +324,23 @@
         </div>
     </section>
     <include src="layout/main-form.html"></include>
+    <ul class="social">
+        <li class="social__item">
+            <a href="#" class="social__link">
+                <include src="assets/svg/whatsapp.html"></include>
+            </a>
+        </li>
+        <li class="social__item">
+            <a href="#" class="social__link">
+                <include src="assets/svg/telegram.html"></include>
+            </a>
+        </li>
+        <li class="social__item">
+            <a href="#" class="social__link">
+                <include src="assets/svg/email.html"></include>
+            </a>
+        </li>
+    </ul>
 </main>
 <include src="layout/footer.html"></include>
 <include src="layout/modals.html"></include>

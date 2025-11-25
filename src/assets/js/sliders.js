@@ -11,6 +11,7 @@ export function SlidersInit() {
     let newsDetailSlider;
     let scheduleSlider;
     let productsSaleSlider;
+    let mainPictureSlider;
 
     function initCustomProgressBar(swiper, sliderType = 'partners') {
         if (sliderType === 'excellence') return;
@@ -135,6 +136,86 @@ export function SlidersInit() {
                     }
                 }
             }
+        });
+    }
+
+    function initMainPictureSlider() {
+        const sliderElement = document.querySelector(".main-picture__slider");
+        if (!sliderElement) return;
+
+        mainPictureSlider = new Swiper(".main-picture__slider", {
+            autoplay: false,
+            speed: 1000,
+            slidesPerView: 1,
+            spaceBetween: 0,
+            loop: false,
+            pagination: {
+                el: '.main-picture__pagination',
+                clickable: true
+            },
+            on: {
+                init: function () {
+                    initMainPictureVideo();
+                },
+                slideChange: function () {
+                    const activeSlide = this.slides[this.activeIndex];
+                    const video = activeSlide.querySelector('.video-media');
+                    const poster = activeSlide.querySelector('.video-poster');
+                    const playBtn = activeSlide.querySelector('.main-video-btn');
+
+                    if (video) {
+                        video.pause();
+                        video.currentTime = 0;
+                        if (poster) poster.style.display = 'block';
+                        if (playBtn) playBtn.style.display = 'flex';
+                    }
+                }
+            }
+        });
+    }
+
+    function initMainPictureVideo() {
+        const videoSlides = document.querySelectorAll('.main-picture__slider .video-slide');
+
+        videoSlides.forEach(slide => {
+            const video = slide.querySelector('.video-media');
+            const playBtn = slide.querySelector('.main-video-btn');
+
+            if (!video || !playBtn) return;
+
+            // Видео всегда видно
+            playBtn.style.display = 'flex';
+
+            playBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+
+                playBtn.style.display = 'none';
+                video.play().then(() => {
+                }).catch(error => {
+                    console.error('Ошибка воспроизведения видео:', error);
+                    playBtn.style.display = 'flex';
+                });
+            });
+
+            video.addEventListener('ended', function() {
+                playBtn.style.display = 'flex';
+                video.currentTime = 0;
+            });
+
+            video.addEventListener('pause', function() {
+                playBtn.style.display = 'flex';
+            });
+
+            video.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (this.paused) {
+                    this.play();
+                    playBtn.style.display = 'none';
+                } else {
+                    this.pause();
+                    playBtn.style.display = 'flex';
+                }
+            });
         });
     }
 
@@ -354,6 +435,10 @@ export function SlidersInit() {
             speed: 1000,
             slidesPerView: 1,
             spaceBetween: 0,
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            },
             navigation: {
                 nextEl: '.excellence-slider__controls .swiper-button-next',
                 prevEl: '.excellence-slider__controls .swiper-button-prev'
@@ -384,19 +469,67 @@ export function SlidersInit() {
     function initProductCardSlider() {
         const thumbnailSwiper = new Swiper(".product-card__slider .thumbnail-swiper", {
             spaceBetween: 10,
-            slidesPerView: 4,
+            slidesPerView: 'auto',
             freeMode: true,
             watchSlidesProgress: true,
+            resistance: false,
+            watchOverflow: false,
+            simulateTouch: true,
+            grabCursor: true,
             navigation: {
                 nextEl: '.product-card__slider .thumbnail-swiper .swiper-button-next',
                 prevEl: '.product-card__slider .thumbnail-swiper .swiper-button-prev',
+                disabledClass: 'swiper-button-disabled',
             },
             breakpoints: {
-                0: { slidesPerView: 3, spaceBetween: 8 },
-                768: { slidesPerView: 4, spaceBetween: 10 },
-                1024: { slidesPerView: 5, spaceBetween: 25 }
+                0: {
+                    slidesPerView: 'auto',
+                    spaceBetween: 8
+                },
+                768: {
+                    slidesPerView: 'auto',
+                    spaceBetween: 10
+                },
+                1024: {
+                    slidesPerView: 'auto',
+                    spaceBetween: 25
+                }
             }
         });
+
+        const updateThumbnailNavigation = () => {
+            if (!thumbnailSwiper.navigation.nextEl || !thumbnailSwiper.navigation.prevEl) return;
+
+            thumbnailSwiper.navigation.nextEl.classList.remove('swiper-button-lock');
+            thumbnailSwiper.navigation.prevEl.classList.remove('swiper-button-lock');
+
+            const isBeginning = thumbnailSwiper.isBeginning;
+            const isEnd = thumbnailSwiper.isEnd;
+
+            thumbnailSwiper.navigation.prevEl.classList.toggle('swiper-button-disabled', isBeginning);
+            thumbnailSwiper.navigation.nextEl.classList.toggle('swiper-button-disabled', isEnd);
+        };
+
+        const originalIsEnd = thumbnailSwiper.isEnd;
+        thumbnailSwiper.isEnd = function() {
+            if (this.slides.length <= this.params.slidesPerView) {
+                return true;
+            }
+            return originalIsEnd.call(this);
+        };
+
+        thumbnailSwiper.on('init', updateThumbnailNavigation);
+        thumbnailSwiper.on('slideChange', updateThumbnailNavigation);
+        thumbnailSwiper.on('transitionEnd', updateThumbnailNavigation);
+        thumbnailSwiper.on('fromEdge', updateThumbnailNavigation);
+        thumbnailSwiper.on('resize', function() {
+            setTimeout(updateThumbnailNavigation, 50);
+        });
+
+        setTimeout(() => {
+            thumbnailSwiper.update();
+            updateThumbnailNavigation();
+        }, 300);
 
         productCardSlider = new Swiper(".product-card__slider .main-swiper", {
             speed: 300,
@@ -463,7 +596,6 @@ export function SlidersInit() {
     }
 
     function initNewsDetailSlider() {
-
         const thumbnailSwiper = new Swiper(".video-slider .thumbnail-swiper", {
             spaceBetween: 10,
             slidesPerView: 4,
@@ -479,7 +611,6 @@ export function SlidersInit() {
                 1024: { slidesPerView: 5, spaceBetween: 25 }
             }
         });
-
 
         newsDetailSlider = new Swiper(".video-slider .main-swiper", {
             speed: 300,
@@ -503,7 +634,6 @@ export function SlidersInit() {
             },
             on: {
                 init: function () {
-
                     const lazyImages = this.el.querySelectorAll('.lazy');
                     lazyImages.forEach(img => {
                         if (img.dataset.src) {
@@ -512,12 +642,8 @@ export function SlidersInit() {
                         }
                     });
 
-
                     initVideoPlayButtons();
-
-
                     initVideoSliderThumbnails();
-
 
                     this.on('slideChange', function() {
                         pauseAllVideos();
@@ -534,144 +660,144 @@ export function SlidersInit() {
             }
         });
 
-
         function initVideoPlayButtons() {
             const mainVideoButtons = document.querySelectorAll('.video-slider .main-video-btn');
             const thumbnailVideoButtons = document.querySelectorAll('.video-slider .thumbnail-video-btn');
             const videos = document.querySelectorAll('.video-slider .video-media');
             const videoPosters = document.querySelectorAll('.video-slider .video-poster');
 
+            if (mainVideoButtons.length === 0 && thumbnailVideoButtons.length === 0) return;
 
             videos.forEach(video => {
-                video.style.display = 'none';
-                video.controls = true;
-                video.preload = 'metadata';
+                if (video) {
+                    video.style.display = 'none';
+                    video.controls = true;
+                    video.preload = 'metadata';
+                }
             });
-
 
             mainVideoButtons.forEach((button, index) => {
-                button.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const video = videos[index];
-                    const poster = videoPosters[index];
+                if (button) {
+                    button.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const video = videos[index];
+                        const poster = videoPosters[index];
 
-                    if (video && typeof video.play === 'function') {
+                        if (video && typeof video.play === 'function') {
+                            if (poster) poster.style.display = 'none';
+                            video.style.display = 'block';
+                            button.style.display = 'none';
 
-                        if (poster) poster.style.display = 'none';
-                        video.style.display = 'block';
-                        button.style.display = 'none';
-
-                        video.play().then(() => {
-
-                        }).catch(error => {
-                            console.error('Error playing video:', error);
-                        });
-                    }
-                });
+                            video.play().then(() => {
+                            }).catch(error => {
+                                console.error('Error playing video:', error);
+                            });
+                        }
+                    });
+                }
             });
-
 
             thumbnailVideoButtons.forEach((button, index) => {
-                button.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    if (newsDetailSlider && typeof newsDetailSlider.slideTo === 'function') {
-                        newsDetailSlider.slideTo(index);
-
-                    }
-                });
+                if (button) {
+                    button.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        if (newsDetailSlider && typeof newsDetailSlider.slideTo === 'function') {
+                            newsDetailSlider.slideTo(index);
+                        }
+                    });
+                }
             });
-
 
             videos.forEach((video, index) => {
+                if (video) {
+                    video.addEventListener('pause', function() {
+                    });
 
-                video.addEventListener('pause', function() {
+                    video.addEventListener('ended', function() {
+                        const mainButton = mainVideoButtons[index];
+                        const poster = videoPosters[index];
 
-                });
+                        this.style.display = 'none';
+                        if (poster) poster.style.display = 'block';
+                        if (mainButton) mainButton.style.display = 'flex';
+                    });
 
-
-                video.addEventListener('ended', function() {
-                    const mainButton = mainVideoButtons[index];
-                    const poster = videoPosters[index];
-
-                    this.style.display = 'none';
-                    if (poster) poster.style.display = 'block';
-                    if (mainButton) mainButton.style.display = 'flex';
-                });
-
-
-                video.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    if (this.paused) {
-                        this.play();
-                    } else {
-                        this.pause();
-                    }
-                });
+                    video.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        if (this.paused) {
+                            this.play();
+                        } else {
+                            this.pause();
+                        }
+                    });
+                }
             });
         }
-
 
         function resetAllVideos() {
             const videos = document.querySelectorAll('.video-slider .video-media');
             const videoPosters = document.querySelectorAll('.video-slider .video-poster');
             const mainVideoButtons = document.querySelectorAll('.video-slider .main-video-btn');
 
+            if (videos.length === 0) return;
+
             videos.forEach((video, index) => {
+                if (video) {
+                    video.pause();
+                    video.currentTime = 0;
+                    video.style.display = 'none';
 
-                video.pause();
-                video.currentTime = 0;
-                video.style.display = 'none';
+                    const poster = videoPosters[index];
+                    const button = mainVideoButtons[index];
 
-
-                const poster = videoPosters[index];
-                const button = mainVideoButtons[index];
-
-                if (poster) poster.style.display = 'block';
-                if (button) button.style.display = 'flex';
+                    if (poster) poster.style.display = 'block';
+                    if (button) button.style.display = 'flex';
+                }
             });
         }
-
 
         function hideAllVideoButtons() {
             const mainVideoButtons = document.querySelectorAll('.video-slider .main-video-btn');
             const videos = document.querySelectorAll('.video-slider .video-media');
             const videoPosters = document.querySelectorAll('.video-slider .video-poster');
 
+            if (mainVideoButtons.length === 0) return;
 
             mainVideoButtons.forEach(button => {
-                button.style.display = 'flex';
+                if (button) button.style.display = 'flex';
             });
-
 
             videos.forEach((video, index) => {
-                video.pause();
-                video.currentTime = 0;
-                video.style.display = 'none';
+                if (video) {
+                    video.pause();
+                    video.currentTime = 0;
+                    video.style.display = 'none';
 
-                const poster = videoPosters[index];
-                if (poster) poster.style.display = 'block';
-            });
-        }
-
-
-        function initVideoSliderThumbnails() {
-            const thumbnailSlides = document.querySelectorAll('.video-slider .thumbnail-slide');
-
-            thumbnailSlides.forEach((slide, index) => {
-
-                slide.addEventListener('click', function() {
-                    if (newsDetailSlider && typeof newsDetailSlider.slideTo === 'function') {
-                        newsDetailSlider.slideTo(index);
-                    }
-                });
-
-
-                if (newsDetailSlider && index === newsDetailSlider.activeIndex) {
-                    slide.classList.add('thumbnail-active');
+                    const poster = videoPosters[index];
+                    if (poster) poster.style.display = 'block';
                 }
             });
         }
 
+        function initVideoSliderThumbnails() {
+            const thumbnailSlides = document.querySelectorAll('.video-slider .thumbnail-slide');
+
+            if (thumbnailSlides.length === 0) return;
+
+            thumbnailSlides.forEach((slide, index) => {
+                if (slide) {
+                    slide.addEventListener('click', function() {
+                        if (newsDetailSlider && typeof newsDetailSlider.slideTo === 'function') {
+                            newsDetailSlider.slideTo(index);
+                        }
+                    });
+
+                    if (newsDetailSlider && index === newsDetailSlider.activeIndex) {
+                        slide.classList.add('thumbnail-active');
+                    }
+                }
+            });
+        }
 
         function updateActiveThumbnail() {
             if (!newsDetailSlider) return;
@@ -684,7 +810,6 @@ export function SlidersInit() {
                 thumbnailSlides[newsDetailSlider.activeIndex].classList.add('thumbnail-active');
             }
         }
-
 
         function pauseAllVideos() {
             const videos = document.querySelectorAll('.video-slider .video-media');
@@ -710,6 +835,10 @@ export function SlidersInit() {
     }
 
     function initAllSliders() {
+        if (document.querySelector(".main-picture__slider")) {
+            initMainPictureSlider();
+        }
+
         if (document.querySelector(".partners-slider")) {
             initPartnersSlider();
         }

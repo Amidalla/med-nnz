@@ -91,7 +91,7 @@
     &__link {
         color: #333333;
         transition: all 0.3s ease;
-        font-size: 22px;
+        font-size: 20px;
         line-height: 130%;
 
         &:hover {
@@ -102,9 +102,11 @@
     &__img {
         position: relative;
         max-width: 241px;
+        width: 241px;
 
         @media (max-width: 660px) {
             max-width: none;
+            width: auto;
             
             img {
                 max-height: 295px;
@@ -113,10 +115,10 @@
     }
 
     &__info {
-        max-width: 400px;
+       width: 400px;
 
         @media (max-width: 660px) {
-            max-width: none;
+            width: auto;
         }
     }
 
@@ -139,9 +141,13 @@
 
     &__price {
         font-weight: 500;
-        font-size: 30px;
+        font-size: 26px;
         color: #000;
         text-align: center;
+
+        @media (max-width: 660px) {
+            font-size: 22px;
+        }
     }
 
     &__del {
@@ -188,10 +194,11 @@
     &__btn {
         @include red-button;
         width: 100%;
+        font-size: 16px;
     }
     
     &__title {
-        font-size: 20px;
+        font-size: 18px;
         color: #0F1019;
         font-weight: bold;
     }

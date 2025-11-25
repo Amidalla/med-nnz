@@ -45,6 +45,7 @@
   padding: 24px 15px 24px 15px;
   border-radius: 10px;
 
+
     &__arrow {
       display: inline-block;
       width: 0;
@@ -69,6 +70,18 @@
 
 
 .filter-variants {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &__item {
+      position: relative;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &__content {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
     &__toggle {
       font-size: 20px;
@@ -121,9 +134,10 @@
         transition: border-color 0.2s ease;
       }
     }
-  }}
+  }
+}
 
-.collapsed {}
+
 
 
 .load-inputs {

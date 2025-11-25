@@ -221,9 +221,6 @@
                                         <div class="swiper-slide thumbnail-slide">
                                             <img class="lazy" data-src="assets/images/min-slide1.jpg" alt="">
                                         </div>
-                                        <div class="swiper-slide thumbnail-slide">
-                                            <img class="lazy" data-src="assets/images/min-slide1.jpg" alt="">
-                                        </div>
                                     </div>
                                     <div class="swiper-button-next"><include src="assets/svg/slider-arrow.html"></include></div>
                                     <div class="swiper-button-prev"><include src="assets/svg/slider-arrow.html"></include></div>
@@ -232,7 +229,7 @@
                             <div class="product-card__mobile">
                                 <div>
                                     <div class="product-card__logo">
-                                        <include src="assets/svg/logo.html"></include>
+                                        <img class="lazy" data-src="assets/images/logo.svg" alt="">
                                         <div class="product-card__article">
                                             <span>Россия</span>
                                             <span><span>КВМИ:</span> 100010</span>
@@ -295,7 +292,37 @@
                                     <span>скидка</span>
                                 </div>
                             </div>
-
+                            <div class="product-card__table">
+                                <div class="product__name">Тележка-каталка для перевозки пациентов</div>
+                                <div class="specs-table">
+                                    <div class="specs-row">
+                                        <span class="specs-label">Полностью рентгенопрозрачное ложе</span>
+                                        <span class="specs-dots"></span>
+                                        <span class="specs-value"> 4-секции</span>
+                                    </div>
+                                    <div class="specs-row">
+                                        <span class="specs-label">Держатель для рентген-кассеты под спинной секцией</span>
+                                        <span class="specs-dots"></span>
+                                        <span class="specs-value">1 шт</span>
+                                    </div>
+                                    <div class="specs-row">
+                                        <span class="specs-label">Тормозная система</span>
+                                        <span class="specs-dots"></span>
+                                        <span class="specs-value">Центральная</span>
+                                    </div>
+                                    <div class="specs-row">
+                                        <span class="specs-label">Направляющее колесо</span>
+                                        <span class="specs-dots"></span>
+                                        <span class="specs-value">Пятое</span>
+                                    </div>
+                                    <div class="specs-row">
+                                        <span class="specs-label">Гидравлика</span>
+                                        <span class="specs-dots"></span>
+                                        <span class="specs-value">США</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="characteristics-link">Все характеристики</a>
+                            </div>
                             <div class="product-card__btn">
                                 <p>Цена по запросу</p>
                                 <div>
@@ -317,7 +344,7 @@
                         <div class="tabs">
                             <div class="tabs__header">
                                 <button class="tab__btn" data-tab="description">Описание</button>
-                                <button class="tab__btn active" data-tab="characteristics">Технические характеристики</button>
+                                <button class="tab__btn" data-tab="characteristics">Технические характеристики</button>
                                 <button class="tab__btn" data-tab="brochure">Брошюры</button>
                                 <button class="tab__btn" data-tab="video">Видео</button>
                                 <button class="tab__btn" data-tab="service">Сервис</button>
@@ -483,25 +510,6 @@
                 </div>
             </div>
         </div>
-        <div class="product-card__container">
-            <ul class="social">
-                <li class="social__item">
-                    <a href="#" class="social__link">
-                        <include src="assets/svg/whatsapp.html"></include>
-                    </a>
-                </li>
-                <li class="social__item">
-                    <a href="#" class="social__link">
-                        <include src="assets/svg/telegram.html"></include>
-                    </a>
-                </li>
-                <li class="social__item">
-                    <a href="#" class="social__link">
-                        <include src="assets/svg/email.html"></include>
-                    </a>
-                </li>
-            </ul>
-        </div>
     </section>
     <section class="recommended">
         <div class="container">
@@ -510,6 +518,23 @@
         </div>
     </section>
     <include src="layout/main-form.html"></include>
+    <ul class="social">
+        <li class="social__item">
+            <a href="#" class="social__link">
+                <include src="assets/svg/whatsapp.html"></include>
+            </a>
+        </li>
+        <li class="social__item">
+            <a href="#" class="social__link">
+                <include src="assets/svg/telegram.html"></include>
+            </a>
+        </li>
+        <li class="social__item">
+            <a href="#" class="social__link">
+                <include src="assets/svg/email.html"></include>
+            </a>
+        </li>
+    </ul>
 </main>
 <include src="layout/footer.html"></include>
 <include src="layout/modals.html"></include>

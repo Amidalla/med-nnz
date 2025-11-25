@@ -5,38 +5,35 @@
 <include src="layout/header.html"></include>
 <main>
     <section class="main-picture">
-        <picture>
-            <source media="(max-width: 450px)" data-srcset="assets/images/main-picture4.jpg">
-            <source media="(max-width: 768px)" data-srcset="assets/images/main-picture3.jpg">
-            <source media="(max-width: 1360px)" data-srcset="assets/images/main-picture2.jpg">
-            <img class="lazy" data-src="assets/images/main-picture.jpg" alt="">
-        </picture>
-        <div class="header_hidden_left absolute">
-            <div class="tn-atom">
-                <h1>
-                    <span>Альфа Мобили</span>
-                    <span>ПРОЕКТНЫЕ МЕДИЦИНСКИЕ</span>
-                    <span>РЕШЕНИЯ</span>
-                </h1>
+        <div class="main-picture__slider swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide image-slide">
+                    <picture>
+                        <source media="(max-width: 450px)" srcset="assets/images/main-picture4.jpg">
+                        <source media="(max-width: 768px)" srcset="assets/images/main-picture3.jpg">
+                        <source media="(max-width: 1360px)" srcset="assets/images/main-picture2.jpg">
+                        <img class="slide-image lazy" data-src="assets/images/main-picture.jpg" alt="Медицинское оборудование">
+                    </picture>
+                    <div class="header_hidden_left absolute">
+                        <div class="tn-atom">
+                            <h1>
+                                <span>Альфа Мобили</span>
+                                <span>ПРОЕКТНЫЕ МЕДИЦИНСКИЕ</span>
+                                <span>РЕШЕНИЯ</span>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide video-slide">
+                    <video class="video-media">
+                        <source src="assets/video/main-video.webm" type="video/webm">
+                    </video>
+                    <div class="main-video-btn"><include src="assets/svg/video-btn.html"></include></div>
+                </div>
             </div>
         </div>
-        <ul class="social">
-            <li class="social__item">
-                <a href="#" class="social__link">
-                    <include src="assets/svg/whatsapp.html"></include>
-                </a>
-            </li>
-            <li class="social__item">
-                <a href="#" class="social__link">
-                    <include src="assets/svg/telegram.html"></include>
-                </a>
-            </li>
-            <li class="social__item">
-                <a href="#" class="social__link">
-                    <include src="assets/svg/email.html"></include>
-                </a>
-            </li>
-        </ul>
+        <div class="main-picture__pagination"></div>
     </section>
     <section class="equipment">
         <div class="container">
@@ -212,37 +209,6 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
-                    <div class="marking__wrapper item-left marking-animate">
-                        <div class="marking-img">
-                            <picture>
-                                <source media="(max-width: 1300px)" data-srcset="assets/images/marking21.jpg">
-                                <source media="(max-width: 1366px)" data-srcset="assets/images/marking20.jpg">
-                                <img class="lazy" data-src="assets/images/marking7.jpg" alt="">
-                            </picture>
-                        </div>
-                        <div class="marking__info">
-                            <h3><a href="#" class="marking__link">Операционная</a></h3>
-                            <ul class="marking__list">
-                                <li class="marking__item">
-                                    <a href="#" class="marking__link">Коронарная ангиопластика</a>
-                                </li>
-                                <li class="marking__item">
-                                    <a href="#" class="marking__link">Операционные столы</a>
-                                    <span class="interior-new">Новинка</span>
-                                </li>
-                                <li class="marking__item">
-                                    <a href="#" class="marking__link">Светильники</a>
-                                </li>
-                                <li class="marking__item">
-                                    <a href="#" class="marking__link">Стерилизаторы</a>
-                                </li>
-                                <li class="marking__item">
-                                    <a href="#" class="marking__link">Хирургический инструмент</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="new">Новинка</div>
                     </div>
                 </div>
             </div>
@@ -626,6 +592,23 @@
             </form>
         </div>
     </section>
+    <ul class="social">
+        <li class="social__item">
+            <a href="#" class="social__link">
+                <include src="assets/svg/whatsapp.html"></include>
+            </a>
+        </li>
+        <li class="social__item">
+            <a href="#" class="social__link">
+                <include src="assets/svg/telegram.html"></include>
+            </a>
+        </li>
+        <li class="social__item">
+            <a href="#" class="social__link">
+                <include src="assets/svg/email.html"></include>
+            </a>
+        </li>
+    </ul>
 </main>
 <include src="layout/footer.html"></include>
 <include src="layout/modals.html"></include>
