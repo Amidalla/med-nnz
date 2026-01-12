@@ -211,6 +211,17 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
+        // Добавляем обработчики для кнопок request-offer
+        const requestOfferBtns = document.querySelectorAll('.request-offer');
+        if (requestOfferBtns.length > 0) {
+            requestOfferBtns.forEach(requestOfferBtn => {
+                requestOfferBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openOfferModal();
+                });
+            });
+        }
+
         const offerModalClose = offerModal.querySelector('.offer-modal__close');
         if (offerModalClose) {
             offerModalClose.addEventListener('click', closeOfferModal);

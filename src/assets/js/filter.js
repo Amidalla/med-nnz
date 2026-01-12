@@ -1,117 +1,77 @@
 export function InitFilter() {
     function initFilterAccordion() {
-        const filterItems = document.querySelectorAll('.filter-variants__item');
+        const filterContainers = document.querySelectorAll('.filter-variants');
 
-        function closeAllFilterItems() {
-            const allContents = document.querySelectorAll('.filter-variants__content');
-            const allArrows = document.querySelectorAll('.filter__arrow');
-            const allItems = document.querySelectorAll('.filter-variants__item');
+        filterContainers.forEach(container => {
+            const filterItems = container.querySelectorAll('.filter-variants__item');
 
-            allContents.forEach(content => {
-                content.style.maxHeight = '0';
-                content.style.overflow = 'hidden';
-            });
+            filterItems.forEach(item => {
+                const header = item.querySelector('.filter-variants__header');
+                const content = item.querySelector('.filter-variants__content');
+                const arrow = item.querySelector('.filter__arrow');
 
-            allArrows.forEach(arrow => {
-                arrow.style.transform = 'rotate(0deg)';
-            });
+                if (!header || !content) return;
 
-            allItems.forEach(item => {
-                item.classList.remove('filter-variants__item--open');
-            });
-        }
 
-        function toggleFilterItem(item, content, arrow) {
-            const isOpen = item.classList.contains('filter-variants__item--open');
-            const allItems = Array.from(document.querySelectorAll('.filter-variants__item'));
-            const currentIndex = allItems.indexOf(item);
+                content.style.cssText = '';
 
-            // Закрываем все элементы
-            closeAllFilterItems();
-
-            if (!isOpen) {
-                // ВКЛЮЧАЕМ открытие БЕЗ анимации сдвига для следующих элементов
-                allItems.forEach((otherItem, index) => {
-                    if (index > currentIndex) {
-                        otherItem.style.transition = 'none'; // Отключаем анимацию
-                    }
-                });
-
-                // Открываем текущий элемент
-                item.classList.add('filter-variants__item--open');
-                const scrollHeight = content.scrollHeight;
-                content.style.maxHeight = scrollHeight + 'px';
-                arrow.style.transform = 'rotate(180deg)';
-
-                // Восстанавливаем анимацию после завершения открытия
-                setTimeout(() => {
-                    allItems.forEach((otherItem, index) => {
-                        if (index > currentIndex) {
-                            otherItem.style.transition = ''; // Восстанавливаем анимацию
-                        }
-                    });
-                }, 400);
-            }
-        }
-
-        // Инициализация состояний
-        filterItems.forEach(item => {
-            const content = item.querySelector('.filter-variants__content');
-            const arrow = item.querySelector('.filter__arrow');
-
-            if (content) {
-                // Если элемент имеет класс --open, оставляем его открытым
-                if (item.classList.contains('filter-variants__item--open')) {
-                    const scrollHeight = content.scrollHeight;
-                    content.style.maxHeight = scrollHeight + 'px';
-                    content.style.overflow = 'visible';
-                    if (arrow) {
-                        arrow.style.transform = 'rotate(180deg)';
-                    }
-                } else {
-                    // Для остальных элементов закрываем
-                    content.style.maxHeight = '0';
-                    content.style.overflow = 'hidden';
-                    if (arrow) {
-                        arrow.style.transform = 'rotate(0deg)';
-                    }
-                }
 
                 content.style.transition = 'max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
-            }
-        });
 
-        // Добавляем обработчики кликов
-        filterItems.forEach(item => {
-            const header = item.querySelector('.filter-variants__header');
-            const content = item.querySelector('.filter-variants__content');
-            const arrow = item.querySelector('.filter__arrow');
 
-            if (header && content && arrow) {
+                item.classList.remove('collapsed');
+
+                item.classList.add('filter-variants__item--open');
+
+
+                content.style.maxHeight = content.scrollHeight + 'px';
+                content.style.overflow = 'visible';
+
+                if (arrow) {
+                    arrow.style.transform = 'rotate(180deg)';
+                }
+
                 header.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
-                    toggleFilterItem(item, content, arrow);
-                });
-            }
-        });
 
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.filter-variants')) {
-                closeAllFilterItems();
-            }
+                    // Переключаем класс collapsed
+                    item.classList.toggle('collapsed');
+
+                    if (item.classList.contains('collapsed')) {
+                        // Закрываем
+                        content.style.maxHeight = '0';
+                        content.style.overflow = 'hidden';
+                        if (arrow) {
+                            arrow.style.transform = 'rotate(0deg)';
+                        }
+                    } else {
+                        // Открываем
+                        const scrollHeight = content.scrollHeight;
+                        content.style.maxHeight = scrollHeight + 'px';
+                        setTimeout(() => {
+                            content.style.overflow = 'visible';
+                        }, 400);
+                        if (arrow) {
+                            arrow.style.transform = 'rotate(180deg)';
+                        }
+                    }
+                });
+            });
         });
 
         window.addEventListener('resize', function() {
-            const openContents = document.querySelectorAll('.filter-variants__content[style*="max-height"]');
-            openContents.forEach(content => {
-                if (content.style.maxHeight !== '0px') {
-                    const scrollHeight = content.scrollHeight;
-                    content.style.maxHeight = scrollHeight + 'px';
-                }
+            document.querySelectorAll('.filter-variants__item:not(.collapsed) .filter-variants__content').forEach(content => {
+                content.style.maxHeight = content.scrollHeight + 'px';
             });
         });
     }
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        initFilterAccordion();
+    });
+
 
     function initLoadSlider() {
         const container = document.querySelector('.load-sliders');
@@ -130,76 +90,158 @@ export function InitFilter() {
             return;
         }
 
-        console.log('Initializing load slider...');
-
         const rangeFill = document.createElement('div');
         rangeFill.style.position = 'absolute';
         rangeFill.style.top = '50%';
         rangeFill.style.height = '5px';
-        rangeFill.style.background = '#FF0000';
+        rangeFill.style.background = '#FF0000'; // Сохраняем оригинальный цвет
         rangeFill.style.transform = 'translateY(-50%)';
         rangeFill.style.borderRadius = '100px';
         rangeFill.style.zIndex = '1';
         container.appendChild(rangeFill);
 
+        let minVal = parseInt(minSlider.value);
+        let maxVal = parseInt(maxSlider.value);
+
+        const minAvailableValue = minInput.getAttribute('min')
+        const maxAvailableValue = minInput.getAttribute('max')
+
+        let isMinInputActive = false;
+        let isMaxInputActive = false;
+
         function updateRangeFill() {
             const min = parseInt(minSlider.value);
             const max = parseInt(maxSlider.value);
-            const totalRange = 999 - 10;
-            const minPercent = ((min - 10) / totalRange) * 100;
-            const maxPercent = ((max - 10) / totalRange) * 100;
+            const totalRange = maxAvailableValue - minAvailableValue;
+            const minPercent = ((min - minAvailableValue) / totalRange) * 100;
+            const maxPercent = ((max - minAvailableValue) / totalRange) * 100;
 
             rangeFill.style.left = minPercent + '%';
             rangeFill.style.width = (maxPercent - minPercent) + '%';
         }
 
-        function updateInputs() {
-            minInput.value = minSlider.value;
-            maxInput.value = maxSlider.value;
-            updateRangeFill();
-        }
-
-        function updateSliders() {
-            let minVal = parseInt(minInput.value) || 10;
-            let maxVal = parseInt(maxInput.value) || 999;
-
-            minVal = Math.max(10, Math.min(999, minVal));
-            maxVal = Math.max(10, Math.min(999, maxVal));
+        const updateFromSliders = () => {
+            minVal = parseInt(minSlider.value);
+            maxVal = parseInt(maxSlider.value);
 
             if (minVal > maxVal) {
-                if (minInput === document.activeElement) {
-                    maxVal = minVal;
-                    maxInput.value = maxVal;
-                } else {
-                    minVal = maxVal;
-                    minInput.value = minVal;
-                }
+                minVal = maxVal;
+                minSlider.value = minVal;
             }
 
-            minSlider.value = minVal;
-            maxSlider.value = maxVal;
-            updateRangeFill();
-        }
+            if (!isMinInputActive) minInput.value = minVal;
+            if (!isMaxInputActive) maxInput.value = maxVal;
 
+            updateRangeFill();
+        };
+
+        const updateSingleInput = (input, value, type) => {
+            const numValue = parseInt(value);
+            if (isNaN(numValue)) return false;
+
+            const minLimit = minAvailableValue;
+            const maxLimit = maxAvailableValue;
+
+            let finalValue = numValue;
+            if (finalValue < minLimit) finalValue = minLimit;
+            if (finalValue > maxLimit) finalValue = maxLimit;
+
+            input.value = finalValue;
+
+            if (type === 'min') {
+                minVal = finalValue;
+                minSlider.value = finalValue;
+            } else {
+                maxVal = finalValue;
+                maxSlider.value = finalValue;
+            }
+
+            updateRangeFill();
+            return true;
+        };
+
+        const finalizeInput = (type) => {
+            if (type === 'min') {
+                isMinInputActive = false;
+                if (minVal > maxVal) {
+                    maxVal = minVal;
+                    maxSlider.value = minVal;
+                    maxInput.value = minVal;
+                }
+            } else {
+                isMaxInputActive = false;
+                if (maxVal < minVal) {
+                    minVal = maxVal;
+                    minSlider.value = maxVal;
+                    minInput.value = maxVal;
+                }
+            }
+            updateRangeFill();
+        };
+
+        // Устанавливаем границы значений
+        minInput.min = minAvailableValue;
+        minInput.max = maxAvailableValue;
+        maxInput.min = minAvailableValue;
+        maxInput.max = maxAvailableValue;
+
+        // Обработчики фокуса
+        minInput.addEventListener('focus', function() {
+            isMinInputActive = true;
+        });
+
+        maxInput.addEventListener('focus', function() {
+            isMaxInputActive = true;
+        });
+
+        // Обработчики ввода
+        minInput.addEventListener('input', function() {
+            updateSingleInput(this, this.value, 'min');
+        });
+
+        maxInput.addEventListener('input', function() {
+            updateSingleInput(this, this.value, 'max');
+        });
+
+        // Обработчики потери фокуса
+        minInput.addEventListener('blur', function() {
+            let value = parseInt(this.value);
+            if (isNaN(value)) {
+                value = minAvailableValue;
+                this.value = value;
+                minVal = value;
+                minSlider.value = value;
+            }
+            finalizeInput('min');
+        });
+
+        maxInput.addEventListener('blur', function() {
+            let value = parseInt(this.value);
+            if (isNaN(value)) {
+                value = minAvailableValue;
+                this.value = value;
+                maxVal = value;
+                maxSlider.value = value;
+            }
+            finalizeInput('max');
+        });
+
+        // Обработчики для слайдеров
         minSlider.addEventListener('input', function() {
             if (parseInt(minSlider.value) > parseInt(maxSlider.value)) {
                 minSlider.value = maxSlider.value;
             }
-            updateInputs();
+            updateFromSliders();
         });
 
         maxSlider.addEventListener('input', function() {
             if (parseInt(maxSlider.value) < parseInt(minSlider.value)) {
                 maxSlider.value = minSlider.value;
             }
-            updateInputs();
+            updateFromSliders();
         });
 
-        minInput.addEventListener('input', updateSliders);
-        maxInput.addEventListener('input', updateSliders);
-
         updateRangeFill();
-        console.log('Load slider initialized successfully');
     }
 
     function init() {

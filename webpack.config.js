@@ -75,11 +75,20 @@ module.exports = (env, argv) => {
                     ],
                 },
                 {
-                    test: /\.(s[ac]ss|css)$/i,
+                    // Правило для ваших SCSS файлов
+                    test: /\.scss$/i,
                     use: [
                         isProduction ? MiniCssExtractPlugin.loader : "style-loader",
                         "css-loader",
                         "sass-loader",
+                    ],
+                },
+                {
+                    // Правило для CSS файлов (включая node_modules)
+                    test: /\.css$/i,
+                    use: [
+                        "style-loader",  // ← Всегда style-loader для CSS
+                        "css-loader",
                     ],
                 },
                 {

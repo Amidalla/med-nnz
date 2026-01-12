@@ -8,16 +8,18 @@ export function InitTabs() {
         }
 
         init() {
-
             if (this.buttons.length > 0 && this.panes.length > 0) {
                 this.buttons[0].classList.add('active');
                 this.panes[0].classList.add('active');
             }
 
-            this.buttons.forEach(button => {
-                button.addEventListener('click', (e) => {
-                    this.switchTab(e.target);
-                });
+
+            this.container.addEventListener('click', (e) => {
+                const button = e.target.closest('.tab__btn');
+                if (button && this.container.contains(button)) {
+                    e.preventDefault();
+                    this.switchTab(button);
+                }
             });
         }
 
@@ -37,13 +39,11 @@ export function InitTabs() {
             }
         }
 
-
         openCharacteristicsTab() {
             const characteristicsButton = this.container.querySelector('.tab__btn[data-tab="characteristics"]');
             if (characteristicsButton) {
                 this.switchTab(characteristicsButton);
 
-                // Прокрутка к табам
                 setTimeout(() => {
                     this.container.scrollIntoView({
                         behavior: 'smooth',
@@ -72,3 +72,10 @@ export function InitTabs() {
         });
     });
 }
+
+window.InitTabs = InitTabs;
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing tabs globally...');
+    InitTabs();
+});

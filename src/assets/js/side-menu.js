@@ -1,17 +1,32 @@
 export function InitSideMenu() {
     const menuItems = document.querySelectorAll('.side-menu__item');
 
-    // Инициализация подменю - все закрыты
+    // Инициализация подменю
     menuItems.forEach(item => {
         const sublist = item.querySelector('.side-menu__sublist');
         if (sublist) {
-            sublist.style.maxHeight = '0';
+            // Стили для всех подменю
             sublist.style.overflow = 'hidden';
             sublist.style.transition = 'max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
 
-            const arrow = item.querySelector('.side-menu__arrow');
-            if (arrow) {
-                arrow.style.transform = 'rotate(0deg)';
+            // Проверяем классы с бэкенда
+            const hasActive = item.classList.contains('active');
+            const hasOpened = item.classList.contains('opened');
+
+            if (hasActive && hasOpened) {
+                // Если оба класса есть - открываем подменю
+                sublist.style.maxHeight = 'none'; // Автоматическая высота
+                const arrow = item.querySelector('.side-menu__arrow');
+                if (arrow) {
+                    arrow.style.transform = 'rotate(180deg)';
+                }
+            } else {
+                // Иначе закрываем
+                sublist.style.maxHeight = '0';
+                const arrow = item.querySelector('.side-menu__arrow');
+                if (arrow) {
+                    arrow.style.transform = 'rotate(0deg)';
+                }
             }
         }
     });
@@ -23,23 +38,24 @@ export function InitSideMenu() {
         const link = item.querySelector('.side-menu__link');
 
         if (arrow && sublist) {
-            // Клик по стрелке - только открытие/закрытие подменю
+            // Клик по стрелке
             arrow.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
                 toggleSubmenu(item, sublist, arrow);
             });
 
-            // Клик по ссылке - только переход по ссылке
+            // Клик по ссылке
             link.addEventListener('click', function(e) {
                 // Обычный переход по ссылке
-                // Подменю не открывается
             });
         }
     });
 
     function toggleSubmenu(item, sublist, arrow) {
-        const isOpen = sublist.style.maxHeight !== '0px' && sublist.style.maxHeight !== '0';
+        const isOpen = sublist.style.maxHeight !== '0px' &&
+            sublist.style.maxHeight !== '0' &&
+            sublist.style.maxHeight !== '';
 
         if (isOpen) {
             // Закрываем текущее подменю
@@ -49,7 +65,7 @@ export function InitSideMenu() {
         } else {
             // Закрываем все подменю и открываем текущее
             closeAllSubmenus();
-            sublist.style.maxHeight = sublist.scrollHeight + 'px';
+            sublist.style.maxHeight = 'none'; // Автоматическая высота
             arrow.style.transform = 'rotate(180deg)';
             item.classList.add('opened');
         }
@@ -73,19 +89,21 @@ export function InitSideMenu() {
         });
     }
 
-    // Закрытие подменю при клике вне меню
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.side-menu')) {
-            closeAllSubmenus();
-        }
-    });
-
-    // Обновление высоты подменю при изменении размера окна
+    // При ресайзе пересчитываем открытые подменю
     window.addEventListener('resize', function() {
-        const openSubmenus = document.querySelectorAll('.side-menu__sublist[style*="max-height"]');
+        const openSubmenus = document.querySelectorAll('.side-menu__sublist');
         openSubmenus.forEach(sublist => {
-            if (sublist.style.maxHeight !== '0px' && sublist.style.maxHeight !== '0') {
-                sublist.style.maxHeight = sublist.scrollHeight + 'px';
+            // Если подменю открыто (max-height не 0 и не пусто)
+            if (sublist.style.maxHeight &&
+                sublist.style.maxHeight !== '0px' &&
+                sublist.style.maxHeight !== '0') {
+                // Сбрасываем и снова ставим auto для перерасчета
+                const currentMaxHeight = sublist.style.maxHeight;
+                sublist.style.maxHeight = 'none';
+                // Принудительный рефлоу
+                sublist.offsetHeight;
+                // Возвращаем auto
+                sublist.style.maxHeight = currentMaxHeight;
             }
         });
     });

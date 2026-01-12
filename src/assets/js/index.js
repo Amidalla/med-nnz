@@ -7,6 +7,10 @@ import "../styles/modals.scss";
 import "../styles/filter.scss";
 import "../styles/header-animation.scss";
 import "../styles/animations.scss";
+
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import { Fancybox } from "@fancyapps/ui";
+
 import LazyLoad from "vanilla-lazyload";
 import Swiper from 'swiper';
 import 'swiper/swiper-bundle.css';
@@ -21,10 +25,12 @@ import { InitVideo } from "./video";
 import { InitAccordion } from "./accordion";
 import { InitHeaderAnimation } from "./header-animation";
 import { InitScrollAnimations } from "./scrollAnimations";
+import { InitMobileCards } from "./cards-mobile";
 import IMask from 'imask';
 
 Swiper.use([Pagination, Navigation, Autoplay, Thumbs, EffectFade]);
 
+window.Fancybox = Fancybox;
 
 function initMobileSearch() {
     const mobileContainer = document.querySelector('.container.mobile');
@@ -66,7 +72,6 @@ function initMobileSearch() {
         }
     };
 
-
     searchToggle.addEventListener('click', (e) => {
         e.stopPropagation();
         e.preventDefault();
@@ -91,7 +96,6 @@ function initMobileSearch() {
     document.addEventListener('keydown', handleEscape);
     window.addEventListener('resize', handleResize);
 }
-
 
 function initSpecsDots() {
     function calculateDotsWidth() {
@@ -136,7 +140,6 @@ function initSpecsDots() {
         });
     }
 
-
     let resizeTimeout;
     const handleResize = () => {
         clearTimeout(resizeTimeout);
@@ -146,7 +149,6 @@ function initSpecsDots() {
     calculateDotsWidth();
     window.addEventListener('resize', handleResize);
 }
-
 
 function initPhoneMasks() {
     const phoneInputs = document.querySelectorAll(`
@@ -194,10 +196,29 @@ function initPhoneMasks() {
     });
 }
 
-
 document.addEventListener('DOMContentLoaded', function() {
-    InitSelect();
+    Fancybox.bind("[data-fancybox]", {
+        infinite: false,
+        autoFocus: false,
+        trapFocus: false,
+        placeFocusBack: false,
+        hideScrollbar: false,
+        parentEl: document.body,
+        Toolbar: {
+            display: {
+                left: ["infobar"],
+                middle: [],
+                right: ["close"],
+            },
+        },
+        Thumbs: {
+            autoStart: true,
+        },
+    });
+
     SlidersInit();
+
+    InitSelect();
     InitModals();
     InitSideMenu();
     InitFilter();
@@ -206,18 +227,16 @@ document.addEventListener('DOMContentLoaded', function() {
     InitAccordion();
     InitHeaderAnimation();
     InitScrollAnimations();
+    InitMobileCards();
 
     setTimeout(() => {
         initMobileSearch();
         initSpecsDots();
     }, 100);
 
-
     const lazyLoadInstance = new LazyLoad();
 
-
     initPhoneMasks();
-
 
     const submitButton = document.querySelector('.submit-btn');
     const checkbox = document.querySelector('input[name="checkbox"]');
@@ -242,7 +261,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleScroll() {
         const footerTop = footerElement.offsetTop;
         const scrollPosition = window.pageYOffset + window.innerHeight;
-
 
         const shouldHide = scrollPosition >= footerTop - 50;
 

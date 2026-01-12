@@ -75,22 +75,39 @@
     &__item {
       position: relative;
       transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+
+       /* &.collapsed {
+          .filter-variants__content {
+            overflow: hidden;
+            max-height: 0;
+          }
+        }
+
+        &:not(.collapsed) {
+          .filter-variants__content {
+            overflow: visible;
+          }
+        }
+
+
+        .filter__arrow {
+          transform: rotate(180deg);
+        }*/
     }
 
     &__content {
-      overflow: hidden;
-      max-height: 0;
-      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: visible;
     }
 
     &__toggle {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 500;
       line-height: 150%;
       letter-spacing: 0.02em;
       color: c.$black;
       display: inline-block;
-      margin-bottom: 18px;
+      margin-bottom: 10px;
       cursor: pointer;
     }
 
@@ -106,7 +123,7 @@
       + span {
         position: relative;
         padding-left: 32px;
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 400;
         line-height: 150%;
         letter-spacing: 0.02em;

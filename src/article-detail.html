@@ -393,119 +393,217 @@
         </div>
     </section>
     <section class="interesting">
-            <div class="events">
-                <div class="container">
-                <div class="section-header">
-                    <div class="section-header__inner">
-                        <h2>Интересные материалы</h2>
-                        <div class="tags">
-                            <div class="tags__inner">
-                                <div class="tags__item active"><a href="#">Новости</a></div>
-                                <div class="tags__item"><a href="#">Статьи</a></div>
+        <div class="tabs">
+            <div class="section-header">
+                <div class="section-header__inner">
+                    <h2>Интересные материалы</h2>
+                    <div class="tabs__header">
+                        <button class="tab__btn" data-tab="news">Новости</button>
+                        <button class="tab__btn" data-tab="articles">Статьи</button>
+                    </div>
+                </div>
+                <div class="all-link">
+                    <a href="#">
+                        <span>Смотреть все</span>
+                        <include src="assets/svg/all-link.html"></include>
+                    </a>
+                </div>
+            </div>
+            <div class="tabs__content">
+                <div class="tab__pane" id="news">
+                    <div class="tabs__container">
+                        <div class="swiper events-slider">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <include src="layout/template/card/events-card.html">
+                                        {
+                                        "image": "assets/images/events1.jpg",
+                                        "title": "Научно-практическая конференция «Современные аспекты лечения ран различной этиологии»",
+                                        "link": "#",
+                                        "date": "24.04.2024"
+                                        }
+                                    </include>
+                                </div>
+                                <div class="swiper-slide">
+                                    <include src="layout/template/card/events-card.html">
+                                        {
+                                        "image": "assets/images/events2.jpg",
+                                        "title": "Компания «Альфа Мобили» участник выставки «Здравоохранение 2023»",
+                                        "link": "#",
+                                        "date": "24.04.2024"
+                                        }
+                                    </include>
+                                </div>
+                                <div class="swiper-slide">
+                                    <include src="layout/template/card/events-card.html">
+                                        {
+                                        "image": "assets/images/events3.jpg",
+                                        "title": "Компания «Альфа Мобили» участник выставки «Здравоохранение 2023»",
+                                        "link": "#",
+                                        "date": "24.04.2024"
+                                        }
+                                    </include>
+                                </div>
+                                <div class="swiper-slide">
+                                    <include src="layout/template/card/events-card.html">
+                                        {
+                                        "image": "assets/images/events4.jpg",
+                                        "title": "Научно-практическая конференция \"Актуальные вопросы хирургических инфекций\" 10 ноября 2023г.",
+                                        "link": "#",
+                                        "date": "24.04.2024"
+                                        }
+                                    </include>
+                                </div>
+                                <div class="swiper-slide">
+                                    <include src="layout/template/card/events-card.html">
+                                        {
+                                        "image": "assets/images/events1.jpg",
+                                        "title": "Научно-практическая конференция «Современные аспекты лечения ран различной этиологии»",
+                                        "link": "#",
+                                        "date": "24.04.2024"
+                                        }
+                                    </include>
+                                </div>
+                                <div class="swiper-slide">
+                                    <include src="layout/template/card/events-card.html">
+                                        {
+                                        "image": "assets/images/events2.jpg",
+                                        "title": "Компания «Альфа Мобили» участник выставки «Здравоохранение 2023»",
+                                        "link": "#",
+                                        "date": "24.04.2024"
+                                        }
+                                    </include>
+                                </div>
+                                <div class="swiper-slide">
+                                    <include src="layout/template/card/events-card.html">
+                                        {
+                                        "image": "assets/images/events3.jpg",
+                                        "title": "Компания «Альфа Мобили» участник выставки «Здравоохранение 2023»",
+                                        "link": "#",
+                                        "date": "24.04.2024"
+                                        }
+                                    </include>
+                                </div>
+                                <div class="swiper-slide">
+                                    <include src="layout/template/card/events-card.html">
+                                        {
+                                        "image": "assets/images/events4.jpg",
+                                        "title": "Научно-практическая конференция \"Актуальные вопросы хирургических инфекций\" 10 ноября 2023г.",
+                                        "link": "#",
+                                        "date": "24.04.2024"
+                                        }
+                                    </include>
+                                </div>
+                            </div>
+                            <div class="events__controls">
+                                <div class="swiper-button-prev">
+                                    <include src="assets/svg/slider-arrow.html"></include>
+                                </div>
+                                <div class="swiper-button-next">
+                                    <include src="assets/svg/slider-arrow.html"></include>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="all-link">
-                        <a href="#">
-                            <span>Смотреть все</span>
-                            <include src="assets/svg/all-link.html"></include>
-                        </a>
-                    </div>
                 </div>
-                <div class="swiper events-slider">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <include src="layout/template/card/events-card.html">
-                                {
-                                "image": "assets/images/events1.jpg",
-                                "title": "Научно-практическая конференция «Современные аспекты лечения ран различной этиологии»",
-                                "link": "#",
-                                "date": "24.04.2024"
-                                }
-                            </include>
-                        </div>
-                        <div class="swiper-slide">
-                            <include src="layout/template/card/events-card.html">
-                                {
-                                "image": "assets/images/events2.jpg",
-                                "title": "Компания «Альфа Мобили» участник выставки «Здравоохранение 2023»",
-                                "link": "#",
-                                "date": "24.04.2024"
-                                }
-                            </include>
-                        </div>
-                        <div class="swiper-slide">
-                            <include src="layout/template/card/events-card.html">
-                                {
-                                "image": "assets/images/events3.jpg",
-                                "title": "Компания «Альфа Мобили» участник выставки «Здравоохранение 2023»",
-                                "link": "#",
-                                "date": "24.04.2024"
-                                }
-                            </include>
-                        </div>
-                        <div class="swiper-slide">
-                            <include src="layout/template/card/events-card.html">
-                                {
-                                "image": "assets/images/events4.jpg",
-                                "title": "Научно-практическая конференция \"Актуальные вопросы хирургических инфекций\" 10 ноября 2023г.",
-                                "link": "#",
-                                "date": "24.04.2024"
-                                }
-                            </include>
-                        </div>
-                        <div class="swiper-slide">
-                            <include src="layout/template/card/events-card.html">
-                                {
-                                "image": "assets/images/events1.jpg",
-                                "title": "Научно-практическая конференция «Современные аспекты лечения ран различной этиологии»",
-                                "link": "#",
-                                "date": "24.04.2024"
-                                }
-                            </include>
-                        </div>
-                        <div class="swiper-slide">
-                            <include src="layout/template/card/events-card.html">
-                                {
-                                "image": "assets/images/events2.jpg",
-                                "title": "Компания «Альфа Мобили» участник выставки «Здравоохранение 2023»",
-                                "link": "#",
-                                "date": "24.04.2024"
-                                }
-                            </include>
-                        </div>
-                        <div class="swiper-slide">
-                            <include src="layout/template/card/events-card.html">
-                                {
-                                "image": "assets/images/events3.jpg",
-                                "title": "Компания «Альфа Мобили» участник выставки «Здравоохранение 2023»",
-                                "link": "#",
-                                "date": "24.04.2024"
-                                }
-                            </include>
-                        </div>
-                        <div class="swiper-slide">
-                            <include src="layout/template/card/events-card.html">
-                                {
-                                "image": "assets/images/events4.jpg",
-                                "title": "Научно-практическая конференция \"Актуальные вопросы хирургических инфекций\" 10 ноября 2023г.",
-                                "link": "#",
-                                "date": "24.04.2024"
-                                }
-                            </include>
+                <div class="tab__pane" id="articles">
+                    <div class="tabs__container">
+                        <div class="swiper events-slider">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <include src="layout/template/card/events-card.html">
+                                        {
+                                        "image": "assets/images/article1.jpg",
+                                        "title": "Оборудование для операционной",
+                                        "link": "#",
+                                        "date": "18.04.2024"
+                                        }
+                                    </include>
+                                </div>
+                                <div class="swiper-slide">
+                                    <include src="layout/template/card/events-card.html">
+                                        {
+                                        "image": "assets/images/article1.jpg",
+                                        "title": "Оборудование для операционной",
+                                        "link": "#",
+                                        "date": "18.04.2024"
+                                        }
+                                    </include>
+                                </div>
+                                <div class="swiper-slide">
+                                    <include src="layout/template/card/events-card.html">
+                                        {
+                                        "image": "assets/images/article1.jpg",
+                                        "title": "Оборудование для операционной",
+                                        "link": "#",
+                                        "date": "18.04.2024"
+                                        }
+                                    </include>
+                                </div>
+                                <div class="swiper-slide">
+                                    <include src="layout/template/card/events-card.html">
+                                        {
+                                        "image": "assets/images/article1.jpg",
+                                        "title": "Оборудование для операционной",
+                                        "link": "#",
+                                        "date": "18.04.2024"
+                                        }
+                                    </include>
+                                </div>
+                                <div class="swiper-slide">
+                                    <include src="layout/template/card/events-card.html">
+                                        {
+                                        "image": "assets/images/article1.jpg",
+                                        "title": "Оборудование для операционной",
+                                        "link": "#",
+                                        "date": "18.04.2024"
+                                        }
+                                    </include>
+                                </div>
+                                <div class="swiper-slide">
+                                    <include src="layout/template/card/events-card.html">
+                                        {
+                                        "image": "assets/images/article1.jpg",
+                                        "title": "Оборудование для операционной",
+                                        "link": "#",
+                                        "date": "18.04.2024"
+                                        }
+                                    </include>
+                                </div>
+                                <div class="swiper-slide">
+                                    <include src="layout/template/card/events-card.html">
+                                        {
+                                        "image": "assets/images/article1.jpg",
+                                        "title": "Оборудование для операционной",
+                                        "link": "#",
+                                        "date": "18.04.2024"
+                                        }
+                                    </include>
+                                </div>
+                                <div class="swiper-slide">
+                                    <include src="layout/template/card/events-card.html">
+                                        {
+                                        "image": "assets/images/article1.jpg",
+                                        "title": "Оборудование для операционной",
+                                        "link": "#",
+                                        "date": "18.04.2024"
+                                        }
+                                    </include>
+                                </div>
+                            </div>
+                            <div class="events__controls">
+                                <div class="swiper-button-prev">
+                                    <include src="assets/svg/slider-arrow.html"></include>
+                                </div>
+                                <div class="swiper-button-next">
+                                    <include src="assets/svg/slider-arrow.html"></include>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="events__controls">
-                        <div class="swiper-button-prev">
-                            <include src="assets/svg/slider-arrow.html"></include>
-                        </div>
-                        <div class="swiper-button-next">
-                            <include src="assets/svg/slider-arrow.html"></include>
-                        </div>
-                    </div>
-                </div>
                 </div>
             </div>
+        </div>
     </section>
     <include src="layout/main-form.html"></include>
     <ul class="social">

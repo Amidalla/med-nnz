@@ -43,7 +43,7 @@
     }
 
     &__inner {
-      margin-left: auto;
+      width: 100%;
 
       @media (max-width: 1300px) {
         margin-left: 0;
@@ -173,6 +173,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   margin-bottom: 2px;
+  margin-left: auto;
 
   @media (max-width: 1300px) {
     margin-right: 0;
