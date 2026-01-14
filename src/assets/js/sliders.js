@@ -720,6 +720,17 @@ export function SlidersInit() {
         return productCardSlider;
     }
     function initNewsDetailSlider() {
+
+        function shouldShowThumbnails() {
+            const thumbSlides = document.querySelectorAll('.video-slider .thumbnail-swiper .swiper-slide');
+            return thumbSlides.length > 1; // Показываем миниатюры только если больше 1 слайда
+        }
+
+
+        const thumbSlidesCount = document.querySelectorAll('.video-slider .thumbnail-swiper .swiper-slide').length;
+        const shouldEnableThumbs = thumbSlidesCount > 1;
+
+
         const thumbnailSwiper = new Swiper(".video-slider .thumbnail-swiper", {
             spaceBetween: 10,
             slidesPerView: 4,
@@ -730,12 +741,14 @@ export function SlidersInit() {
                 prevEl: '.video-slider .thumbnail-swiper .swiper-button-prev',
             },
             slideToClickedSlide: true,
+            enabled: shouldEnableThumbs, // Полностью отключаем Swiper при одном слайде
             breakpoints: {
                 0: { slidesPerView: 3, spaceBetween: 8 },
                 768: { slidesPerView: 4, spaceBetween: 10 },
                 1024: { slidesPerView: 5, spaceBetween: 25 }
             }
         });
+
 
         newsDetailSlider = new Swiper(".video-slider .main-swiper", {
             speed: 300,
@@ -747,14 +760,14 @@ export function SlidersInit() {
                 dynamicBullets: true
             },
             thumbs: {
-                swiper: thumbnailSwiper
+                swiper: shouldEnableThumbs ? thumbnailSwiper : null // Передаем null если слайд один
             },
             breakpoints: {
                 0: {
                     thumbs: { swiper: false }
                 },
                 1001: {
-                    thumbs: { swiper: thumbnailSwiper }
+                    thumbs: { swiper: shouldEnableThumbs ? thumbnailSwiper : null }
                 }
             },
             on: {
@@ -948,15 +961,60 @@ export function SlidersInit() {
         function toggleVideoSliderElements() {
             const thumbnails = document.querySelector('.video-slider .thumbnail-swiper');
             const pagination = document.querySelector('.video-slider .main-swiper .swiper-pagination');
+            const thumbWrapper = thumbnails ? thumbnails.querySelector('.swiper-wrapper') : null;
 
-            if (window.innerWidth <= 1000) {
-                if (thumbnails) thumbnails.style.display = 'none';
-                if (pagination) pagination.style.display = 'block';
-            } else {
-                if (thumbnails) thumbnails.style.display = 'block';
+            const showThumbnails = shouldShowThumbnails();
+
+            if (!showThumbnails) {
+
+                if (thumbnails) {
+                    thumbnails.style.display = 'none';
+                    thumbnails.style.opacity = '0';
+                    thumbnails.style.visibility = 'hidden';
+                    thumbnails.style.height = '0';
+                    thumbnails.style.overflow = 'hidden';
+                    thumbnails.style.margin = '0';
+                    thumbnails.style.padding = '0';
+                }
+
+
+                const nextBtn = document.querySelector('.video-slider .thumbnail-swiper .swiper-button-next');
+                const prevBtn = document.querySelector('.video-slider .thumbnail-swiper .swiper-button-prev');
+                if (nextBtn) nextBtn.style.display = 'none';
+                if (prevBtn) prevBtn.style.display = 'none';
+
+
                 if (pagination) pagination.style.display = 'none';
+
+            } else {
+
+                if (window.innerWidth <= 1000) {
+                    if (thumbnails) {
+                        thumbnails.style.display = 'none';
+                        thumbnails.style.opacity = '0';
+                        thumbnails.style.visibility = 'hidden';
+                        thumbnails.style.height = '0';
+                    }
+                    if (pagination) pagination.style.display = 'block';
+                } else {
+                    if (thumbnails) {
+                        thumbnails.style.display = 'block';
+                        thumbnails.style.opacity = '1';
+                        thumbnails.style.visibility = 'visible';
+                        thumbnails.style.height = 'auto';
+                    }
+                    if (pagination) pagination.style.display = 'none';
+                }
             }
         }
+
+
+        toggleVideoSliderElements();
+
+
+        window.addEventListener('resize', function() {
+            toggleVideoSliderElements();
+        });
     }
 
     function initAllSliders() {

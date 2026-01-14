@@ -1,46 +1,107 @@
 export function InitModals() {
+    // Модальное окно каталога
     const modal = document.querySelector('.modal-catalog');
     const btn = document.querySelector('.catalog-btn');
+    const modalNav = document.querySelector('.modal-catalog__nav');
 
-    if (!modal || !btn) return;
+    if (!modal || !btn || !modalNav) return;
 
     let isOpen = false;
-
-    function toggleModal() {
-        if (isOpen) {
-            closeModal();
-        } else {
-            openModal();
-        }
-    }
+    let isHoveringBtn = false;
+    let isHoveringNav = false;
+    let animationTimeout = null;
+    let isClosing = false;
+    let isOpening = false;
 
     function openModal() {
+        if (isOpening || isOpen) return;
+
+        isOpening = true;
+        isClosing = false;
         document.body.style.overflow = 'hidden';
         modal.classList.add('active');
         btn.classList.add('active');
-        isOpen = true;
+
+
+        setTimeout(() => {
+            isOpen = true;
+            isOpening = false;
+        }, 300);
     }
 
     function closeModal() {
+        if (isClosing || !isOpen || isOpening) return;
+
+        isClosing = true;
         document.body.style.overflow = '';
         modal.classList.remove('active');
         btn.classList.remove('active');
-        isOpen = false;
+
+
+        setTimeout(() => {
+            isOpen = false;
+            isClosing = false;
+            isHoveringBtn = false;
+            isHoveringNav = false;
+        }, 300);
     }
 
+    function scheduleCloseCheck() {
+
+        if (animationTimeout) {
+            clearTimeout(animationTimeout);
+        }
+
+
+        animationTimeout = setTimeout(() => {
+            if (!isHoveringBtn && !isHoveringNav && isOpen && !isOpening) {
+                closeModal();
+            }
+        }, 100);
+    }
+
+
+    btn.addEventListener('mouseenter', () => {
+        isHoveringBtn = true;
+        if (!isOpen && !isOpening) {
+            openModal();
+        }
+    });
+
+
+    btn.addEventListener('mouseleave', () => {
+        isHoveringBtn = false;
+        scheduleCloseCheck();
+    });
+
+
+    modalNav.addEventListener('mouseenter', () => {
+        isHoveringNav = true;
+
+    });
+
+
+    modalNav.addEventListener('mouseleave', () => {
+        isHoveringNav = false;
+        scheduleCloseCheck();
+    });
+
+
     btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleModal();
+        if (isOpen) {
+            closeModal();
+
+        }
     });
 
     document.addEventListener('click', (e) => {
-        if (isOpen && !modal.contains(e.target) && !btn.contains(e.target)) {
+        if (isOpen && !isOpening && !modal.contains(e.target) && !btn.contains(e.target)) {
             closeModal();
         }
     });
 
     document.addEventListener('keydown', (e) => {
-        if (isOpen && e.key === 'Escape') {
+        if (isOpen && !isOpening && e.key === 'Escape') {
             closeModal();
         }
     });
@@ -49,6 +110,7 @@ export function InitModals() {
         e.stopPropagation();
     });
 }
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenu = document.querySelector('.mobile-menu');

@@ -619,7 +619,7 @@ a {
     margin-bottom: 20px;
 
     a {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 500;
       line-height: 130%;
       letter-spacing: 0.02em;
@@ -702,7 +702,7 @@ a {
     margin-bottom: 20px;
 
     a {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 500;
       line-height: 130%;
       letter-spacing: 0.02em;
@@ -986,6 +986,11 @@ a {
   margin-bottom: 20px;
   position: absolute;
   top: 0;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .status {
@@ -1719,13 +1724,6 @@ a {
 }
 
 .marking__wrapper .marking__info h3 .marking__link {
-  @media (max-width: 1300px) {
-    font-size: 22px;
-  }
-
-  @media (max-width: 650px) {
-    font-size: 20px;
-  }
 
 }
 
@@ -1777,7 +1775,7 @@ a {
 
   &__link {
     color: #3C3F41;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 400;
     cursor: pointer;
 
@@ -1821,6 +1819,7 @@ a {
 
   &.caption {
     h1 {
+
       @media (max-width: 1700px) {
         font-size: 48px;
       }
@@ -1839,19 +1838,16 @@ a {
   }
 
   h1 {
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 500;
     line-height: 100%;
     color: #272727;
 
     @media (max-width: 1500px) {
-      font-size: 52px;
+      font-size: 38px;
       line-height: 120%;
     }
 
-    @media (max-width: 1300px) {
-      font-size: 40px;
-    }
     @media (max-width: 700px) {
       font-size: 28px;
     }
@@ -2309,18 +2305,11 @@ a {
 
 .catalog-directory {
   padding-top: 46px;
-  padding-bottom: 80px;
-  
-  @media (max-width: 1500px) {
-    padding-bottom: 60px;
-  }
 
   @media (max-width: 1359px) {
-    padding-bottom: 60px;
     padding-top: 24px;
   }
   @media (max-width: 700px) {
-    padding-bottom: 48px;
     padding-top: 24px;
   }
 
@@ -2492,7 +2481,7 @@ a {
 
 
   &__link {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     line-height: 130%;
     letter-spacing: 0.02em;
@@ -2542,7 +2531,7 @@ a {
   }
 
   &__sublink {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
     line-height: 120%;
     letter-spacing: 0.02em;
@@ -3181,7 +3170,6 @@ a {
 
     p {
       &:first-child {
-        margin-bottom: 8px;
         font-size: 16px;
         font-weight: 400;
         line-height: 150%;
@@ -3605,6 +3593,10 @@ a {
             justify-content: center;
           }
 
+          @media (max-width: 550px) {
+            height: 289px;
+          }
+
 
           .label {
             position: absolute;
@@ -3613,10 +3605,16 @@ a {
             display: flex;
            flex-wrap: wrap;
             gap: 15px;
+            padding-right: 14px;
 
             .rus {
               margin-bottom: 0;
               position: static;
+
+              img {
+                width: 20px;
+                height: 20px;
+              }
             }
 
             .new {
@@ -4017,7 +4015,7 @@ a {
   background: c.$white;
   border: 1px solid #EAEFF4;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 34px;
   letter-spacing: 0.02em;
@@ -4059,6 +4057,43 @@ a {
   transition: opacity 0.4s ease, height 0.4s ease;
   transform: translateY(20px);
 
+  .table-box {
+    width: 100%;
+    overflow-x: auto;
+    max-width: calc(100vw - 40px);
+    -webkit-overflow-scrolling: touch;
+
+    table {
+      min-width: 400px;
+    }
+  }
+
+  table {
+    width: 100%;
+    text-align: left;
+    border: none;
+    border-collapse: collapse;
+
+    tr {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: .02em;
+      color: #272727;
+
+      td {
+        box-shadow: 0px -1px 0px 0px #bac0c5 inset;
+        padding: 20px 16px;
+        text-align: left;
+        width: auto;
+        border: none !important;
+        p {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
   h3 {
     font-size: 24px;
     font-weight: 500;
@@ -4081,65 +4116,6 @@ a {
   height: auto;
   transform: translateY(0);
   transition: opacity 0.5s ease 0.1s, height 0.5s ease 0.1s, transform 0.5s ease 0.1s;
-
-  &#characteristics {
-
-    table {
-      width: 100%;
-      text-align: left;
-      border: none;
-
-      tr {
-        box-shadow: 0px -1px 0px 0px #bac0c5 inset;
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 20px;
-        letter-spacing: .02em;
-        color: #272727;
-
-        td {
-          padding: 20px 16px;
-          text-align: left;
-          width: auto;
-          border: none !important;
-
-          @media (max-width: 450px) {
-            padding: 15px 5px;
-          }
-        }
-      }
-    }
-  }
-  &#description {
-
-
-    table {
-      width: 100%;
-      text-align: left;
-      border: none;
-
-      tr {
-
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 20px;
-        letter-spacing: .02em;
-        color: #272727;
-
-        td {
-          padding: 20px 16px;
-          text-align: left;
-          width: auto;
-          border: none !important;
-          box-shadow: 0px -1px 0px 0px #bac0c5 inset;
-          
-          @media (max-width: 450px) {
-            padding: 15px 5px;
-          }
-        }
-      }
-    }
-  }
 }
 
 .tabs__container {
@@ -4154,6 +4130,31 @@ a {
 
   h2 {
     text-align: left;
+    font-size: 26px;
+    line-height: 34px;
+
+    @media (max-width: 1700px) {
+      font-size: 24px;
+    }
+
+    @media (max-width: 1300px) {
+      font-size: 22px;
+    }
+    @media (max-width: 700px) {
+      font-size: 20px;
+    }
+  }
+
+
+  h3 {
+    text-align: left;
+    font-size: 20px;
+    line-height: 130%;
+    letter-spacing: 0.02em;
+
+    @media (max-width: 1300px) {
+      font-size: 18px;
+    }
   }
 }
 
@@ -4173,7 +4174,7 @@ a {
       line-height: 100%;
       letter-spacing: .02em;
       color: #333;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       padding-left: 15px;
       position: relative;
 
@@ -4183,7 +4184,7 @@ a {
         li {
           font-size: 16px;
           font-weight: 400;
-          line-height: 150%;
+          line-height: 120%;
           letter-spacing: .02em;
           color: #333;
           margin-bottom: 8px;
@@ -4194,7 +4195,7 @@ a {
             content: "";
             position: absolute;
             left: 0;
-            top: 11px;
+            top: 5px;
             width: 6px;
             height: 6px;
             border-radius: 50%;
@@ -5274,6 +5275,7 @@ div.page-bg {
       border-radius: 20px;
       transition: all 0.3s ease;
       max-width: 593px;
+      min-height: 340px;
       
       @media (max-width: 1700px) {
         padding: 29px 22px 16px 22px;
@@ -5351,18 +5353,10 @@ div.page-bg {
       letter-spacing: 0.02em;
       color: c.$black;
       margin-bottom: 20px;
-      
-      @media (max-width: 1700px) {
-        font-size: 22px;
-      }
+
       @media (max-width: 1300px) {
         max-width: 410px;
       }
-
-      @media (max-width: 700px) {
-        font-size: 20px;
-      }
-
     }
 
     &__info {
@@ -5821,13 +5815,19 @@ div.page-bg {
       position: relative;
       line-height: 0;
       font-size: 0;
+      height: 498px;
 
-
+      @media (max-width: 600px) {
+        height: 330px;
+      }
+      @media (max-width: 360px) {
+        height: 213px;
+      }
 
       img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
         border-radius: 20px;
         min-height: 213px;
       }
@@ -8416,9 +8416,9 @@ div.page-bg {
 
 .main-picture {
   position: relative;
-  height: 823px;
+  height: calc(100vh - 150px);
 
-  @media (max-width: 1360px) {
+  @media (max-width: 1300px) {
     height: 864px;
   }
 
@@ -8456,7 +8456,7 @@ div.page-bg {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    height: 823px;
+    height: 100%;
   }
 
   .video-poster {
@@ -8516,7 +8516,43 @@ div.page-bg {
     }
 
     h2 {
+      font-size: 62px;
+      font-weight: 500;
+      line-height: 130%;
+      color: #2d3b49;
+      text-align: left;
       margin-bottom: 18px;
+
+      @media (max-width: 1700px) {
+        font-size: 60px;;
+      }
+
+      @media (max-width: 1300px) {
+        font-size: 46px;
+      }
+      @media (max-width: 700px) {
+        font-size: 34px;
+      }
+    }
+
+    div {
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 110%;
+      letter-spacing: 0.02em;
+      color: #2d3b49;
+      text-align: left;
+
+      @media (max-width: 1700px) {
+        font-size: 22px;
+      }
+
+      @media (max-width: 1300px) {
+        font-size: 20px;
+      }
+      @media (max-width: 700px) {
+        font-size: 18px;
+      }
     }
 
     a {
@@ -8532,7 +8568,9 @@ div.page-bg {
   .video-slide {
     .header_hidden_left {
       .main-picture__title {
-        color: c.$white;
+        a {
+          color: c.$white;
+        }
       }
     }
   }
