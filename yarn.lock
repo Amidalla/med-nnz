@@ -30,6 +30,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fancyapps/ui@npm:^6.1.7":
+  version: 6.1.7
+  resolution: "@fancyapps/ui@npm:6.1.7"
+  checksum: 10c0/0eaeaaa620851c38d8b5754dddc88e04eb9f66cedf08e95bacaee0041ba7a3d4455c6d2270d74a3b5b8fabebdaa180f04741d89e1f6dd5a34460cfa56f25ac60
+  languageName: node
+  linkType: hard
+
 "@img/sharp-darwin-arm64@npm:0.33.5":
   version: 0.33.5
   resolution: "@img/sharp-darwin-arm64@npm:0.33.5"
@@ -1273,6 +1280,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "bip-it@workspace:."
   dependencies:
+    "@fancyapps/ui": "npm:^6.1.7"
     copy-webpack-plugin: "npm:^13.0.1"
     css-loader: "npm:^7.1.2"
     favicons: "npm:^7.2.0"
