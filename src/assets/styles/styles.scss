@@ -2305,12 +2305,19 @@ a {
 
 .catalog-directory {
   padding-top: 46px;
+  padding-bottom: 80px;
+
+  @media (max-width: 1500px) {
+    padding-bottom: 60px;
+  }
 
   @media (max-width: 1359px) {
     padding-top: 24px;
+    padding-bottom: 56px;
   }
   @media (max-width: 700px) {
     padding-top: 24px;
+    padding-bottom: 48px;
   }
 
     .new {

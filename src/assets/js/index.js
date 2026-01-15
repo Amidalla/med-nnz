@@ -150,6 +150,47 @@ function initSpecsDots() {
     window.addEventListener('resize', handleResize);
 }
 
+function initSectionPadding() {
+    function adjustSectionPadding() {
+        const sections = document.querySelectorAll('.catalog-directory, .catalog-section');
+
+        sections.forEach(section => {
+            let nextElement = section.nextElementSibling;
+
+
+            while (nextElement && nextElement.nodeType === 3 && nextElement.textContent.trim() === '') {
+                nextElement = nextElement.nextElementSibling;
+            }
+
+
+            const isNextContentSection = nextElement &&
+                nextElement.classList &&
+                nextElement.classList.contains('content') &&
+                nextElement.classList.contains('name-left');
+
+
+            if (isNextContentSection) {
+                section.style.paddingBottom = '0';
+            } else {
+
+                section.style.paddingBottom = '';
+            }
+        });
+    }
+
+    adjustSectionPadding();
+
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(adjustSectionPadding, 100);
+    });
+
+    const lazyLoadInstance = new LazyLoad({
+        callback_loaded: adjustSectionPadding
+    });
+}
+
 function initPhoneMasks() {
     const phoneInputs = document.querySelectorAll(`
         input[type="tel"][name="tel"],
@@ -232,6 +273,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
         initMobileSearch();
         initSpecsDots();
+        initSectionPadding();
     }, 100);
 
     const lazyLoadInstance = new LazyLoad();

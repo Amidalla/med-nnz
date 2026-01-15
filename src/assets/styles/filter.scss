@@ -3,33 +3,39 @@
 
 .catalog-section {
   padding-top: 46px;
+  padding-bottom: 80px;
 
   @media (max-width: 1500px) {
     padding-top: 32px;
+    padding-bottom: 60px;
   }
+
   @media (max-width: 1300px) {
     padding-top: 24px;
-
+    padding-bottom: 56px;
   }
 
-    &__inner {
-      display: grid;
-      grid-template-columns: 282px 1fr;
-      gap: 27px;
+  @media (max-width: 700px) {
+    padding-bottom: 48px;
+  }
 
-      @media (max-width: 1359px) {
-        display: block;
-      }
+  &__inner {
+    display: grid;
+    grid-template-columns: 282px 1fr;
+    gap: 27px;
+
+    @media (max-width: 1359px) {
+      display: block;
     }
+  }
 
-    &__left {
-
-      @media (max-width: 1359px) {
-        display: none;
-      }
+  &__left {
+    @media (max-width: 1359px) {
+      display: none;
     }
+  }
 
-    &__right {}
+  &__right {}
 }
 
 .filter {
