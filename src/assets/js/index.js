@@ -152,10 +152,33 @@ function initSpecsDots() {
 
 function initSectionPadding() {
     function adjustSectionPadding() {
+        // 1. Логика для catalog-directory, catalog-section
         const sections = document.querySelectorAll('.catalog-directory, .catalog-section');
 
         sections.forEach(section => {
             let nextElement = section.nextElementSibling;
+
+            while (nextElement && nextElement.nodeType === 3 && nextElement.textContent.trim() === '') {
+                nextElement = nextElement.nextElementSibling;
+            }
+
+            const isNextContentSection = nextElement &&
+                nextElement.classList &&
+                nextElement.classList.contains('content') &&
+                nextElement.classList.contains('name-left');
+
+            if (isNextContentSection) {
+                section.style.paddingBottom = '0';
+            } else {
+                section.style.paddingBottom = '';
+            }
+        });
+
+
+        const newsDetailSections = document.querySelectorAll('.news-detail');
+
+        newsDetailSections.forEach(newsDetail => {
+            let nextElement = newsDetail.nextElementSibling;
 
 
             while (nextElement && nextElement.nodeType === 3 && nextElement.textContent.trim() === '') {
@@ -163,17 +186,61 @@ function initSectionPadding() {
             }
 
 
-            const isNextContentSection = nextElement &&
+            const isNextContentNews = nextElement &&
                 nextElement.classList &&
                 nextElement.classList.contains('content') &&
-                nextElement.classList.contains('name-left');
+                nextElement.classList.contains('news');
+
+            if (isNextContentNews) {
+
+                newsDetail.style.paddingBottom = '0';
+                newsDetail.style.marginBottom = '0';
 
 
-            if (isNextContentSection) {
-                section.style.paddingBottom = '0';
+                nextElement.style.paddingTop = '0';
+                nextElement.style.marginTop = '0';
             } else {
 
-                section.style.paddingBottom = '';
+                newsDetail.style.paddingBottom = '';
+                newsDetail.style.marginBottom = '';
+
+
+                const contentNewsSections = document.querySelectorAll('.content.news');
+                contentNewsSections.forEach(section => {
+                    section.style.paddingTop = '';
+                    section.style.marginTop = '';
+                });
+            }
+        });
+
+
+        const pageNameElements = document.querySelectorAll('.page-name');
+
+        pageNameElements.forEach(pageName => {
+            let nextElement = pageName.nextElementSibling;
+
+            while (nextElement && nextElement.nodeType === 3 && nextElement.textContent.trim() === '') {
+                nextElement = nextElement.nextElementSibling;
+            }
+
+            const isNextProductCard = nextElement &&
+                nextElement.classList &&
+                nextElement.classList.contains('product-card');
+
+            if (isNextProductCard) {
+                const hasTagsInside = nextElement.querySelector('.tags') !== null;
+
+                if (!hasTagsInside) {
+                    if (window.innerWidth > 1400) {
+                        pageName.style.marginBottom = '46px';
+                    } else {
+                        pageName.style.marginBottom = '24px';
+                    }
+                } else {
+                    pageName.style.marginBottom = '';
+                }
+            } else {
+                pageName.style.marginBottom = '';
             }
         });
     }
@@ -188,52 +255,6 @@ function initSectionPadding() {
 
     const lazyLoadInstance = new LazyLoad({
         callback_loaded: adjustSectionPadding
-    });
-}
-
-function initPhoneMasks() {
-    const phoneInputs = document.querySelectorAll(`
-        input[type="tel"][name="tel"],
-        input[type="tel"][data-phone-input]
-    `);
-
-    phoneInputs.forEach(input => {
-        let mask = null;
-
-        const initMask = () => {
-            if (!mask) {
-                input.classList.add('phone-mask-active');
-                mask = IMask(input, {
-                    mask: '+{7} (000) 000-00-00',
-                    lazy: false
-                });
-
-                if (!input.value) {
-                    input.value = '+7 (';
-                }
-            }
-        };
-
-        const destroyMask = () => {
-            if (mask) {
-                const phoneNumber = input.value.replace(/\D/g, '');
-                if (phoneNumber.length < 11 || phoneNumber === '7') {
-                    input.value = '';
-                }
-                input.classList.remove('phone-mask-active');
-                mask.destroy();
-                mask = null;
-            }
-        };
-
-        input.addEventListener('focus', initMask);
-        input.addEventListener('blur', destroyMask);
-
-        input.addEventListener('input', (e) => {
-            if (mask && input.value === '+7 (' && e.inputType === 'deleteContentBackward') {
-                destroyMask();
-            }
-        });
     });
 }
 

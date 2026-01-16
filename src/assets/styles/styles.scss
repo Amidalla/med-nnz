@@ -5566,15 +5566,20 @@ div.page-bg {
     padding-bottom: 56px;
   }
 
+
   @media (max-width: 700px) {
     padding-top: 24px;
     padding-bottom: 48px;
   }
     &__inner {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-columns: 1fr 612px;
       gap: 30px;
       align-items: stretch;
+
+      @media (max-width: 1500px) {
+        grid-template-columns: 1fr 570px;
+      }
 
       @media (max-width: 1300px) {
         display: flex;
@@ -5735,6 +5740,82 @@ div.page-bg {
       padding-bottom: 48px;
     }
 
+    ul {
+      li {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 100%;
+        letter-spacing: .02em;
+        color: #333;
+        margin-bottom: 16px;
+        padding-left: 15px;
+        position: relative;
+
+        ul {
+          margin-top: 16px;
+
+          li {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 120%;
+            letter-spacing: .02em;
+            color: #333;
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+
+            &::before {
+              content: "";
+              position: absolute;
+              left: 0;
+              top: 5px;
+              width: 6px;
+              height: 6px;
+              border-radius: 50%;
+              background: #e11a1a;
+            }
+
+            ul {
+              margin-top: 16px;
+
+              li {
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 120%;
+                letter-spacing: .02em;
+                color: #333;
+                margin-bottom: 8px;
+                padding-left: 15px;
+                position: relative;
+
+                &::before {
+                  content: "";
+                  position: absolute;
+                  left: 0;
+                  top: 6px;
+                  width: 5px;
+                  height: 5px;
+                  border-radius: 50%;
+                  background: transparent;
+                  border: 1px solid #e11a1a;
+                }
+              }
+            }
+          }
+        }
+
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 1px;
+          width: 4px;
+          height: 13px;
+          background: url('../images/red-arrow.svg') no-repeat;
+        }
+      }
+    }
+
     p {
       max-width: 1245px;
       margin-bottom: 30px;
@@ -5760,8 +5841,9 @@ div.page-bg {
 }
 
 .video-slider {
-  max-width: 100%;
+  max-width: 612px;
   width: 100%;
+
 
   .swiper-pagination {
     bottom: 50px;
@@ -5849,21 +5931,27 @@ div.page-bg {
       position: relative;
       line-height: 0;
       font-size: 0;
-      height: 498px;
+      height: 330px;
 
-      @media (max-width: 600px) {
-        height: 330px;
+      @media (max-width: 1500px) {
+        height: 313px;
       }
-      @media (max-width: 360px) {
+      @media (max-width: 450px) {
         height: 213px;
       }
 
       img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
+        object-fit: cover;
         border-radius: 20px;
         min-height: 213px;
+      }
+
+      iframe {
+        max-width: 100%;
+        height: 100%;
+        border: none;
       }
     }
 
@@ -6199,9 +6287,14 @@ div.page-bg {
 
     &__inner {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-columns: 1fr 612px;
       gap: 30px;
       align-items: stretch;
+
+      @media (max-width: 1500px) {
+        grid-template-columns: 1fr 570px;
+      }
+
 
       @media (max-width: 1365px) {
         display: flex;
@@ -6415,9 +6508,13 @@ div.page-bg {
 
     &__inner {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-columns: 1fr 612px;
       gap: 30px;
       align-items: stretch;
+
+      @media (max-width: 1500px) {
+        grid-template-columns: 1fr 570px;
+      }
 
       @media (max-width: 1300px) {
         display: flex;
@@ -8030,9 +8127,13 @@ div.page-bg {
 
     &__inner {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-columns: 1fr 612px;
       gap: 30px;
       align-items: stretch;
+
+      @media (max-width: 1500px) {
+        grid-template-columns: 1fr 570px;
+      }
 
       @media (max-width: 1300px) {
         display: flex;

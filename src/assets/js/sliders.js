@@ -723,7 +723,7 @@ export function SlidersInit() {
 
         function shouldShowThumbnails() {
             const thumbSlides = document.querySelectorAll('.video-slider .thumbnail-swiper .swiper-slide');
-            return thumbSlides.length > 1; // Показываем миниатюры только если больше 1 слайда
+            return thumbSlides.length > 1;
         }
 
 
@@ -733,21 +733,73 @@ export function SlidersInit() {
 
         const thumbnailSwiper = new Swiper(".video-slider .thumbnail-swiper", {
             spaceBetween: 10,
-            slidesPerView: 4,
+            slidesPerView: 'auto',
             freeMode: true,
             watchSlidesProgress: true,
+            resistance: false,
+            watchOverflow: false,
+            simulateTouch: true,
+            grabCursor: true,
             navigation: {
                 nextEl: '.video-slider .thumbnail-swiper .swiper-button-next',
                 prevEl: '.video-slider .thumbnail-swiper .swiper-button-prev',
+                disabledClass: 'swiper-button-disabled',
             },
             slideToClickedSlide: true,
-            enabled: shouldEnableThumbs, // Полностью отключаем Swiper при одном слайде
+            enabled: shouldEnableThumbs,
             breakpoints: {
-                0: { slidesPerView: 3, spaceBetween: 8 },
-                768: { slidesPerView: 4, spaceBetween: 10 },
-                1024: { slidesPerView: 5, spaceBetween: 25 }
+                0: {
+                    slidesPerView: 'auto',
+                    spaceBetween: 8
+                },
+                768: {
+                    slidesPerView: 'auto',
+                    spaceBetween: 10
+                },
+                1024: {
+                    slidesPerView: 'auto',
+                    spaceBetween: 25
+                }
             }
         });
+
+
+        const updateThumbnailNavigation = () => {
+            if (!thumbnailSwiper.navigation.nextEl || !thumbnailSwiper.navigation.prevEl) return;
+
+            thumbnailSwiper.navigation.nextEl.classList.remove('swiper-button-lock');
+            thumbnailSwiper.navigation.prevEl.classList.remove('swiper-button-lock');
+
+            const isBeginning = thumbnailSwiper.isBeginning;
+            const isEnd = thumbnailSwiper.isEnd;
+
+            thumbnailSwiper.navigation.prevEl.classList.toggle('swiper-button-disabled', isBeginning);
+            thumbnailSwiper.navigation.nextEl.classList.toggle('swiper-button-disabled', isEnd);
+        };
+
+
+        const originalIsEnd = thumbnailSwiper.isEnd;
+        thumbnailSwiper.isEnd = function() {
+            if (this.slides.length <= this.params.slidesPerView) {
+                return true;
+            }
+            return originalIsEnd.call(this);
+        };
+
+
+        thumbnailSwiper.on('init', updateThumbnailNavigation);
+        thumbnailSwiper.on('slideChange', updateThumbnailNavigation);
+        thumbnailSwiper.on('transitionEnd', updateThumbnailNavigation);
+        thumbnailSwiper.on('fromEdge', updateThumbnailNavigation);
+        thumbnailSwiper.on('resize', function() {
+            setTimeout(updateThumbnailNavigation, 50);
+        });
+
+
+        setTimeout(() => {
+            thumbnailSwiper.update();
+            updateThumbnailNavigation();
+        }, 300);
 
 
         newsDetailSlider = new Swiper(".video-slider .main-swiper", {
@@ -760,7 +812,7 @@ export function SlidersInit() {
                 dynamicBullets: true
             },
             thumbs: {
-                swiper: shouldEnableThumbs ? thumbnailSwiper : null // Передаем null если слайд один
+                swiper: shouldEnableThumbs ? thumbnailSwiper : null
             },
             breakpoints: {
                 0: {
@@ -791,6 +843,7 @@ export function SlidersInit() {
                     });
 
                     toggleVideoSliderElements();
+                    initFancyboxForVideoSlider(this);
                 },
                 resize: function () {
                     toggleVideoSliderElements();
@@ -1008,6 +1061,82 @@ export function SlidersInit() {
             }
         }
 
+        function initFancyboxForVideoSlider(swiperInstance) {
+            const sliderContainer = swiperInstance.el;
+            const slides = sliderContainer.querySelectorAll('.swiper-slide');
+            const galleryItems = [];
+
+
+            slides.forEach((slide, index) => {
+                const img = slide.querySelector('img');
+                if (!img) return;
+
+
+                const originalSrc = img.dataset.original || img.dataset.large || img.dataset.src || img.src;
+                const thumbSrc = img.src;
+                const altText = img.alt || `Изображение ${index + 1}`;
+
+                galleryItems.push({
+                    src: originalSrc,
+                    thumb: thumbSrc,
+                    alt: altText
+                });
+
+
+                const imageElement = slide.querySelector('img');
+                if (imageElement) {
+                    imageElement.style.cursor = 'zoom-in';
+                    imageElement.addEventListener('click', (e) => {
+                        e.stopPropagation();
+
+
+                        Fancybox.show(galleryItems, {
+                            startIndex: swiperInstance.activeIndex,
+                            infinite: false,
+                            autoFocus: false,
+                            trapFocus: false,
+                            placeFocusBack: false,
+                            hideScrollbar: false,
+                            parentEl: document.body,
+                            Toolbar: {
+                                display: {
+                                    left: ["infobar"],
+                                    middle: [],
+                                    right: ["close"],
+                                },
+                            },
+                            Thumbs: {
+                                autoStart: true,
+                                type: 'modern'
+                            },
+                            Images: {
+                                zoom: true,
+                                wheel: false,
+                            },
+                            on: {
+
+                                change: (fancybox, carousel, slide) => {
+                                    const currentIndex = slide.index;
+                                    if (swiperInstance && !swiperInstance.destroyed) {
+                                        swiperInstance.slideTo(currentIndex);
+                                    }
+                                },
+
+                                close: () => {
+                                    if (swiperInstance && !swiperInstance.destroyed) {
+                                        const fancybox = Fancybox.getInstance();
+                                        const lastIndex = fancybox ? fancybox.getSlide().index : swiperInstance.activeIndex;
+                                        swiperInstance.slideTo(lastIndex);
+                                    }
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+
+
+        }
 
         toggleVideoSliderElements();
 
