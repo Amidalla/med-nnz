@@ -1066,29 +1066,26 @@ export function SlidersInit() {
             const slides = sliderContainer.querySelectorAll('.swiper-slide');
             const galleryItems = [];
 
-
             slides.forEach((slide, index) => {
                 const img = slide.querySelector('img');
                 if (!img) return;
 
 
-                const originalSrc = img.dataset.original || img.dataset.large || img.dataset.src || img.src;
+                const fullSrc = img.dataset.full || img.dataset.original || img.dataset.large || img.dataset.src || img.src;
                 const thumbSrc = img.src;
                 const altText = img.alt || `Изображение ${index + 1}`;
 
                 galleryItems.push({
-                    src: originalSrc,
+                    src: fullSrc,
                     thumb: thumbSrc,
                     alt: altText
                 });
-
 
                 const imageElement = slide.querySelector('img');
                 if (imageElement) {
                     imageElement.style.cursor = 'zoom-in';
                     imageElement.addEventListener('click', (e) => {
                         e.stopPropagation();
-
 
                         Fancybox.show(galleryItems, {
                             startIndex: swiperInstance.activeIndex,
@@ -1134,12 +1131,9 @@ export function SlidersInit() {
                     });
                 }
             });
-
-
         }
 
         toggleVideoSliderElements();
-
 
         window.addEventListener('resize', function() {
             toggleVideoSliderElements();
