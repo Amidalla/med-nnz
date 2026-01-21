@@ -643,45 +643,65 @@ export function SlidersInit() {
         function initFancyboxForMainSlider(swiperInstance) {
             const sliderContainer = swiperInstance.el;
             const slides = sliderContainer.querySelectorAll('.swiper-slide');
-            const galleryItems = [];
-
 
             slides.forEach((slide, index) => {
                 const img = slide.querySelector('img');
                 if (!img) return;
 
-
-                const originalSrc = img.dataset.original || img.dataset.large || img.dataset.src || img.src;
-                const thumbSrc = img.src;
-                const altText = img.alt || `Изображение ${index + 1}`;
-
-                galleryItems.push({
-                    src: originalSrc,
-                    thumb: thumbSrc,
-                    alt: altText
-                });
-
-
                 const imageElement = slide.querySelector('img');
                 if (imageElement) {
                     imageElement.style.cursor = 'zoom-in';
-                    imageElement.addEventListener('click', (e) => {
+
+                    const newImageElement = imageElement.cloneNode(true);
+                    imageElement.parentNode.replaceChild(newImageElement, imageElement);
+
+                    newImageElement.addEventListener('click', (e) => {
                         e.stopPropagation();
 
+                        const galleryItems = [];
+                        const slides = sliderContainer.querySelectorAll('.swiper-slide');
+
+                        slides.forEach((slideItem, itemIndex) => {
+                            const slideImg = slideItem.querySelector('img');
+                            if (!slideImg) return;
+
+                            const originalSrc = slideImg.dataset.original || slideImg.dataset.large || slideImg.dataset.src || slideImg.src;
+                            const thumbSrc = slideImg.src;
+                            const altText = slideImg.alt || `Изображение ${itemIndex + 1}`;
+
+                            galleryItems.push({
+                                src: originalSrc,
+                                thumb: thumbSrc,
+                                alt: altText
+                            });
+                        });
+
+                        const activeIndex = swiperInstance.activeIndex;
 
                         Fancybox.show(galleryItems, {
-                            startIndex: swiperInstance.activeIndex,
+                            startIndex: activeIndex,
                             infinite: false,
                             autoFocus: false,
                             trapFocus: false,
                             placeFocusBack: false,
                             hideScrollbar: false,
                             parentEl: document.body,
+
+
+                            captions: true,
+                            Captions: {
+                                showOnInit: true,
+                                caption: function(fancybox, carousel, slide) {
+                                    return slide.alt || '';
+                                }
+                            },
+
+
                             Toolbar: {
                                 display: {
-                                    left: ["infobar"],
+                                    left: ["infobar", "counter"],
                                     middle: [],
-                                    right: ["close"],
+                                    right: ["zoom", "slideshow", "fullscreen", "thumbs", "close"],
                                 },
                             },
                             Thumbs: {
@@ -691,17 +711,33 @@ export function SlidersInit() {
                             Images: {
                                 zoom: true,
                                 wheel: false,
+                                click: 'toggleZoom'
                             },
-                            on: {
+                            Slides: {
+                                dragToClose: false
+                            },
 
-                                change: (fancybox, carousel, slide) => {
+
+                            on: {
+                                init: function(fancybox) {
+                                    console.log('Fancybox initialized with captions');
+
+
+                                    createFancyboxCaption();
+                                },
+
+                                change: function(fancybox, carousel, slide) {
                                     const currentIndex = slide.index;
+
+
+                                    updateFancyboxCaption(slide.alt);
+
                                     if (swiperInstance && !swiperInstance.destroyed) {
                                         swiperInstance.slideTo(currentIndex);
                                     }
                                 },
 
-                                close: () => {
+                                close: function() {
                                     if (swiperInstance && !swiperInstance.destroyed) {
                                         const fancybox = Fancybox.getInstance();
                                         const lastIndex = fancybox ? fancybox.getSlide().index : swiperInstance.activeIndex;
@@ -710,13 +746,74 @@ export function SlidersInit() {
                                 }
                             }
                         });
+
+
+                        function createFancyboxCaption() {
+                            setTimeout(() => {
+                                if (!document.querySelector('.fancybox__caption')) {
+                                    const img = document.querySelector('.f-panzoom__content');
+                                    if (img) {
+                                        const caption = document.createElement('div');
+                                        caption.className = 'fancybox__caption';
+                                        caption.textContent = img.alt || '';
+
+
+                                        caption.style.cssText = `
+                                    position: static;
+                                    padding: 10px 20px;
+                                    background: rgba(0, 0, 0, 0.8);
+                                    color: white;
+                                    text-align: center;
+                                    font-size: 14px;
+                                    z-index: 1000;
+                                `;
+
+                                        const container = document.querySelector('.fancybox__container');
+                                        if (container) {
+                                            container.appendChild(caption);
+                                            console.log('Caption created:', img.alt);
+                                        }
+                                    }
+                                }
+                            }, 100);
+                        }
+
+
+                        function updateFancyboxCaption(text) {
+                            let caption = document.querySelector('.fancybox__caption');
+
+                            if (!caption) {
+
+                                caption = document.createElement('div');
+                                caption.className = 'fancybox__caption';
+                                caption.style.cssText = `
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            padding: 10px 20px;
+                            background: rgba(0, 0, 0, 0.8);
+                            color: white;
+                            text-align: center;
+                            font-size: 14px;
+                            z-index: 1000;
+                        `;
+
+                                const container = document.querySelector('.fancybox__container');
+                                if (container) {
+                                    container.appendChild(caption);
+                                }
+                            }
+
+
+                            if (caption) {
+                                caption.textContent = text || '';
+                            }
+                        }
                     });
                 }
             });
-
-
         }
-
         return productCardSlider;
     }
     function initNewsDetailSlider() {

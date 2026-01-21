@@ -5853,7 +5853,7 @@ div.page-bg {
 
     p {
       max-width: 1245px;
-      margin-bottom: 30px;
+      margin-bottom: 15px;
 
       @media (max-width: 1300px) {
         font-size: 16px;
@@ -6187,6 +6187,43 @@ div.page-bg {
 
       .content__inner {
         max-width: 100%;
+
+        .table-box {
+          width: 100%;
+          overflow-x: auto;
+          max-width: calc(100vw - 40px);
+          -webkit-overflow-scrolling: touch;
+
+          table {
+            min-width: 400px;
+          }
+        }
+
+        table {
+          width: 100%;
+          text-align: left;
+          border: none;
+          border-collapse: collapse;
+
+          tr {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px;
+            letter-spacing: .02em;
+            color: #272727;
+
+            td {
+              box-shadow: 0px -1px 0px 0px #bac0c5 inset;
+              padding: 20px 16px;
+              text-align: left;
+              width: auto;
+              border: none !important;
+              p {
+                margin-bottom: 0;
+              }
+            }
+          }
+        }
 
         &.laptop {
           @media (max-width: 1200px) {
