@@ -102,6 +102,7 @@ a {
   }
 
   .marking {
+
     &__wrapper {
 
       .marking-img {
@@ -1583,7 +1584,13 @@ a {
   }
 
   .smart-captcha {
-     width: 300px;
+     width: 340px;
+     max-width: 340px;
+     height: 120px !important;
+
+    @media (max-width: 380px) {
+      width: 320px;
+    }
   }
 
   fieldset {
@@ -2374,6 +2381,7 @@ a {
         }
 
         .item-top {
+
           @media (max-width: 766px) {
             display: flex;
             flex-direction: row;
@@ -4177,7 +4185,7 @@ a {
   ul {
     li {
       font-size: 16px;
-      font-weight: 700;
+      font-weight: 400;
       line-height: 100%;
       letter-spacing: .02em;
       color: #333;
@@ -5305,21 +5313,6 @@ div.page-bg {
         margin-top: -20px;
       }
     }
-
-    .rus {
-      position: static;
-      width: 100%;
-      margin-bottom: 0;
-
-      img {
-        width: 20px;
-        height: 20px;
-
-        @media (max-width: 450px) {
-          margin-top: 0;
-        }
-      }
-    }
   }
 
     &__item {
@@ -5408,6 +5401,10 @@ div.page-bg {
       letter-spacing: 0.02em;
       color: c.$black;
       margin-bottom: 20px;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      overflow: hidden;
 
       @media (max-width: 1300px) {
         max-width: 410px;
@@ -5495,8 +5492,6 @@ div.page-bg {
     }
 
     &__availability {
-      grid-column: 1 / -1;
-      position: absolute;
       bottom: 16px;
       padding: 6px 17px;
       background: #26ae97;
@@ -5507,6 +5502,10 @@ div.page-bg {
       color: #fff;
       text-align: center;
       border-radius: 100px;
+
+      &.no-bg {
+        background: none;
+      }
 
       @media (max-width: 920px) {
         font-size: 16px;
@@ -6681,7 +6680,7 @@ div.page-bg {
 
 .schedule-tabs {
   display: grid;
-  grid-template-columns: 435px minmax(0, 1fr);
+  grid-template-columns: 300px minmax(0, 1fr);
   gap: 26px;
   padding-bottom: 80px;
   align-items: start;
@@ -7059,6 +7058,34 @@ div.page-bg {
         &__title {}
     
         &__info {}
+
+        &__labels {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          align-items: end;
+          gap: 20px;
+          grid-auto-flow: column;
+
+          @media (max-width: 913px) {
+            display: flex;
+            flex-direction: column;
+          }
+
+          .rus {
+            position: static;
+            width: 100%;
+            margin-bottom: 0;
+
+            img {
+              width: 20px;
+              height: 20px;
+
+              @media (max-width: 450px) {
+                margin-top: 0;
+              }
+            }
+          }
+        }
     
         &__text {}
     
@@ -9155,4 +9182,5 @@ h1.visually-hidden {
 
 .smart-captcha {
   min-width: 300px !important;
+  height: 120px !important;
 }

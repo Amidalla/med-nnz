@@ -295,6 +295,7 @@ document.addEventListener('DOMContentLoaded', function() {
         initMobileSearch();
         initSpecsDots();
         initSectionPadding();
+        preventIconWrap();
     }, 100);
 
     const lazyLoadInstance = new LazyLoad();
@@ -314,6 +315,74 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+function preventIconWrap() {
+    document.querySelectorAll('.marking__link').forEach(link => {
+
+        if (link.classList.contains('icon-wrap-fixed')) return;
+
+        const svg = link.querySelector('svg');
+        if (!svg) return;
+
+
+        let fullText = '';
+        const allTextNodes = [];
+
+        Array.from(link.childNodes).forEach(node => {
+            if (node.nodeType === Node.TEXT_NODE) {
+                fullText += node.textContent;
+                allTextNodes.push(node);
+            }
+        });
+
+
+        const trimmedText = fullText.trim();
+
+
+        const words = trimmedText.split(/\s+/);
+        if (words.length === 0) return;
+
+        const lastWord = words[words.length - 1];
+        const lastWordIndex = trimmedText.lastIndexOf(lastWord);
+
+        if (lastWordIndex === -1) return;
+
+
+        const span = document.createElement('span');
+        span.style.whiteSpace = 'nowrap';
+        span.style.display = 'inline-flex';
+        span.style.alignItems = 'center';
+        span.style.gap = '2px';
+
+
+        span.appendChild(document.createTextNode(lastWord));
+
+
+        const nbspNode = document.createTextNode('\u00A0');
+        span.appendChild(nbspNode);
+
+
+        link.removeChild(svg);
+        span.appendChild(svg);
+
+
+        link.innerHTML = '';
+
+
+        if (words.length > 1) {
+            const textBeforeLastWord = trimmedText.substring(0, lastWordIndex).trim();
+            if (textBeforeLastWord) {
+                link.appendChild(document.createTextNode(textBeforeLastWord + ' '));
+            }
+        }
+
+
+        link.appendChild(span);
+
+
+        link.classList.add('icon-wrap-fixed');
+    });
+}
 
 document.addEventListener('DOMContentLoaded', function() {
     const socialBlock = document.querySelector('.social');
