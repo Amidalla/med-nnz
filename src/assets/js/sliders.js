@@ -1164,70 +1164,117 @@ export function SlidersInit() {
             const galleryItems = [];
 
             slides.forEach((slide, index) => {
+
                 const img = slide.querySelector('img');
-                if (!img) return;
 
+                const video = slide.querySelector('iframe');
 
-                const fullSrc = img.dataset.full || img.dataset.original || img.dataset.large || img.dataset.src || img.src;
-                const thumbSrc = img.src;
-                const altText = img.alt || `Изображение ${index + 1}`;
+                if (img) {
 
-                galleryItems.push({
-                    src: fullSrc,
-                    thumb: thumbSrc,
-                    alt: altText
-                });
+                    const fullSrc = img.dataset.full || img.dataset.original || img.dataset.large || img.dataset.src || img.src;
+                    const thumbSrc = img.src;
+                    const altText = img.alt || `Изображение ${index + 1}`;
 
-                const imageElement = slide.querySelector('img');
-                if (imageElement) {
-                    imageElement.style.cursor = 'zoom-in';
-                    imageElement.addEventListener('click', (e) => {
-                        e.stopPropagation();
+                    galleryItems.push({
+                        src: fullSrc,
+                        thumb: thumbSrc,
+                        alt: altText,
+                        type: 'image'
+                    });
 
-                        Fancybox.show(galleryItems, {
-                            startIndex: swiperInstance.activeIndex,
-                            infinite: false,
-                            autoFocus: false,
-                            trapFocus: false,
-                            placeFocusBack: false,
-                            hideScrollbar: false,
-                            parentEl: document.body,
-                            Toolbar: {
-                                display: {
-                                    left: ["infobar"],
-                                    middle: [],
-                                    right: ["close"],
-                                },
-                            },
-                            Thumbs: {
-                                autoStart: true,
-                                type: 'modern'
-                            },
-                            Images: {
-                                zoom: true,
-                                wheel: false,
-                            },
-                            on: {
-
-                                change: (fancybox, carousel, slide) => {
-                                    const currentIndex = slide.index;
-                                    if (swiperInstance && !swiperInstance.destroyed) {
-                                        swiperInstance.slideTo(currentIndex);
-                                    }
-                                },
-
-                                close: () => {
-                                    if (swiperInstance && !swiperInstance.destroyed) {
-                                        const fancybox = Fancybox.getInstance();
-                                        const lastIndex = fancybox ? fancybox.getSlide().index : swiperInstance.activeIndex;
-                                        swiperInstance.slideTo(lastIndex);
-                                    }
-                                }
-                            }
+                    const imageElement = slide.querySelector('img');
+                    if (imageElement) {
+                        imageElement.style.cursor = 'zoom-in';
+                        imageElement.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            openFancybox(galleryItems, index);
                         });
+                    }
+                } else if (video) {
+
+                    const videoSrc = video.src;
+                    const videoTitle = video.title || `Видео ${index + 1}`;
+
+
+                    const thumbnailSwiper = document.querySelector('.video-slider .thumbnail-swiper');
+                    let thumbSrc = '';
+                    if (thumbnailSwiper) {
+                        const thumbnailSlides = thumbnailSwiper.querySelectorAll('.swiper-slide');
+                        if (thumbnailSlides[index]) {
+                            const thumbImg = thumbnailSlides[index].querySelector('img');
+                            if (thumbImg) {
+                                thumbSrc = thumbImg.src || thumbImg.dataset.src || '';
+                            }
+                        }
+                    }
+
+                    galleryItems.push({
+                        src: videoSrc,
+                        thumb: thumbSrc || '',
+                        type: 'iframe',
+                        iframe: {
+                            css: {
+                                width: '80vw',
+                                height: '80vh',
+                                maxWidth: '1200px'
+                            }
+                        },
+                        preload: false,
+                        caption: videoTitle
+                    });
+
+
+                    const slideContent = slide.querySelector('iframe') || slide;
+                    slideContent.style.cursor = 'pointer';
+                    slideContent.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        openFancybox(galleryItems, index);
                     });
                 }
             });
+
+
+            function openFancybox(items, startIndex) {
+                Fancybox.show(items, {
+                    startIndex: startIndex,
+                    infinite: false,
+                    autoFocus: false,
+                    trapFocus: false,
+                    placeFocusBack: false,
+                    hideScrollbar: false,
+                    parentEl: document.body,
+                    Toolbar: {
+                        display: {
+                            left: ["infobar"],
+                            middle: [],
+                            right: ["close"],
+                        },
+                    },
+                    Thumbs: {
+                        autoStart: true,
+                        type: 'modern'
+                    },
+                    Images: {
+                        zoom: true,
+                        wheel: false,
+                    },
+                    on: {
+                        change: (fancybox, carousel, slide) => {
+                            const currentIndex = slide.index;
+                            if (swiperInstance && !swiperInstance.destroyed) {
+                                swiperInstance.slideTo(currentIndex);
+                            }
+                        },
+                        close: () => {
+                            if (swiperInstance && !swiperInstance.destroyed) {
+                                const fancybox = Fancybox.getInstance();
+                                const lastIndex = fancybox ? fancybox.getSlide().index : swiperInstance.activeIndex;
+                                swiperInstance.slideTo(lastIndex);
+                            }
+                        }
+                    }
+                });
+            }
         }
 
         toggleVideoSliderElements();
