@@ -76,6 +76,5 @@ export function InitTabs() {
 window.InitTabs = InitTabs;
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, initializing tabs globally...');
     InitTabs();
 });

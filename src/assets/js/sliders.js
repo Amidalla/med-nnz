@@ -1166,11 +1166,12 @@ export function SlidersInit() {
             slides.forEach((slide, index) => {
 
                 const img = slide.querySelector('img');
+                const iframe = slide.querySelector('iframe');
+                const videoElement = slide.querySelector('video.video-media');
+                const videoPoster = slide.querySelector('.video-poster');
 
-                const video = slide.querySelector('iframe');
 
-                if (img) {
-
+                if (img && !img.classList.contains('video-poster')) {
                     const fullSrc = img.dataset.full || img.dataset.original || img.dataset.large || img.dataset.src || img.src;
                     const thumbSrc = img.src;
                     const altText = img.alt || `Изображение ${index + 1}`;
@@ -1182,19 +1183,16 @@ export function SlidersInit() {
                         type: 'image'
                     });
 
-                    const imageElement = slide.querySelector('img');
-                    if (imageElement) {
-                        imageElement.style.cursor = 'zoom-in';
-                        imageElement.addEventListener('click', (e) => {
-                            e.stopPropagation();
-                            openFancybox(galleryItems, index);
-                        });
-                    }
-                } else if (video) {
+                    img.style.cursor = 'zoom-in';
+                    img.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        openFancybox(galleryItems, index);
+                    });
+                }
 
-                    const videoSrc = video.src;
-                    const videoTitle = video.title || `Видео ${index + 1}`;
-
+                else if (iframe) {
+                    const videoSrc = iframe.src;
+                    const videoTitle = iframe.title || `Видео ${index + 1}`;
 
                     const thumbnailSwiper = document.querySelector('.video-slider .thumbnail-swiper');
                     let thumbSrc = '';
@@ -1223,7 +1221,6 @@ export function SlidersInit() {
                         caption: videoTitle
                     });
 
-
                     const slideContent = slide.querySelector('iframe') || slide;
                     slideContent.style.cursor = 'pointer';
                     slideContent.addEventListener('click', (e) => {
@@ -1231,8 +1228,86 @@ export function SlidersInit() {
                         openFancybox(galleryItems, index);
                     });
                 }
-            });
 
+                else if (videoElement) {
+                    const videoSrc = videoElement.src ||
+                        (videoElement.querySelector('source') ? videoElement.querySelector('source').src : '') ||
+                        videoElement.dataset.src;
+
+                    if (!videoSrc) return;
+
+
+                    let thumbSrc = '';
+                    if (videoPoster) {
+                        thumbSrc = videoPoster.src || '';
+                    }
+
+
+                    if (!thumbSrc) {
+                        const thumbnailSwiper = document.querySelector('.video-slider .thumbnail-swiper');
+                        if (thumbnailSwiper) {
+                            const thumbnailSlides = thumbnailSwiper.querySelectorAll('.swiper-slide');
+                            if (thumbnailSlides[index]) {
+                                const thumbImg = thumbnailSlides[index].querySelector('img');
+                                if (thumbImg) {
+                                    thumbSrc = thumbImg.src || thumbImg.dataset.src || '';
+                                }
+                            }
+                        }
+                    }
+
+                    const videoTitle = videoElement.title || videoElement.alt || `Видео ${index + 1}`;
+
+
+                    galleryItems.push({
+                        html: `
+                    <div class="fancybox-video-container">
+                        <video 
+                            class="fancybox-video" 
+                            controls 
+                            playsinline
+                            ${thumbSrc ? `poster="${thumbSrc}"` : ''}
+                            style="width: 100%; height: 100%; max-width: 1200px; max-height: 80vh; background: #000;"
+                        >
+                            <source src="${videoSrc}" type="video/mp4">
+                            Ваш браузер не поддерживает видео тег.
+                        </video>
+                    </div>
+                `,
+                        thumb: thumbSrc || '',
+                        type: 'html',
+                        caption: videoTitle,
+                        video: {
+                            autoStart: false,
+                            controls: true
+                        }
+                    });
+
+
+                    const clickableArea = videoPoster || slide;
+                    clickableArea.style.cursor = 'pointer';
+                    clickableArea.addEventListener('click', (e) => {
+
+                        const playBtn = slide.querySelector('.main-video-btn');
+                        if (playBtn && (playBtn === e.target || playBtn.contains(e.target))) {
+                            return;
+                        }
+
+                        e.stopPropagation();
+                        openFancybox(galleryItems, index);
+                    });
+
+
+                    const videoBtn = slide.querySelector('.thumbnail-video-btn');
+                    if (videoBtn) {
+                        videoBtn.style.cursor = 'pointer';
+                        videoBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            openFancybox(galleryItems, index);
+                        });
+                    }
+                }
+            });
 
             function openFancybox(items, startIndex) {
                 Fancybox.show(items, {
@@ -1259,18 +1334,50 @@ export function SlidersInit() {
                         wheel: false,
                     },
                     on: {
+                        init: function(fancybox) {
+                            console.log('Fancybox initialized for mixed content');
+                        },
+
+                        load: function(fancybox, slide) {
+
+                            if (slide.type === 'html') {
+                                const video = slide.$container.querySelector('.fancybox-video');
+                                if (video) {
+
+                                    video.style.width = '100%';
+                                    video.style.height = '100%';
+                                    video.style.objectFit = 'contain';
+                                    video.style.backgroundColor = '#000';
+                                }
+                            }
+                        },
+
                         change: (fancybox, carousel, slide) => {
                             const currentIndex = slide.index;
                             if (swiperInstance && !swiperInstance.destroyed) {
                                 swiperInstance.slideTo(currentIndex);
                             }
+
+
+                            document.querySelectorAll('.fancybox-video').forEach(video => {
+                                if (video.closest('.fancybox__slide') !== slide.$container) {
+                                    video.pause();
+                                }
+                            });
                         },
+
                         close: () => {
                             if (swiperInstance && !swiperInstance.destroyed) {
                                 const fancybox = Fancybox.getInstance();
                                 const lastIndex = fancybox ? fancybox.getSlide().index : swiperInstance.activeIndex;
                                 swiperInstance.slideTo(lastIndex);
                             }
+
+
+                            document.querySelectorAll('.fancybox-video').forEach(video => {
+                                video.pause();
+                                video.currentTime = 0;
+                            });
                         }
                     }
                 });

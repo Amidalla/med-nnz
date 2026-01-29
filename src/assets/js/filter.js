@@ -35,18 +35,18 @@ export function InitFilter() {
                     e.preventDefault();
                     e.stopPropagation();
 
-                    // Переключаем класс collapsed
+
                     item.classList.toggle('collapsed');
 
                     if (item.classList.contains('collapsed')) {
-                        // Закрываем
+
                         content.style.maxHeight = '0';
                         content.style.overflow = 'hidden';
                         if (arrow) {
                             arrow.style.transform = 'rotate(0deg)';
                         }
                     } else {
-                        // Открываем
+
                         const scrollHeight = content.scrollHeight;
                         content.style.maxHeight = scrollHeight + 'px';
                         setTimeout(() => {
@@ -76,7 +76,6 @@ export function InitFilter() {
     function initLoadSlider() {
         const container = document.querySelector('.load-sliders');
         if (!container) {
-            console.log('Slider container not found');
             return;
         }
 
@@ -94,7 +93,7 @@ export function InitFilter() {
         rangeFill.style.position = 'absolute';
         rangeFill.style.top = '50%';
         rangeFill.style.height = '5px';
-        rangeFill.style.background = '#FF0000'; // Сохраняем оригинальный цвет
+        rangeFill.style.background = '#FF0000';
         rangeFill.style.transform = 'translateY(-50%)';
         rangeFill.style.borderRadius = '100px';
         rangeFill.style.zIndex = '1';
@@ -179,13 +178,13 @@ export function InitFilter() {
             updateRangeFill();
         };
 
-        // Устанавливаем границы значений
+
         minInput.min = minAvailableValue;
         minInput.max = maxAvailableValue;
         maxInput.min = minAvailableValue;
         maxInput.max = maxAvailableValue;
 
-        // Обработчики фокуса
+
         minInput.addEventListener('focus', function() {
             isMinInputActive = true;
         });
@@ -194,7 +193,7 @@ export function InitFilter() {
             isMaxInputActive = true;
         });
 
-        // Обработчики ввода
+
         minInput.addEventListener('input', function() {
             updateSingleInput(this, this.value, 'min');
         });
@@ -203,7 +202,7 @@ export function InitFilter() {
             updateSingleInput(this, this.value, 'max');
         });
 
-        // Обработчики потери фокуса
+
         minInput.addEventListener('blur', function() {
             let value = parseInt(this.value);
             if (isNaN(value)) {
@@ -226,7 +225,7 @@ export function InitFilter() {
             finalizeInput('max');
         });
 
-        // Обработчики для слайдеров
+
         minSlider.addEventListener('input', function() {
             if (parseInt(minSlider.value) > parseInt(maxSlider.value)) {
                 minSlider.value = maxSlider.value;
@@ -245,7 +244,6 @@ export function InitFilter() {
     }
 
     function init() {
-        console.log('Initializing filter...');
         initFilterAccordion();
         initLoadSlider();
     }

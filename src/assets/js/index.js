@@ -134,9 +134,7 @@ function initSpecsDots() {
                 } else {
                     dots.style.width = '0px';
                 }
-            } catch (error) {
-                console.warn('Error calculating dots width:', error);
-            }
+            } catch (error) {}
         });
     }
 
@@ -152,7 +150,6 @@ function initSpecsDots() {
 
 function initSectionPadding() {
     function adjustSectionPadding() {
-        // 1. Логика для catalog-directory, catalog-section
         const sections = document.querySelectorAll('.catalog-directory, .catalog-section');
 
         sections.forEach(section => {
@@ -174,17 +171,14 @@ function initSectionPadding() {
             }
         });
 
-
         const newsDetailSections = document.querySelectorAll('.news-detail');
 
         newsDetailSections.forEach(newsDetail => {
             let nextElement = newsDetail.nextElementSibling;
 
-
             while (nextElement && nextElement.nodeType === 3 && nextElement.textContent.trim() === '') {
                 nextElement = nextElement.nextElementSibling;
             }
-
 
             const isNextContentNews = nextElement &&
                 nextElement.classList &&
@@ -192,19 +186,13 @@ function initSectionPadding() {
                 nextElement.classList.contains('news');
 
             if (isNextContentNews) {
-
                 newsDetail.style.paddingBottom = '0';
                 newsDetail.style.marginBottom = '0';
-
-
                 nextElement.style.paddingTop = '0';
                 nextElement.style.marginTop = '0';
             } else {
-
                 newsDetail.style.paddingBottom = '';
                 newsDetail.style.marginBottom = '';
-
-
                 const contentNewsSections = document.querySelectorAll('.content.news');
                 contentNewsSections.forEach(section => {
                     section.style.paddingTop = '';
@@ -212,7 +200,6 @@ function initSectionPadding() {
                 });
             }
         });
-
 
         const pageNameElements = document.querySelectorAll('.page-name');
 
@@ -255,6 +242,105 @@ function initSectionPadding() {
 
     const lazyLoadInstance = new LazyLoad({
         callback_loaded: adjustSectionPadding
+    });
+}
+
+function initPhoneMasks() {
+    const phoneInputs = document.querySelectorAll(`
+        input[type="tel"][name="tel"],
+        input[type="tel"][name="representative-phone"],
+        input[type="tel"][data-phone-input]
+    `);
+
+    phoneInputs.forEach(input => {
+        let mask = null;
+
+        input.addEventListener('focus', () => {
+            if (!mask) {
+                input.classList.add('phone-mask-active');
+                mask = IMask(input, {
+                    mask: '+{7} (000) 000-00-00',
+                    lazy: false
+                });
+
+                if (!input.value) {
+                    input.value = '+7 (';
+                }
+            }
+        });
+
+        input.addEventListener('blur', () => {
+            if (mask) {
+                const phoneNumber = input.value.replace(/\D/g, '');
+                if (phoneNumber.length < 11 || phoneNumber === '7') {
+                    input.value = '';
+                }
+                input.classList.remove('phone-mask-active');
+                mask.destroy();
+                mask = null;
+            }
+        });
+
+        input.addEventListener('input', (e) => {
+            if (mask && input.value === '+7 (' && e.inputType === 'deleteContentBackward') {
+                input.value = '';
+                input.classList.remove('phone-mask-active');
+                mask.destroy();
+                mask = null;
+            }
+        });
+    });
+}
+
+function initMasks() {
+    const maskedInputs = document.querySelectorAll('[data-mask]');
+    maskedInputs.forEach(input => {
+        const maskType = input.dataset.mask;
+        switch(maskType) {
+            case 'phone':
+                IMask(input, {
+                    mask: '+{7} (000) 000-00-00'
+                });
+                break;
+            case 'card':
+                IMask(input, {
+                    mask: '0000 0000 0000 0000'
+                });
+                break;
+            case 'date':
+                IMask(input, {
+                    mask: '00.00.0000'
+                });
+                break;
+            case 'cvc':
+                IMask(input, {
+                    mask: '000'
+                });
+                break;
+            case 'inn-legal':
+                IMask(input, {
+                    mask: '0000000000',
+                    lazy: true,
+                    placeholderChar: ' '
+                });
+                break;
+            default:
+                if (input.dataset.maskPattern) {
+                    IMask(input, {
+                        mask: input.dataset.maskPattern
+                    });
+                }
+                break;
+        }
+    });
+
+    const phoneInputs = document.querySelectorAll('input[data-phone-input]');
+    phoneInputs.forEach(input => {
+        if (!input.hasAttribute('data-mask')) {
+            IMask(input, {
+                mask: '+{7} (000) 000-00-00'
+            });
+        }
     });
 }
 
@@ -301,6 +387,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const lazyLoadInstance = new LazyLoad();
 
     initPhoneMasks();
+    initMasks();
 
     const submitButton = document.querySelector('.submit-btn');
     const checkbox = document.querySelector('input[name="checkbox"]');
@@ -318,12 +405,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function preventIconWrap() {
     document.querySelectorAll('.marking__link').forEach(link => {
-
         if (link.classList.contains('icon-wrap-fixed')) return;
 
         const svg = link.querySelector('svg');
         if (!svg) return;
-
 
         let fullText = '';
         const allTextNodes = [];
@@ -335,10 +420,7 @@ function preventIconWrap() {
             }
         });
 
-
         const trimmedText = fullText.trim();
-
-
         const words = trimmedText.split(/\s+/);
         if (words.length === 0) return;
 
@@ -347,27 +429,18 @@ function preventIconWrap() {
 
         if (lastWordIndex === -1) return;
 
-
         const span = document.createElement('span');
         span.style.whiteSpace = 'nowrap';
         span.style.display = 'inline-flex';
         span.style.alignItems = 'center';
         span.style.gap = '2px';
 
-
         span.appendChild(document.createTextNode(lastWord));
-
-
         const nbspNode = document.createTextNode('\u00A0');
         span.appendChild(nbspNode);
-
-
         link.removeChild(svg);
         span.appendChild(svg);
-
-
         link.innerHTML = '';
-
 
         if (words.length > 1) {
             const textBeforeLastWord = trimmedText.substring(0, lastWordIndex).trim();
@@ -376,10 +449,7 @@ function preventIconWrap() {
             }
         }
 
-
         link.appendChild(span);
-
-
         link.classList.add('icon-wrap-fixed');
     });
 }
