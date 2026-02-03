@@ -1,22 +1,25 @@
 export function InitMobileCards() {
+
+    const isHomePage = document.body.classList.contains('page-main');
+
+
+    if (!isHomePage) return;
+
     const cardsList = document.querySelector('.cards__list');
     const cardsItems = document.querySelectorAll('.cards__item');
 
     if (cardsItems.length <= 3) return;
-
 
     let isExpanded = false;
     let currentButton = null;
 
     addAnimationStyles();
 
-
     function createButton() {
         const button = document.createElement('button');
         button.className = 'show-more-btn';
         button.textContent = 'Показать еще';
         button.type = 'button';
-
 
         button.style.cssText = `
             display: block;
@@ -35,7 +38,6 @@ export function InitMobileCards() {
 
         return button;
     }
-
 
     function addAnimationStyles() {
         const style = document.createElement('style');
@@ -64,7 +66,6 @@ export function InitMobileCards() {
         document.head.appendChild(style);
     }
 
-
     function hideItem(item) {
         item.classList.remove('visible');
         item.classList.add('hidden');
@@ -81,10 +82,8 @@ export function InitMobileCards() {
         }, 10);
     }
 
-
     function toggleItemsVisibility() {
         if (isExpanded) {
-
             cardsItems.forEach((item, index) => {
                 if (index >= 3) {
                     showItem(item);
@@ -94,7 +93,6 @@ export function InitMobileCards() {
                 currentButton.textContent = 'Скрыть';
             }
         } else {
-
             cardsItems.forEach((item, index) => {
                 if (index >= 3) {
                     hideItem(item);
@@ -106,7 +104,6 @@ export function InitMobileCards() {
         }
     }
 
-
     function manageMobileView() {
         if (window.innerWidth <= 600) {
             // На мобильных
@@ -114,14 +111,12 @@ export function InitMobileCards() {
                 currentButton = createButton();
                 cardsList.parentNode.appendChild(currentButton);
 
-
                 currentButton.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
 
                     isExpanded = !isExpanded;
                     toggleItemsVisibility();
-
 
                     setTimeout(() => {
                         if (isExpanded) {
@@ -139,16 +134,14 @@ export function InitMobileCards() {
                 });
             }
 
-
             toggleItemsVisibility();
 
         } else {
-
+            // На десктопе
             if (currentButton) {
                 currentButton.remove();
                 currentButton = null;
             }
-
 
             isExpanded = false;
             cardsItems.forEach(item => {
@@ -158,11 +151,8 @@ export function InitMobileCards() {
         }
     }
 
-
     function initialize() {
-
         isExpanded = false;
-
 
         cardsItems.forEach((item, index) => {
             if (index < 3) {
@@ -177,9 +167,7 @@ export function InitMobileCards() {
         manageMobileView();
     }
 
-
     initialize();
-
 
     let resizeTimeout;
     window.addEventListener('resize', () => {

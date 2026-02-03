@@ -19,6 +19,43 @@
     padding-bottom: 48px;
   }
 
+  &__mobile-btn {
+    display: none;
+
+    @media (max-width: 1359px) {
+      display: flex;
+      align-items: center;
+    }
+    
+    @media (max-width: 460px) {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+    }
+
+    .filter-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
+      color: #fff;
+      padding: 13px 14px;
+      background: #e11a1a;
+      border-radius: 5px;
+      border: none;
+      transition: background-color .3s ease;
+      width: 165px;
+      height: 42px;
+
+      &:hover {
+        background: #bb0202;
+      }
+    }
+  }
+
   &__inner {
     display: grid;
     grid-template-columns: 282px 1fr;
@@ -31,7 +68,26 @@
 
   &__left {
     @media (max-width: 1359px) {
-      display: none;
+      opacity: 0;
+      visibility: hidden;
+      width: 0;
+      height: 0;
+      right: -100%;
+      transition: right .3s ease;
+
+      &.active {
+        position: fixed;
+        top: 0;
+        right: 0;
+        visibility: visible;
+        z-index: 1002;
+        opacity: 1;
+        max-width: 623px;
+        width: 100%;
+        height: 100vh;
+        overflow-y: auto;
+        background: #f5f7fa;
+      }
     }
   }
 
@@ -43,6 +99,11 @@
   background: #F5F7FA;
   padding: 24px 15px 24px 15px;
   border-radius: 10px;
+  
+  @media (max-width: 1359px) {
+    border: none;
+    padding: 50px 15px 24px 15px;
+  }
 
 
     &__arrow {
@@ -337,5 +398,24 @@
 
   &:hover {
     background: #BB0202;
+  }
+}
+
+.mobile-filter-close {
+  display: none;
+
+  @media (max-width: 1359px) {
+    display: block;
+    position: absolute;
+    top: 15px;
+    right: 22px;
+    cursor: pointer;
+  }
+
+  svg {
+    @media (max-width: 450px) {
+      width: 32px;
+      height: 32px;
+    }
   }
 }

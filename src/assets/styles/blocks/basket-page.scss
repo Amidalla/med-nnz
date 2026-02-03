@@ -191,6 +191,7 @@
     position: sticky;
     top: 0;
 
+
     &__btn {
         @include red-button;
         width: 100%;
@@ -215,6 +216,7 @@
         font-size: 16px;
         border-top: 1px dashed #CDD5E2;
         padding-top: 24px;
+        display: none;
         
         a {
             color: $red;

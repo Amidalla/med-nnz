@@ -1295,6 +1295,14 @@ a {
     justify-content: center;
     background: c.$white;
 
+    a {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+
     img {
       @media (max-width: 1300px) {
         max-width: 146px;
@@ -3398,6 +3406,11 @@ a {
               border-left: none;
               border-top-right-radius: 5px;
               border-bottom-right-radius: 5px;
+
+              @media (max-width: 600px) {
+                border-radius: 5px;
+                border: 1px solid #9EABB9;
+              }
             }
 
             svg path {
@@ -3478,7 +3491,7 @@ a {
             }
 
             @media (max-width: 600px) {
-              display: none;
+              display: none !important;
             }
 
           }
@@ -3500,6 +3513,15 @@ a {
           &:hover {
             background: #A8A8A8;
             color: c.$white;
+
+            @media (max-width: 600px) {
+              background: #fff;
+              width: 40px;
+              height: 40px;
+              border: 1px solid #9eabb9;
+              overflow: hidden;
+              border-radius: 5px;
+            }
 
             span:last-child {
               background: #BB0202;
@@ -3731,6 +3753,11 @@ a {
       padding: 8px 24px;
       margin-bottom: 10px;
 
+      a {
+        display: inline-block;
+        margin-bottom: 15px;
+      }
+
       svg {
         width: 190px;
         height: 48px;
@@ -3750,7 +3777,7 @@ a {
 
       & > span {
         & > span {
-          font-size: 20px;
+          font-size: 16px;
           color: #6D6D6D;
 
           @media (max-width: 1400px) {
@@ -5298,7 +5325,7 @@ div.page-bg {
   &__media {
     min-width: 170px;
     grid-column: auto;
-    
+
     @media (max-width: 920px) {
       min-width: 141px;
     }
@@ -5315,14 +5342,14 @@ div.page-bg {
   }
 
     &__item {
-      background: c.$white;
+      background: #fff;
       padding: 29px 39px 16px 39px;
       border-radius: 20px;
-      transition: all 0.3s ease;
+      transition: all .3s ease;
       max-width: 593px;
       min-height: 303px;
       position: relative;
-      
+
       @media (max-width: 1700px) {
         padding: 29px 22px 16px 22px;
       }
@@ -5339,14 +5366,6 @@ div.page-bg {
           grid-column: auto;
         }
         &:last-child {
-          grid-column: 1 / -1;
-
-          .promotions__text {
-            flex-direction: row;
-            justify-content: flex-start;
-            align-items: end;
-            gap: 23px;
-          }
 
          .promotions__availability {
             text-align: right;
@@ -5371,7 +5390,6 @@ div.page-bg {
 
           .promotions__text {
             flex-direction: column;
-            justify-content: flex-end;
             align-items: start;
           }
 
@@ -5397,8 +5415,8 @@ div.page-bg {
       font-size: 18px;
       font-weight: 500;
       line-height: 130%;
-      letter-spacing: 0.02em;
-      color: c.$black;
+      letter-spacing: .02em;
+      color: #333;
       margin-bottom: 20px;
       display: -webkit-box;
       -webkit-box-orient: vertical;
@@ -5430,20 +5448,52 @@ div.page-bg {
       justify-content: start;
       margin-top: 30px;
 
+      @media (max-width: 760px) {
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+        gap: 8px;
+      }
+
       @media (max-width: 450px) {
         margin-top: 0;
       }
     }
 
+    &__media {
+      max-height: 152px;
+    }
+
+    &__labels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      gap: 20px;
+      grid-auto-flow: column;
+      margin-top: auto;
+
+      @media (max-width: 913px) {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .rus {
+        position: static;
+        width: 100%;
+        margin-bottom: 0;
+      }
+    }
+
     &__label {
+
       &.discount {
         padding: 6px 17px;
-        background: #E11A1A;
+        background: #e11a1a;
         font-size: 18px;
         font-weight: 500;
         line-height: 130%;
-        letter-spacing: 0.02em;
-        color: c.$white;
+        letter-spacing: .02em;
+        color: #fff;
         text-align: center;
         border-radius: 100px;
         max-width: 124px;
@@ -5455,12 +5505,12 @@ div.page-bg {
 
       &.sale {
         padding: 6px 17px;
-        background: #26AE97;
+        background: #26ae97;
         font-size: 18px;
         font-weight: 500;
         line-height: 130%;
-        letter-spacing: 0.02em;
-        color: c.$white;
+        letter-spacing: .02em;
+        color: #fff;
         text-align: center;
         border-radius: 100px;
         max-width: 210px;
@@ -5476,7 +5526,7 @@ div.page-bg {
       font-size: 50px;
       font-weight: 500;
       line-height: 130%;
-      color: #E11A1A;
+      color: #e11a1a;
       margin-top: 5px;
       white-space: nowrap;
 
@@ -8795,6 +8845,14 @@ div.page-bg {
 
   &__slider {
     height: 100%;
+
+    .swiper-slide {
+      height: 608px;
+
+      @media (max-width: 450px) {
+        height: 523px;
+      }
+    }
   }
 
   .video-media {
@@ -8843,7 +8901,7 @@ div.page-bg {
   .header_hidden_left {
     &.absolute {
       position: absolute;
-      top: 188px;
+      top: 80px;
       left: 40px;
 
       @media (max-width: 1700px) {
@@ -9257,4 +9315,14 @@ h1.visually-hidden {
 .smart-captcha {
   min-width: 300px !important;
   height: 120px !important;
+}
+
+ol {
+  li {
+    list-style-type: decimal;
+    list-style-position: outside;
+    display: list-item;
+    margin-left: 20px;
+    margin-bottom: 16px;
+  }
 }

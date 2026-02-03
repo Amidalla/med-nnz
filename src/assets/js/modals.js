@@ -22,7 +22,6 @@ export function InitModals() {
         modal.classList.add('active');
         btn.classList.add('active');
 
-
         setTimeout(() => {
             isOpen = true;
             isOpening = false;
@@ -37,7 +36,6 @@ export function InitModals() {
         modal.classList.remove('active');
         btn.classList.remove('active');
 
-
         setTimeout(() => {
             isOpen = false;
             isClosing = false;
@@ -47,11 +45,9 @@ export function InitModals() {
     }
 
     function scheduleCloseCheck() {
-
         if (animationTimeout) {
             clearTimeout(animationTimeout);
         }
-
 
         animationTimeout = setTimeout(() => {
             if (!isHoveringBtn && !isHoveringNav && isOpen && !isOpening) {
@@ -60,7 +56,6 @@ export function InitModals() {
         }, 100);
     }
 
-
     btn.addEventListener('mouseenter', () => {
         isHoveringBtn = true;
         if (!isOpen && !isOpening) {
@@ -68,29 +63,23 @@ export function InitModals() {
         }
     });
 
-
     btn.addEventListener('mouseleave', () => {
         isHoveringBtn = false;
         scheduleCloseCheck();
     });
 
-
     modalNav.addEventListener('mouseenter', () => {
         isHoveringNav = true;
-
     });
-
 
     modalNav.addEventListener('mouseleave', () => {
         isHoveringNav = false;
         scheduleCloseCheck();
     });
 
-
     btn.addEventListener('click', (e) => {
         if (isOpen) {
             closeModal();
-
         }
     });
 
@@ -110,7 +99,6 @@ export function InitModals() {
         e.stopPropagation();
     });
 }
-
 
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenu = document.querySelector('.mobile-menu');
@@ -273,7 +261,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        // Добавляем обработчики для кнопок request-offer
         const requestOfferBtns = document.querySelectorAll('.request-offer');
         if (requestOfferBtns.length > 0) {
             requestOfferBtns.forEach(requestOfferBtn => {
@@ -451,5 +438,72 @@ document.addEventListener('DOMContentLoaded', function() {
         consultationModal.addEventListener('click', (e) => {
             e.stopPropagation();
         });
+    }
+
+
+    const filterBtn = document.querySelector('.filter-btn');
+    const mobileFilterCloseBtn = document.querySelector('.mobile-filter-close');
+    const catalogSectionLeft = document.querySelector('.catalog-section__left');
+    const catalogSectionRight = document.querySelector('.catalog-section__right');
+
+    if (filterBtn && catalogSectionLeft && catalogSectionRight && overlay) {
+        let isFilterOpen = false;
+        const mediaQuery = window.matchMedia('(max-width: 1359px)');
+
+        function isMobileFilter() {
+            return mediaQuery.matches;
+        }
+
+        function openFilter() {
+            if (isFilterOpen || !isMobileFilter()) return;
+
+            document.body.style.overflow = 'hidden';
+            catalogSectionLeft.classList.add('active');
+            overlay.classList.add('active');
+            isFilterOpen = true;
+        }
+
+        function closeFilter() {
+            if (!isFilterOpen) return;
+
+            document.body.style.overflow = '';
+            catalogSectionLeft.classList.remove('active');
+            overlay.classList.remove('active');
+            isFilterOpen = false;
+        }
+
+        filterBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openFilter();
+        });
+
+        if (mobileFilterCloseBtn) {
+            mobileFilterCloseBtn.addEventListener('click', closeFilter);
+        }
+
+        overlay.addEventListener('click', (e) => {
+            if (isFilterOpen) {
+                closeFilter();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (isFilterOpen && e.key === 'Escape') {
+                closeFilter();
+            }
+        });
+
+        catalogSectionLeft.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+
+        function handleMediaChange(e) {
+            if (!e.matches && isFilterOpen) {
+                closeFilter();
+            }
+        }
+
+        mediaQuery.addListener(handleMediaChange);
     }
 });

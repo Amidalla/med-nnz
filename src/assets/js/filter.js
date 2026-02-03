@@ -12,18 +12,10 @@ export function InitFilter() {
 
                 if (!header || !content) return;
 
-
                 content.style.cssText = '';
-
-
                 content.style.transition = 'max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
-
-
                 item.classList.remove('collapsed');
-
                 item.classList.add('filter-variants__item--open');
-
-
                 content.style.maxHeight = content.scrollHeight + 'px';
                 content.style.overflow = 'visible';
 
@@ -35,18 +27,15 @@ export function InitFilter() {
                     e.preventDefault();
                     e.stopPropagation();
 
-
                     item.classList.toggle('collapsed');
 
                     if (item.classList.contains('collapsed')) {
-
                         content.style.maxHeight = '0';
                         content.style.overflow = 'hidden';
                         if (arrow) {
                             arrow.style.transform = 'rotate(0deg)';
                         }
                     } else {
-
                         const scrollHeight = content.scrollHeight;
                         content.style.maxHeight = scrollHeight + 'px';
                         setTimeout(() => {
@@ -67,11 +56,26 @@ export function InitFilter() {
         });
     }
 
+    function checkAndToggleFilterButton() {
+        const leftSection = document.querySelector('.catalog-section__left');
+        const filterBtn = document.querySelector('.filter-btn');
 
-    document.addEventListener('DOMContentLoaded', function() {
-        initFilterAccordion();
-    });
+        if (!filterBtn) {
+            return;
+        }
 
+        if (leftSection) {
+            const hasFilterElements = leftSection.querySelector('.filter-variants') !== null;
+
+            if (hasFilterElements) {
+                filterBtn.style.display = '';
+            } else {
+                filterBtn.style.display = 'none';
+            }
+        } else {
+            filterBtn.style.display = 'none';
+        }
+    }
 
     function initLoadSlider() {
         const container = document.querySelector('.load-sliders');
@@ -178,12 +182,10 @@ export function InitFilter() {
             updateRangeFill();
         };
 
-
         minInput.min = minAvailableValue;
         minInput.max = maxAvailableValue;
         maxInput.min = minAvailableValue;
         maxInput.max = maxAvailableValue;
-
 
         minInput.addEventListener('focus', function() {
             isMinInputActive = true;
@@ -193,7 +195,6 @@ export function InitFilter() {
             isMaxInputActive = true;
         });
 
-
         minInput.addEventListener('input', function() {
             updateSingleInput(this, this.value, 'min');
         });
@@ -201,7 +202,6 @@ export function InitFilter() {
         maxInput.addEventListener('input', function() {
             updateSingleInput(this, this.value, 'max');
         });
-
 
         minInput.addEventListener('blur', function() {
             let value = parseInt(this.value);
@@ -225,7 +225,6 @@ export function InitFilter() {
             finalizeInput('max');
         });
 
-
         minSlider.addEventListener('input', function() {
             if (parseInt(minSlider.value) > parseInt(maxSlider.value)) {
                 minSlider.value = maxSlider.value;
@@ -246,6 +245,7 @@ export function InitFilter() {
     function init() {
         initFilterAccordion();
         initLoadSlider();
+        checkAndToggleFilterButton();
     }
 
     if (document.readyState === 'loading') {
