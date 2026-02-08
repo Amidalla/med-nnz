@@ -343,9 +343,11 @@
 
     &__bottom {
         display: flex;
+        gap: 20px;
 
-        @media (max-width: 750px) {
+        @media (max-width: 1060px) {
             flex-direction: column;
+            gap: 10px;
         }
 
         div {
@@ -434,7 +436,7 @@
 .development {
     margin-left: auto;
 
-    @media (max-width: 750px) {
+    @media (max-width: 1060px) {
         margin-left: 0;
     }
 }

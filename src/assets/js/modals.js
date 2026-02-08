@@ -1,4 +1,5 @@
 export function InitModals() {
+    return;
     // Модальное окно каталога
     const modal = document.querySelector('.modal-catalog');
     const btn = document.querySelector('.catalog-btn');

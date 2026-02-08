@@ -382,25 +382,13 @@ document.addEventListener('DOMContentLoaded', function() {
         initSpecsDots();
         initSectionPadding();
         preventIconWrap();
+        preventScheduleIconWrap();
     }, 100);
 
     const lazyLoadInstance = new LazyLoad();
 
     initPhoneMasks();
     initMasks();
-
-    const submitButton = document.querySelector('.submit-btn');
-    const checkbox = document.querySelector('input[name="checkbox"]');
-
-    if (checkbox) {
-        checkbox.checked = true;
-    }
-
-    submitButton?.addEventListener('click', function() {
-        if (checkbox && !checkbox.checked) {
-            checkbox.checked = true;
-        }
-    });
 });
 
 function preventIconWrap() {
@@ -451,6 +439,57 @@ function preventIconWrap() {
 
         link.appendChild(span);
         link.classList.add('icon-wrap-fixed');
+    });
+}
+
+function preventScheduleIconWrap() {
+    document.querySelectorAll('.schedule__link').forEach(link => {
+        if (link.classList.contains('icon-wrap-fixed-schedule')) return;
+
+        const svg = link.querySelector('svg');
+        if (!svg) return;
+
+        let fullText = '';
+        const allTextNodes = [];
+
+        Array.from(link.childNodes).forEach(node => {
+            if (node.nodeType === Node.TEXT_NODE) {
+                fullText += node.textContent;
+                allTextNodes.push(node);
+            }
+        });
+
+        const trimmedText = fullText.trim();
+        const words = trimmedText.split(/\s+/);
+        if (words.length === 0) return;
+
+        const lastWord = words[words.length - 1];
+        const lastWordIndex = trimmedText.lastIndexOf(lastWord);
+
+        if (lastWordIndex === -1) return;
+
+        const span = document.createElement('span');
+        span.style.whiteSpace = 'nowrap';
+        span.style.display = 'inline-flex';
+        span.style.alignItems = 'center';
+        span.style.gap = '2px';
+
+        span.appendChild(document.createTextNode(lastWord));
+        const nbspNode = document.createTextNode('\u00A0');
+        span.appendChild(nbspNode);
+        link.removeChild(svg);
+        span.appendChild(svg);
+        link.innerHTML = '';
+
+        if (words.length > 1) {
+            const textBeforeLastWord = trimmedText.substring(0, lastWordIndex).trim();
+            if (textBeforeLastWord) {
+                link.appendChild(document.createTextNode(textBeforeLastWord + ' '));
+            }
+        }
+
+        link.appendChild(span);
+        link.classList.add('icon-wrap-fixed-schedule');
     });
 }
 

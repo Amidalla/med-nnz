@@ -529,7 +529,7 @@ a {
   img {
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center 45%;
   }
 }
@@ -4448,6 +4448,82 @@ div.page-bg {
     padding-bottom: 40px;
   }
 
+  ul {
+    li {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 120%;
+      letter-spacing: .02em;
+      color: #333;
+      margin-bottom: 16px;
+      padding-left: 15px;
+      position: relative;
+
+      ul {
+        margin-top: 16px;
+
+        li {
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 120%;
+          letter-spacing: .02em;
+          color: #333;
+          margin-bottom: 8px;
+          padding-left: 15px;
+          position: relative;
+
+          &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #e11a1a;
+          }
+
+          ul {
+            margin-top: 16px;
+
+            li {
+              font-size: 16px;
+              font-weight: 400;
+              line-height: 120%;
+              letter-spacing: .02em;
+              color: #333;
+              margin-bottom: 8px;
+              padding-left: 15px;
+              position: relative;
+
+              &::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 6px;
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background: transparent;
+                border: 1px solid #e11a1a;
+              }
+            }
+          }
+        }
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 1px;
+        width: 4px;
+        height: 13px;
+        background: url('../images/red-arrow.svg') no-repeat;
+      }
+    }
+  }
+
   .container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -4602,6 +4678,82 @@ div.page-bg {
     padding-bottom: 48px;
   }
 
+
+  ul {
+    li {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 120%;
+      letter-spacing: .02em;
+      color: #333;
+      margin-bottom: 16px;
+      padding-left: 15px;
+      position: relative;
+
+      ul {
+        margin-top: 16px;
+
+        li {
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 120%;
+          letter-spacing: .02em;
+          color: #333;
+          margin-bottom: 8px;
+          padding-left: 15px;
+          position: relative;
+
+          &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #e11a1a;
+          }
+
+          ul {
+            margin-top: 16px;
+
+            li {
+              font-size: 16px;
+              font-weight: 400;
+              line-height: 120%;
+              letter-spacing: .02em;
+              color: #333;
+              margin-bottom: 8px;
+              padding-left: 15px;
+              position: relative;
+
+              &::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 6px;
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background: transparent;
+                border: 1px solid #e11a1a;
+              }
+            }
+          }
+        }
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 1px;
+        width: 4px;
+        height: 13px;
+        background: url('../images/red-arrow.svg') no-repeat;
+      }
+    }
+  }
 
 
    .container {
@@ -5246,6 +5398,7 @@ div.page-bg {
   width: 223px;
   margin: 0 auto;
   margin-top: 48px;
+  font-size: 16px;
 
   @media (max-width: 1700px) {
     margin-top: 42px;
@@ -5687,7 +5840,7 @@ div.page-bg {
         li {
           font-size: 16px;
           font-weight: 400;
-          line-height: 100%;
+          line-height: 120%;
           letter-spacing: .02em;
           color: #333;
           margin-bottom: 16px;
@@ -5900,7 +6053,7 @@ div.page-bg {
       li {
         font-size: 16px;
         font-weight: 700;
-        line-height: 100%;
+        line-height: 120%;
         letter-spacing: .02em;
         color: #333;
         margin-bottom: 16px;
@@ -8904,14 +9057,14 @@ div.page-bg {
       top: 80px;
       left: 40px;
 
-      @media (max-width: 1700px) {
+      /*@media (max-width: 1700px) {
         top: 210px;
         left: 22px;
       }
       @media (max-width: 1300px) {
         top: 133px;
         left: 50px;
-      }
+      }*/
       @media (max-width: 700px) {
         top: 51.5px;
         left: 18px;
@@ -9144,6 +9297,11 @@ main {
     span {
       font-size: 14px;
     }
+    a {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 
   .catalog-btn {
@@ -9324,5 +9482,13 @@ ol {
     display: list-item;
     margin-left: 20px;
     margin-bottom: 16px;
+  }
+}
+
+.about-section {
+  padding-top: 46px;
+  
+  @media (max-width: 1359px) {
+    padding-top: 24px;
   }
 }
