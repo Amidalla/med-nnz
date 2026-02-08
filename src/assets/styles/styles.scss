@@ -4969,7 +4969,7 @@ div.page-bg {
     }
 
     &__year {
-      font-size: 70px;
+      font-size: 50px;
       font-weight: 700;
       line-height: 60px;
       background: linear-gradient(180deg, #475D7D -39.71%, #F3F5F8 416.18%);
@@ -4977,10 +4977,7 @@ div.page-bg {
       background-clip: text;
       color: transparent;
       margin-bottom: 38px;
-      
-      @media (max-width: 1700px) {
-        font-size: 70px;
-      }
+
       @media (max-width: 1300px) {
         font-size: 40px;
       }
