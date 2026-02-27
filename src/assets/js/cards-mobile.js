@@ -1,7 +1,5 @@
 export function InitMobileCards() {
-
     const isHomePage = document.body.classList.contains('page-main');
-
 
     if (!isHomePage) return;
 
@@ -14,6 +12,62 @@ export function InitMobileCards() {
     let currentButton = null;
 
     addAnimationStyles();
+
+    function addAnimationStyles() {
+        const style = document.createElement('style');
+        style.textContent = `
+            .cards__list {
+                position: relative;
+            }
+            
+            .cards__item {
+                transition: opacity 0.3s ease, transform 0.3s ease !important;
+            }
+            
+            .cards__item.hidden-mobile,
+            .cards__item.hidden-desktop,
+            .cards__item.hidden-tablet,
+            .cards__item.hidden-small-tablet {
+                position: absolute !important;
+                opacity: 0 !important;
+                transform: translateY(-10px) !important;
+                pointer-events: none;
+                max-height: 0;
+                margin: 0;
+                padding: 0;
+                border: 0;
+                width: 0;
+                height: 0;
+                overflow: hidden;
+                z-index: -1;
+            }
+            
+            @media (max-width: 600px) {
+                .cards__item.hidden-mobile {
+                    display: block !important;
+                }
+            }
+            
+            @media (min-width: 601px) and (max-width: 1000px) {
+                .cards__item.hidden-small-tablet {
+                    display: block !important;
+                }
+            }
+            
+            @media (min-width: 1001px) and (max-width: 1300px) {
+                .cards__item.hidden-tablet {
+                    display: block !important;
+                }
+            }
+            
+            @media (min-width: 1301px) {
+                .cards__item.hidden-desktop {
+                    display: block !important;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
 
     function createButton() {
         const button = document.createElement('button');
@@ -39,74 +93,61 @@ export function InitMobileCards() {
         return button;
     }
 
-    function addAnimationStyles() {
-        const style = document.createElement('style');
-        style.textContent = `
-            .cards__item {
-                transition: all 0.4s ease-in-out;
-                overflow: hidden;
-            }
-            
-            @media (max-width: 600px) {
-                .cards__item.hidden {
-                    opacity: 0;
-                    max-height: 0;
-                    margin: 0;
-                    padding: 0;
-                    transform: translateY(-10px);
-                }
-                
-                .cards__item.visible {
-                    opacity: 1;
-                    max-height: 1000px;
-                    transform: translateY(0);
-                }
-            }
-        `;
-        document.head.appendChild(style);
+    function getLimit() {
+        const width = window.innerWidth;
+        if (width <= 600) return 3;
+        if (width <= 1000) return 2;
+        if (width <= 1300) return 3;
+        return 4;
     }
 
-    function hideItem(item) {
-        item.classList.remove('visible');
-        item.classList.add('hidden');
-        setTimeout(() => {
-            item.style.display = 'none';
-        }, 400);
-    }
-
-    function showItem(item) {
-        item.style.display = 'grid';
-        setTimeout(() => {
-            item.classList.remove('hidden');
-            item.classList.add('visible');
-        }, 10);
+    function getHiddenClass() {
+        const width = window.innerWidth;
+        if (width <= 600) return 'hidden-mobile';
+        if (width <= 1000) return 'hidden-small-tablet';
+        if (width <= 1300) return 'hidden-tablet';
+        return 'hidden-desktop';
     }
 
     function toggleItemsVisibility() {
+        const limit = getLimit();
+        const hiddenClass = getHiddenClass();
+
         if (isExpanded) {
-            cardsItems.forEach((item, index) => {
-                if (index >= 3) {
-                    showItem(item);
-                }
+            cardsItems.forEach(item => {
+                item.classList.remove('hidden-mobile', 'hidden-desktop', 'hidden-tablet', 'hidden-small-tablet');
             });
-            if (currentButton) {
-                currentButton.textContent = 'Скрыть';
-            }
+            currentButton.textContent = 'Скрыть';
         } else {
             cardsItems.forEach((item, index) => {
-                if (index >= 3) {
-                    hideItem(item);
+                if (index >= limit) {
+                    item.classList.add(hiddenClass);
+                } else {
+                    item.classList.remove('hidden-mobile', 'hidden-desktop', 'hidden-tablet', 'hidden-small-tablet');
                 }
             });
-            if (currentButton) {
-                currentButton.textContent = 'Показать еще';
-            }
+            currentButton.textContent = 'Показать еще';
+
+            setTimeout(() => {
+                cardsItems[0].scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 300);
         }
+
+        setTimeout(() => {
+            if (window.checkAnimations) {
+                window.checkAnimations();
+            }
+        }, 350);
     }
 
-    function manageMobileView() {
-        if (window.innerWidth <= 600) {
-            // На мобильных
+    function manageView() {
+        const limit = getLimit();
+        const hiddenClass = getHiddenClass();
+
+        if (window.innerWidth <= 600 || window.innerWidth >= 601) {
             if (!currentButton) {
                 currentButton = createButton();
                 cardsList.parentNode.appendChild(currentButton);
@@ -117,27 +158,18 @@ export function InitMobileCards() {
 
                     isExpanded = !isExpanded;
                     toggleItemsVisibility();
-
-                    setTimeout(() => {
-                        if (isExpanded) {
-                            currentButton.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'nearest'
-                            });
-                        } else {
-                            cardsItems[0].scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
-                            });
-                        }
-                    }, isExpanded ? 100 : 400);
                 });
             }
 
-            toggleItemsVisibility();
+            cardsItems.forEach((item, index) => {
+                if (index >= limit) {
+                    item.classList.add(hiddenClass);
+                } else {
+                    item.classList.remove('hidden-mobile', 'hidden-desktop', 'hidden-tablet', 'hidden-small-tablet');
+                }
+            });
 
         } else {
-            // На десктопе
             if (currentButton) {
                 currentButton.remove();
                 currentButton = null;
@@ -145,26 +177,32 @@ export function InitMobileCards() {
 
             isExpanded = false;
             cardsItems.forEach(item => {
-                item.style.display = 'grid';
-                item.classList.remove('hidden', 'visible');
+                item.classList.remove('hidden-mobile', 'hidden-desktop', 'hidden-tablet', 'hidden-small-tablet');
             });
+
+            if (window.checkAnimations) {
+                window.checkAnimations();
+            }
         }
     }
 
     function initialize() {
-        isExpanded = false;
+        const limit = getLimit();
+        const hiddenClass = getHiddenClass();
 
         cardsItems.forEach((item, index) => {
-            if (index < 3) {
-                item.classList.add('visible');
-                item.style.display = 'grid';
-            } else {
-                item.style.display = 'none';
-                item.classList.remove('hidden', 'visible');
+            if (index >= limit) {
+                item.classList.add(hiddenClass);
             }
         });
 
-        manageMobileView();
+        manageView();
+
+        setTimeout(() => {
+            if (window.checkAnimations) {
+                window.checkAnimations();
+            }
+        }, 300);
     }
 
     initialize();
@@ -172,6 +210,6 @@ export function InitMobileCards() {
     let resizeTimeout;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(manageMobileView, 250);
+        resizeTimeout = setTimeout(manageView, 250);
     });
 }

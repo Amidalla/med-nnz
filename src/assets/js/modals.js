@@ -441,6 +441,46 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    const submittedModal = document.querySelector('.form-submitted');
+    const submittedModalClose = submittedModal?.querySelector('.modal__close, .form-submitted__close, [data-close]');
+
+    if (submittedModal && submittedModalClose && overlay) {
+        submittedModalClose.addEventListener('click', () => {
+            if (submittedModal.classList.contains('opened')) {
+                document.body.style.overflow = '';
+
+                const anyModalOpen = document.querySelector('.call-modal.opened, .offer-modal.opened, .review-modal.opened, .vacancy-modal.opened, .consultation-modal.opened, .modal-catalog.active');
+
+                if (!anyModalOpen) {
+                    overlay.classList.remove('active');
+                }
+            }
+        });
+
+        overlay.addEventListener('click', (e) => {
+            if (submittedModal.classList.contains('opened')) {
+                document.body.style.overflow = '';
+
+                const anyModalOpen = document.querySelector('.call-modal.opened, .offer-modal.opened, .review-modal.opened, .vacancy-modal.opened, .consultation-modal.opened, .modal-catalog.active');
+
+                if (!anyModalOpen) {
+                    overlay.classList.remove('active');
+                }
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (submittedModal.classList.contains('opened') && e.key === 'Escape') {
+                document.body.style.overflow = '';
+
+                const anyModalOpen = document.querySelector('.call-modal.opened, .offer-modal.opened, .review-modal.opened, .vacancy-modal.opened, .consultation-modal.opened, .modal-catalog.active');
+
+                if (!anyModalOpen) {
+                    overlay.classList.remove('active');
+                }
+            }
+        });
+    }
 
     const filterBtn = document.querySelector('.filter-btn');
     const mobileFilterCloseBtn = document.querySelector('.mobile-filter-close');
