@@ -1,6 +1,6 @@
 export function InitVideo() {
     document.addEventListener('DOMContentLoaded', function() {
-        // Обработка обычных видео
+
         const videoContainers = document.querySelectorAll('.video-container:not(.rutube-container)');
         let currentlyPlaying = null;
 
@@ -15,7 +15,7 @@ export function InitVideo() {
                     currentlyPlaying.pause();
                     currentlyPlaying.parentElement.classList.remove('video-playing');
 
-                    // Показываем кнопку воспроизведения у остановленного видео
+
                     const stoppedPlayBtn = currentlyPlaying.parentElement.querySelector('.play-button');
                     if (stoppedPlayBtn) {
                         stoppedPlayBtn.style.display = 'flex';
@@ -26,7 +26,7 @@ export function InitVideo() {
                     video.play().then(() => {
                         container.classList.add('video-playing');
                         currentlyPlaying = video;
-                        // Скрываем кнопку воспроизведения при воспроизведении
+
                         playBtn.style.display = 'none';
                     }).catch(error => {
                         console.error('Ошибка воспроизведения видео:', error);
@@ -35,7 +35,7 @@ export function InitVideo() {
                     video.pause();
                     container.classList.remove('video-playing');
                     currentlyPlaying = null;
-                    // Показываем кнопку воспроизведения при паузе
+
                     playBtn.style.display = 'flex';
                 }
             }
@@ -56,7 +56,7 @@ export function InitVideo() {
                 video.addEventListener('ended', function() {
                     container.classList.remove('video-playing');
                     currentlyPlaying = null;
-                    // Показываем кнопку воспроизведения при окончании
+
                     playBtn.style.display = 'flex';
                 });
 
@@ -65,7 +65,7 @@ export function InitVideo() {
                     if (currentlyPlaying === video) {
                         currentlyPlaying = null;
                     }
-                    // Показываем кнопку воспроизведения при паузе
+
                     playBtn.style.display = 'flex';
                 });
 
@@ -76,7 +76,7 @@ export function InitVideo() {
             }
         });
 
-        // Обработка видео в слайдерах
+
         const videoSliders = document.querySelectorAll('.video-slider');
         videoSliders.forEach(slider => {
             const videos = slider.querySelectorAll('video');
@@ -117,14 +117,14 @@ export function InitVideo() {
                         video.style.display = 'none';
                     });
 
-                    // Инициализация - скрываем видео, показываем постер и кнопку
+
                     video.style.display = 'none';
                     if (poster) poster.style.display = 'block';
                     if (playBtn) playBtn.style.display = 'flex';
                 }
             });
 
-            // Обработка кнопок воспроизведения в слайдерах
+
             playBtns.forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -143,7 +143,7 @@ export function InitVideo() {
             });
         });
 
-        // Обработка Rutube видео - ИСПРАВЛЕННЫЙ ВАРИАНТ
+
         document.querySelectorAll('.rutube-container').forEach(container => {
             const playBtn = container.querySelector('.play-button');
             const videoId = container.getAttribute('data-video-id');
@@ -154,12 +154,12 @@ export function InitVideo() {
                     e.stopPropagation();
                     e.preventDefault();
 
-                    // Сохраняем стили контейнера перед заменой
+
                     const originalWidth = container.style.width || getComputedStyle(container).width;
                     const originalHeight = container.style.height || getComputedStyle(container).height;
                     const originalDisplay = container.style.display || getComputedStyle(container).display;
 
-                    // Создаем iframe с сохраненными размерами
+
                     const iframe = document.createElement('iframe');
                     iframe.width = originalWidth || '753.5';
                     iframe.height = originalHeight || '423.84';
@@ -171,17 +171,17 @@ export function InitVideo() {
                     iframe.setAttribute('allowFullScreen', '');
                     iframe.style.cssText = 'border: none; width: 100%; height: 100%; display: block;';
 
-                    // Сохраняем структуру и стили контейнера
+
                     container.style.width = originalWidth;
                     container.style.height = originalHeight;
                     container.style.display = originalDisplay;
 
-                    // Заменяем содержимое контейнера на iframe
+
                     container.innerHTML = '';
                     container.appendChild(iframe);
                     container.classList.remove('rutube-container');
 
-                    // Восстанавливаем класс контейнера для единообразия
+
                     container.classList.add('video-container');
                 });
             }
@@ -193,7 +193,7 @@ export function InitVideo() {
                 currentlyPlaying.parentElement.classList.remove('video-playing');
                 currentlyPlaying = null;
 
-                // Показываем кнопку воспроизведения при клике вне видео
+
                 const stoppedPlayBtn = currentlyPlaying?.parentElement?.querySelector('.play-button');
                 if (stoppedPlayBtn) {
                     stoppedPlayBtn.style.display = 'flex';
