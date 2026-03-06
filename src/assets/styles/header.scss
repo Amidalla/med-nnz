@@ -146,6 +146,10 @@
     margin-left: auto;
   }
 
+  @media (max-width: 1180px) {
+    margin-left: 0;
+  }
+
   a {
     color: #626262;
     outline: none;
