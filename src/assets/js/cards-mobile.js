@@ -21,7 +21,7 @@ export function InitMobileCards() {
             }
             
             .cards__item {
-                transition: opacity 0.3s ease, transform 0.3s ease !important;
+                transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease !important;
             }
             
             .cards__item.hidden-mobile,

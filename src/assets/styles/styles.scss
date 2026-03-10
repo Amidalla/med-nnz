@@ -822,6 +822,7 @@ a {
       overflow: hidden;
       display: grid;
       grid-template-rows: auto 1fr;
+      transition: box-shadow 0.3s ease;
 
       &:hover {
         box-shadow: 0px 2px 27.9px 0px #A8A8A8B8;
@@ -7046,6 +7047,11 @@ div.page-bg {
 
   .cards__title h4 a {
     font-size: 18px;
+    color: #333;
+
+    &:hover {
+      color: #e11a1a;
+    }
   }
 
 

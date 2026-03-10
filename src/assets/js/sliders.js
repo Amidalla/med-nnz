@@ -143,7 +143,7 @@ export function SlidersInit() {
         if (!sliderElement) return;
 
         mainPictureSlider = new Swiper(".main-picture__slider", {
-            autoplay: false,
+            autoplay: true,
             speed: 1000,
             slidesPerView: 1,
             spaceBetween: 0,
