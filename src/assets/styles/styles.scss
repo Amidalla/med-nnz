@@ -2850,6 +2850,17 @@ a {
     @media (max-width: 600px) {
       grid-template-columns: repeat(1, 1fr);
     }
+
+    h4 {
+      a {
+        color: #000;
+        transition: all 0.3s ease;
+
+        &:hover {
+          color: #e11a1a;
+        }
+      }
+    }
   }
 }
 
@@ -4215,6 +4226,7 @@ a {
       font-weight: 400;
       line-height: 100%;
       letter-spacing: .02em;
+      line-height: 120%;
       color: #333;
       margin-bottom: 16px;
       padding-left: 15px;
@@ -4455,6 +4467,7 @@ div.page-bg {
       font-weight: 400;
       line-height: 120%;
       letter-spacing: .02em;
+      line-height: 150%;
       color: #333;
       margin-bottom: 16px;
       padding-left: 15px;
@@ -6666,7 +6679,7 @@ div.page-bg {
         li {
           font-size: 16px;
           font-weight: 400;
-          line-height: 100%;
+          line-height: 120%;
           letter-spacing: .02em;
           color: #333;
           margin-bottom: 16px;
@@ -7782,7 +7795,7 @@ div.page-bg {
         li {
           font-size: 16px;
           font-weight: 400;
-          line-height: 150%;
+          line-height: 120%;
           letter-spacing: 0.02em;
           color: c.$black;
           margin-bottom: 15px;
@@ -8411,7 +8424,7 @@ div.page-bg {
     li {
       font-size: 16px;
       font-weight: 400;
-      line-height: 150%;
+      line-height: 120%;
       letter-spacing: 0.02em;
       color: #333333;
       margin-bottom: 24px;
@@ -8592,10 +8605,12 @@ div.page-bg {
   @include red-button;
   margin-left: 0;
   font-size: 16px;
+  margin-top: 30px;
 
   @media (max-width: 1300px) {
     font-size: 16px;
     height: 40px;
+    margin-top: 20px;
   }
   @media (max-width: 450px) {
     width: 100%;

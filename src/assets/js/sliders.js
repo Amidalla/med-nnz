@@ -13,6 +13,31 @@ export function SlidersInit() {
     let productsSaleSlider;
     let mainPictureSlider;
 
+    // Функция для проверки видимости слайдера партнеров
+    function checkPartnersVisibility() {
+        if (!partnersSlider) return;
+
+        const sliderElement = partnersSlider.el;
+        if (!sliderElement) return;
+
+        const rect = sliderElement.getBoundingClientRect();
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+
+        // Слайдер считается видимым, если он появился в области видимости (с запасом 15% от верха)
+        const isVisible = rect.top <= windowHeight * 0.85 && rect.bottom >= 0;
+
+        // Управление автопрокруткой
+        if (isVisible && window.innerWidth > 650) {
+            if (partnersSlider.autoplay && partnersSlider.autoplay.running === false) {
+                partnersSlider.autoplay.start();
+            }
+        } else {
+            if (partnersSlider.autoplay && partnersSlider.autoplay.running === true) {
+                partnersSlider.autoplay.stop();
+            }
+        }
+    }
+
     function initCustomProgressBar(swiper, sliderType = 'partners') {
         if (sliderType === 'excellence') return;
 
@@ -138,6 +163,7 @@ export function SlidersInit() {
             }
         });
     }
+
     function initMainPictureSlider() {
         const sliderElement = document.querySelector(".main-picture__slider");
         if (!sliderElement) return;
@@ -256,7 +282,10 @@ export function SlidersInit() {
     function initPartnersSlider() {
         partnersSlider = new Swiper(".partners-slider", {
             autoplay: {
-                delay: 3000
+                delay: 3000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+                stopOnLastSlide: false
             },
             slidesPerView: 2.2,
             loop: true,
@@ -280,14 +309,27 @@ export function SlidersInit() {
                     const sliderElement = this.el;
 
                     sliderElement.addEventListener('mouseenter', () => {
-                        this.autoplay.stop();
+                        if (this.autoplay.running) {
+                            this.autoplay.stop();
+                        }
                     });
 
                     sliderElement.addEventListener('mouseleave', () => {
-                        this.autoplay.start();
+                        // Проверяем видимость при уходе мыши
+                        setTimeout(() => {
+                            checkPartnersVisibility();
+                        }, 100);
                     });
 
                     initCustomProgressBar(this, 'partners');
+
+                    // Изначально останавливаем автопрокрутку
+                    this.autoplay.stop();
+
+                    // Проверяем видимость через небольшую задержку
+                    setTimeout(() => {
+                        checkPartnersVisibility();
+                    }, 300);
                 },
                 slideChange: function () {
                     updateCustomProgressBar(this, 'partners');
@@ -297,6 +339,9 @@ export function SlidersInit() {
                 },
                 resize: function () {
                     toggleProgressBar();
+                    setTimeout(() => {
+                        checkPartnersVisibility();
+                    }, 100);
                 }
             }
         });
@@ -499,6 +544,7 @@ export function SlidersInit() {
             }
         });
     }
+
     function initProductCardSlider() {
 
         const thumbnailSwiper = new Swiper(".product-card__slider .thumbnail-swiper", {
@@ -765,6 +811,7 @@ export function SlidersInit() {
 
         return productCardSlider;
     }
+
     function initNewsDetailSlider() {
 
         function shouldShowThumbnails() {
@@ -1382,10 +1429,38 @@ export function SlidersInit() {
         }
     }
 
+    // Добавляем слушатель скролла для проверки видимости слайдера партнеров
+    function initScrollListener() {
+        let ticking = false;
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    checkPartnersVisibility();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // Проверяем при загрузке
+        window.addEventListener('load', () => {
+            setTimeout(checkPartnersVisibility, 300);
+        });
+
+        // Проверяем сразу
+        setTimeout(checkPartnersVisibility, 300);
+    }
+
     window.addEventListener('resize', toggleProgressBar);
 
     initAllSliders();
     toggleProgressBar();
+
+    // Инициализируем слушатель скролла
+    if (document.querySelector(".partners-slider")) {
+        initScrollListener();
+    }
 }
 
 export default SlidersInit;
