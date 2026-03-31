@@ -546,7 +546,37 @@ export function SlidersInit() {
     }
 
     function initProductCardSlider() {
+        const mainSliderElement = document.querySelector(".product-card__slider .main-swiper");
+        if (!mainSliderElement) return;
 
+
+        const slides = mainSliderElement.querySelectorAll('.swiper-slide');
+        const hasMultipleSlides = slides.length > 1;
+
+
+        if (!hasMultipleSlides) {
+
+            const thumbnailContainer = document.querySelector('.product-card__slider .thumbnail-swiper');
+            if (thumbnailContainer) {
+                thumbnailContainer.style.display = 'none';
+            }
+
+
+            const navigation = document.querySelector('.product-card__slider .main-swiper .swiper-navigation');
+            if (navigation) {
+                navigation.style.display = 'none';
+            }
+
+
+            const pagination = document.querySelector('.product-card__slider .main-swiper .swiper-pagination');
+            if (pagination) {
+                pagination.style.display = 'none';
+            }
+
+            return;
+        }
+
+        // Инициализация миниатюр только если слайдов больше одного
         const thumbnailSwiper = new Swiper(".product-card__slider .thumbnail-swiper", {
             spaceBetween: 10,
             slidesPerView: 'auto',
@@ -577,7 +607,6 @@ export function SlidersInit() {
             }
         });
 
-
         const updateThumbnailNavigation = () => {
             if (!thumbnailSwiper.navigation.nextEl || !thumbnailSwiper.navigation.prevEl) return;
 
@@ -591,7 +620,6 @@ export function SlidersInit() {
             thumbnailSwiper.navigation.nextEl.classList.toggle('swiper-button-disabled', isEnd);
         };
 
-
         const originalIsEnd = thumbnailSwiper.isEnd;
         thumbnailSwiper.isEnd = function() {
             if (this.slides.length <= this.params.slidesPerView) {
@@ -599,7 +627,6 @@ export function SlidersInit() {
             }
             return originalIsEnd.call(this);
         };
-
 
         thumbnailSwiper.on('init', updateThumbnailNavigation);
         thumbnailSwiper.on('slideChange', updateThumbnailNavigation);
@@ -609,12 +636,10 @@ export function SlidersInit() {
             setTimeout(updateThumbnailNavigation, 50);
         });
 
-
         setTimeout(() => {
             thumbnailSwiper.update();
             updateThumbnailNavigation();
         }, 300);
-
 
         const productCardSlider = new Swiper(".product-card__slider .main-swiper", {
             speed: 300,
@@ -647,7 +672,6 @@ export function SlidersInit() {
             },
             on: {
                 init: function () {
-
                     const lazyImages = this.el.querySelectorAll('.lazy');
                     lazyImages.forEach(img => {
                         if (img.dataset.src) {
@@ -656,10 +680,7 @@ export function SlidersInit() {
                         }
                     });
 
-
                     toggleProductCardElements();
-
-
                     initFancyboxForMainSlider(this);
                 },
                 resize: function () {
@@ -667,7 +688,6 @@ export function SlidersInit() {
                 }
             }
         });
-
 
         function toggleProductCardElements() {
             const thumbnails = document.querySelector('.product-card__slider .thumbnail-swiper');
@@ -685,16 +705,13 @@ export function SlidersInit() {
             }
         }
 
-
         function initFancyboxForMainSlider(swiperInstance) {
             const sliderContainer = swiperInstance.el;
             const slides = sliderContainer.querySelectorAll('.swiper-slide');
 
-
             const galleryItems = [];
 
             slides.forEach((slide, index) => {
-
                 let img = slide.querySelector('img:not(.label img)');
                 if (!img) {
                     img = slide.querySelector('img');
@@ -702,11 +719,9 @@ export function SlidersInit() {
 
                 if (!img) return;
 
-
                 const originalSrc = img.dataset.original || img.dataset.large || img.dataset.src || img.src;
                 const thumbSrc = img.src;
                 const altText = img.alt || `Изображение ${index + 1}`;
-
 
                 galleryItems.push({
                     src: originalSrc,
@@ -715,16 +730,12 @@ export function SlidersInit() {
                     caption: altText
                 });
 
-
                 img.style.cursor = 'zoom-in';
-
-
                 img.dataset.slideIndex = index;
 
                 img.addEventListener('click', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
-
 
                     const clickedIndex = parseInt(img.dataset.slideIndex) || 0;
 
@@ -737,19 +748,15 @@ export function SlidersInit() {
                         hideScrollbar: false,
                         parentEl: document.body,
 
-
                         caption: function(fancybox, carousel, slide) {
-
                             return slide.caption || slide.alt || '';
                         },
-
 
                         showCaption: true,
                         Caption: {
                             showOnInit: true,
                             updateOnMove: true
                         },
-
 
                         Toolbar: {
                             display: {
@@ -771,11 +778,9 @@ export function SlidersInit() {
                             dragToClose: false
                         },
 
-
                         on: {
                             init: function(fancybox) {
                                 console.log('Fancybox initialized with captions');
-
 
                                 setTimeout(() => {
                                     const caption = fancybox.container.querySelector('.fancybox__caption');
@@ -789,7 +794,6 @@ export function SlidersInit() {
 
                             change: function(fancybox, carousel, slide) {
                                 const currentIndex = slide.index;
-
 
                                 if (swiperInstance && !swiperInstance.destroyed) {
                                     swiperInstance.slideTo(currentIndex);
