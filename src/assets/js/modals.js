@@ -1,113 +1,120 @@
 export function InitModals() {
-    return;
-    // Модальное окно каталога
+
     const modal = document.querySelector('.modal-catalog');
     const btn = document.querySelector('.catalog-btn');
     const modalNav = document.querySelector('.modal-catalog__nav');
 
-    if (!modal || !btn || !modalNav) return;
+    if (modal && btn && modalNav) {
+        let isOpen = false;
+        let isHoveringBtn = false;
+        let isHoveringNav = false;
+        let animationTimeout = null;
+        let isClosing = false;
+        let isOpening = false;
 
-    let isOpen = false;
-    let isHoveringBtn = false;
-    let isHoveringNav = false;
-    let animationTimeout = null;
-    let isClosing = false;
-    let isOpening = false;
+        function openModal() {
+            if (isOpening || isOpen) return;
 
-    function openModal() {
-        if (isOpening || isOpen) return;
-
-        isOpening = true;
-        isClosing = false;
-        document.body.style.overflow = 'hidden';
-        modal.classList.add('active');
-        btn.classList.add('active');
-
-        setTimeout(() => {
-            isOpen = true;
-            isOpening = false;
-        }, 300);
-    }
-
-    function closeModal() {
-        if (isClosing || !isOpen || isOpening) return;
-
-        isClosing = true;
-        document.body.style.overflow = '';
-        modal.classList.remove('active');
-        btn.classList.remove('active');
-
-        setTimeout(() => {
-            isOpen = false;
+            isOpening = true;
             isClosing = false;
-            isHoveringBtn = false;
-            isHoveringNav = false;
-        }, 300);
-    }
+            modal.classList.add('active');
+            btn.classList.add('active');
 
-    function scheduleCloseCheck() {
-        if (animationTimeout) {
-            clearTimeout(animationTimeout);
+            setTimeout(() => {
+                isOpen = true;
+                isOpening = false;
+            }, 300);
         }
 
-        animationTimeout = setTimeout(() => {
-            if (!isHoveringBtn && !isHoveringNav && isOpen && !isOpening) {
+        function closeModal() {
+            if (isClosing || !isOpen || isOpening) return;
+
+            isClosing = true;
+            modal.classList.remove('active');
+            btn.classList.remove('active');
+
+            setTimeout(() => {
+                isOpen = false;
+                isClosing = false;
+                isHoveringBtn = false;
+                isHoveringNav = false;
+            }, 300);
+        }
+
+        function scheduleCloseCheck() {
+            if (animationTimeout) {
+                clearTimeout(animationTimeout);
+            }
+
+            animationTimeout = setTimeout(() => {
+                if (!isHoveringBtn && !isHoveringNav && isOpen && !isOpening) {
+                    closeModal();
+                }
+            }, 100);
+        }
+
+        btn.addEventListener('mouseenter', () => {
+            isHoveringBtn = true;
+            if (!isOpen && !isOpening) {
+                openModal();
+            }
+        });
+
+        btn.addEventListener('mouseleave', () => {
+            isHoveringBtn = false;
+            scheduleCloseCheck();
+        });
+
+        if (modalNav) {
+            modalNav.addEventListener('mouseenter', () => {
+                isHoveringNav = true;
+            });
+
+            modalNav.addEventListener('mouseleave', () => {
+                isHoveringNav = false;
+                scheduleCloseCheck();
+            });
+        }
+
+        btn.addEventListener('click', (e) => {
+            if (isOpen) {
                 closeModal();
             }
-        }, 100);
+        });
+
+        document.addEventListener('click', (e) => {
+            if (isOpen && !isOpening && modal && !modal.contains(e.target) && btn && !btn.contains(e.target)) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (isOpen && !isOpening && e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        }
     }
 
-    btn.addEventListener('mouseenter', () => {
-        isHoveringBtn = true;
-        if (!isOpen && !isOpening) {
-            openModal();
-        }
-    });
 
-    btn.addEventListener('mouseleave', () => {
-        isHoveringBtn = false;
-        scheduleCloseCheck();
-    });
-
-    modalNav.addEventListener('mouseenter', () => {
-        isHoveringNav = true;
-    });
-
-    modalNav.addEventListener('mouseleave', () => {
-        isHoveringNav = false;
-        scheduleCloseCheck();
-    });
-
-    btn.addEventListener('click', (e) => {
-        if (isOpen) {
-            closeModal();
-        }
-    });
-
-    document.addEventListener('click', (e) => {
-        if (isOpen && !isOpening && !modal.contains(e.target) && !btn.contains(e.target)) {
-            closeModal();
-        }
-    });
-
-    document.addEventListener('keydown', (e) => {
-        if (isOpen && !isOpening && e.key === 'Escape') {
-            closeModal();
-        }
-    });
-
-    modal.addEventListener('click', (e) => {
-        e.stopPropagation();
-    });
-}
-
-document.addEventListener('DOMContentLoaded', function() {
     const mobileMenu = document.querySelector('.mobile-menu');
     const burgerBtn = document.querySelector('.burger');
     const overlay = document.querySelector('.overlay');
-    const closeBtn = document.querySelector('.mobile-menu__close');
 
-    if (!burgerBtn || !mobileMenu || !overlay) {
+
+    let mobileOverlay = document.querySelector('.mobile-overlay');
+    if (!mobileOverlay) {
+        mobileOverlay = document.createElement('div');
+        mobileOverlay.className = 'mobile-overlay';
+        document.body.appendChild(mobileOverlay);
+    }
+
+    if (!burgerBtn || !mobileMenu) {
         return;
     }
 
@@ -121,47 +128,73 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function handleDropdownClick(e) {
+
         if (e.target.classList.contains('dropdown-arrow')) {
             e.preventDefault();
             e.stopPropagation();
-
             const dropdownItem = e.target.closest('.dropdown-box, .dropdown-sub-box');
-
             if (dropdownItem) {
                 dropdownItem.classList.toggle('active');
             }
+            return;
         }
+
+
+        const catalogBox = e.target.closest('.catalog-box');
+        const isMainCatalogLink = catalogBox &&
+            e.target.closest('.menu-link-wrapper') &&
+            e.target.closest('.mobile-menu__link') &&
+            !e.target.closest('.dropdown-sub-box');
+
+        if (isMainCatalogLink) {
+            e.preventDefault();
+            e.stopPropagation();
+            catalogBox.classList.toggle('active');
+            return;
+        }
+
+
     }
 
     function openMobileMenu() {
         document.body.style.overflow = 'hidden';
         mobileMenu.classList.add('active');
-        overlay.classList.add('active');
+        mobileOverlay.classList.add('active');
+        burgerBtn.classList.add('active');
         isMobileMenuOpen = true;
-
-        if (mobileMenu) mobileMenu.style.zIndex = '';
-        if (overlay) overlay.style.zIndex = '';
     }
 
     function closeMobileMenu() {
         document.body.style.overflow = '';
         mobileMenu.classList.remove('active');
-        overlay.classList.remove('active');
+        mobileOverlay.classList.remove('active');
+        burgerBtn.classList.remove('active');
         closeAllDropdowns();
         isMobileMenuOpen = false;
+    }
 
-        if (mobileMenu) mobileMenu.style.zIndex = '';
-        if (overlay) overlay.style.zIndex = '';
+    // Функция для принудительного закрытия мобильного меню при открытии модалок
+    function forceCloseMobileMenu() {
+        if (isMobileMenuOpen) {
+            document.body.style.overflow = '';
+            mobileMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            burgerBtn.classList.remove('active');
+            closeAllDropdowns();
+            isMobileMenuOpen = false;
+        }
     }
 
     burgerBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        openMobileMenu();
+        if (isMobileMenuOpen) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
     });
 
-    closeBtn.addEventListener('click', closeMobileMenu);
-
-    overlay.addEventListener('click', closeMobileMenu);
+    mobileOverlay.addEventListener('click', closeMobileMenu);
 
     document.addEventListener('keydown', (e) => {
         if (isMobileMenuOpen && e.key === 'Escape') {
@@ -176,6 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     closeAllDropdowns();
 
+
     const callModal = document.querySelector('.call-modal');
     const callBtns = document.querySelectorAll('.call-btn');
 
@@ -183,16 +217,12 @@ document.addEventListener('DOMContentLoaded', function() {
         let isCallModalOpen = false;
 
         function openCallModal() {
+            forceCloseMobileMenu(); // Закрываем мобильное меню
+
             document.body.style.overflow = 'hidden';
             callModal.classList.add('opened');
             overlay.classList.add('active');
             isCallModalOpen = true;
-
-            if (isMobileMenuOpen && mobileMenu && callModal) {
-                mobileMenu.style.zIndex = '999';
-                overlay.style.zIndex = '1000';
-                callModal.style.zIndex = '1001';
-            }
         }
 
         function closeCallModal() {
@@ -200,10 +230,6 @@ document.addEventListener('DOMContentLoaded', function() {
             callModal.classList.remove('opened');
             overlay.classList.remove('active');
             isCallModalOpen = false;
-
-            if (callModal) callModal.style.zIndex = '';
-            if (overlay) overlay.style.zIndex = '';
-            if (mobileMenu) mobileMenu.style.zIndex = '';
         }
 
         callBtns.forEach(callBtn => {
@@ -242,6 +268,8 @@ document.addEventListener('DOMContentLoaded', function() {
         let isOfferModalOpen = false;
 
         function openOfferModal() {
+            forceCloseMobileMenu(); // Закрываем мобильное меню
+
             document.body.style.overflow = 'hidden';
             offerModal.classList.add('opened');
             overlay.classList.add('active');
@@ -301,6 +329,8 @@ document.addEventListener('DOMContentLoaded', function() {
         let isReviewModalOpen = false;
 
         function openReviewModal() {
+            forceCloseMobileMenu(); // Закрываем мобильное меню
+
             document.body.style.overflow = 'hidden';
             reviewModal.classList.add('opened');
             overlay.classList.add('active');
@@ -350,6 +380,8 @@ document.addEventListener('DOMContentLoaded', function() {
         let isVacancyModalOpen = false;
 
         function openVacancyModal() {
+            forceCloseMobileMenu(); // Закрываем мобильное меню
+
             document.body.style.overflow = 'hidden';
             vacancyModal.classList.add('opened');
             overlay.classList.add('active');
@@ -399,6 +431,8 @@ document.addEventListener('DOMContentLoaded', function() {
         let isConsultationModalOpen = false;
 
         function openConsultationModal() {
+            forceCloseMobileMenu(); // Закрываем мобильное меню
+
             document.body.style.overflow = 'hidden';
             consultationModal.classList.add('opened');
             overlay.classList.add('active');
@@ -538,7 +572,6 @@ document.addEventListener('DOMContentLoaded', function() {
             e.stopPropagation();
         });
 
-
         function handleMediaChange(e) {
             if (!e.matches && isFilterOpen) {
                 closeFilter();
@@ -547,4 +580,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
         mediaQuery.addListener(handleMediaChange);
     }
-});
+}

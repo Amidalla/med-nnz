@@ -142,6 +142,10 @@
   font-weight: 700;
   transition: all 0.3s ease;
 
+  svg {
+    min-height: 14px;
+  }
+
   @media (max-width: 1300px) {
     margin-left: auto;
   }
@@ -543,6 +547,22 @@ input[type="search"]::-webkit-search-cancel-button {
     margin-left: 12px;
     width: 43px;
     height: 28px;
+  }
+
+  &.active {
+    span:nth-child(1) {
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    span:nth-child(2) {
+      opacity: 0;
+    }
+
+    span:nth-child(3) {
+      bottom: 50%;
+      transform: translateY(50%) rotate(-45deg);
+    }
   }
 }
 
