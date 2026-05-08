@@ -9641,3 +9641,17 @@ ol {
     padding-top: 24px;
   }
 }
+
+.catalog-section__right {
+
+  .catalog-section__mobile-btn {
+    gap: 20px;
+
+    @media (max-width: 460px) {
+      gap: 0;
+    }
+    .category-select {
+      max-width: 235px;
+    }
+  }
+}
